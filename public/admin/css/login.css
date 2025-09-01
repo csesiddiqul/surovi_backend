@@ -1,0 +1,38 @@
+.ad-from{
+    text-align: center;
+    margin: 200px auto;
+}
+.fild-cont{
+    margin: 20px;
+    width: 300px;
+    padding: 6px;
+    border-radius: 3px;
+
+}
+.mylog{
+    text-align: center;
+    font-weight: normal;
+    margin-bottom: 0px;
+    color: #fd0000;
+
+}
+.mybtn{
+    width: 316px;
+    padding: 8px;
+    background: #fd0000;
+    border-radius: 8px;
+    border: none;
+    color: floralwhite;
+    margin: 16px;
+}
+
+.log-body {
+    width: 450px;
+    margin: 0 auto;
+    background: #f4f6f9;
+    padding: 10px 10px 60px 10px;
+    border-radius: 8px;
+}
+.scol{
+    color: #0f6674;
+}
