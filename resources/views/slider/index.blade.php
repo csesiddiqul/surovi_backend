@@ -36,17 +36,23 @@
                     <td>{{$slider->Priority}}</td>
                     <td>{{($slider->status == 1 ? 'Active' : 'De-Active')}}</td>
                     <td>
-                        <a href="{{route('slider.edit',$slider->id)}}" onclick="return confirm('Are you sure Edit data?')" class="btn btn-success btn-xs"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
+                        <a href="{{route('slider.edit',$slider->id)}}"  class="btn btn-success btn-xs"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
 
 
 
-                        <a href="{{route('slider.destroy',$slider->id)}}" class="btn btn-danger btn-xs"  onclick="event.preventDefault(); document.getElementById('deleteSlider + {{$slider->id}}').submit()";> <i class="fa-solid fa-trash-can"></i> Delete</a>
+                        <a href="#" class="btn btn-danger btn-xs"
+                        onclick="event.preventDefault();
+                                    if(confirm('Are you sure you want to delete this slider?')) {
+                                        document.getElementById('deleteSlider{{$slider->id}}').submit();
+                                    }">
+                        <i class="fa-solid fa-trash-can"></i> Delete
+                        </a>
 
-                        <form id="deleteSlider + {{$slider->id}}" action="{{route('slider.destroy',$slider->id)}}" method="POST" class="d-none">
+                        <form id="deleteSlider{{$slider->id}}" action="{{ route('slider.destroy', $slider->id) }}" method="POST" class="d-none">
                             @csrf
-
                             @method('DELETE')
                         </form>
+
                     </td>
                 </tr>
                 @endforeach

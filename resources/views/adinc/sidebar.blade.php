@@ -44,14 +44,17 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
                      with font-awesome or any other icon font library -->
-                <li class="nav-item menu-open">
-                    <a href="{{asset('/home')}}" class="nav-link active">
+                <li class="nav-item {{ request()->routeIs('home') ? 'menu-open' : '' }}">
+                    <a href="{{asset('/home')}}" class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Dashboard
                         </p>
                     </a>
                 </li>
+
+
+
 
                 <li class="nav-item">
                     <a href="#" class="nav-link">
@@ -78,8 +81,8 @@
                     </ul>
                 </li>
 
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
+                <li class="nav-item {{ request()->routeIs('slider.create')  || request()->routeIs('slider.index') || request()->routeIs('slider.edit') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->routeIs('slider.create') || request()->routeIs('slider.index') ? 'active' : '' }}"">
                         <i class="nav-icon fa-solid fa-images"></i>
                         <p>
                             Slider
@@ -88,13 +91,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{route('slider.create')}}" class="nav-link">
+                            <a href="{{route('slider.create')}}" class="nav-link {{ request()->routeIs('slider.create') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>upload</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('slider.index')}}" class="nav-link">
+                            <a href="{{route('slider.index')}}" class="nav-link {{ request()->routeIs('slider.index') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>list</p>
                             </a>
