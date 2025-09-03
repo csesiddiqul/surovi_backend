@@ -56,8 +56,8 @@
 
 
 
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
+                <li class="nav-item {{ request()->routeIs('users.create')  || request()->routeIs('users.index') || request()->routeIs('users.edit') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->routeIs('users.create') || request()->routeIs('users.index') ? 'active' : '' }}">
                         <i class="nav-icon fa-solid fa-user"></i>
                         <p>
                             User
@@ -66,13 +66,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{route('users.create')}}" class="nav-link">
+                            <a href="{{route('users.create')}}" class="nav-link  {{ request()->routeIs('users.create') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Create</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('users')}}" class="nav-link">
+                            <a href="{{route('users')}}" class="nav-link  {{ request()->routeIs('users.index') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>list</p>
                             </a>
@@ -81,8 +81,10 @@
                     </ul>
                 </li>
 
+
+
                 <li class="nav-item {{ request()->routeIs('slider.create')  || request()->routeIs('slider.index') || request()->routeIs('slider.edit') ? 'menu-open' : '' }}">
-                    <a href="#" class="nav-link {{ request()->routeIs('slider.create') || request()->routeIs('slider.index') ? 'active' : '' }}"">
+                    <a href="#" class="nav-link {{ request()->routeIs('slider.create') || request()->routeIs('slider.index') || request()->routeIs('slider.edit') ? 'active' : '' }}">
                         <i class="nav-icon fa-solid fa-images"></i>
                         <p>
                             Slider
@@ -109,10 +111,8 @@
 
 
 
-                 <li class="nav-item">
-
-
-                    <a href="#" class="nav-link">
+                 <li class="nav-item {{ request()->routeIs('sdg.create')  || request()->routeIs('sdg.index') || request()->routeIs('sdg.edit') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->routeIs('sdg.create') || request()->routeIs('sdg.index') ? 'active' : '' }}">
                         <i class="nav-icon fa-solid fa-newspaper"></i>
                         <p>
                             SDG
@@ -122,13 +122,13 @@
 
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{route('sdg.create')}}" class="nav-link">
+                            <a href="{{route('sdg.create')}}" class="nav-link {{ request()->routeIs('sdg.create') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Create</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('sdg.index')}}" class="nav-link">
+                            <a href="{{route('sdg.index')}}" class="nav-link {{ request()->routeIs('sdg.index') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>list</p>
                             </a>
@@ -140,10 +140,8 @@
 
 
 
-                <li class="nav-item">
-
-
-                    <a href="#" class="nav-link">
+                <li class="nav-item {{ request()->routeIs('account.create')  || request()->routeIs('account.index') || request()->routeIs('account.edit') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->routeIs('account.create') || request()->routeIs('account.index') ? 'active' : '' }}">
                         <i class="nav-icon fa-solid fa-newspaper"></i>
                         <p>
                             Account
@@ -153,27 +151,23 @@
 
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{route('account.create')}}" class="nav-link">
+                            <a href="{{route('account.create')}}" class="nav-link {{ request()->routeIs('account.create') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Create</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('account.index')}}" class="nav-link">
+                            <a href="{{route('account.index')}}" class="nav-link {{ request()->routeIs('account.index') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>list</p>
                             </a>
                         </li>
-
                     </ul>
-
                 </li>
 
 
-                <li class="nav-item">
-
-
-                    <a href="#" class="nav-link">
+                <li class="nav-item {{ request()->routeIs('donate_info.index') || request()->routeIs('donations.create')  || request()->routeIs('donations.index') || request()->routeIs('donations.edit') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->routeIs('donate_info.index') || request()->routeIs('donations.index') || request()->routeIs('donations.create')  ? 'active' : '' }}">
                         <i class="nav-icon fa-solid fa-newspaper"></i>
                         <p>
                             Donations
@@ -182,23 +176,21 @@
                     </a>
 
                     <ul class="nav nav-treeview">
-
-
                         <li class="nav-item">
-                            <a href="{{ route('donate_info.index') }}" class="nav-link">
+                            <a href="{{ route('donate_info.index') }}" class="nav-link {{ request()->routeIs('donate_info.index') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Donate Info</p>
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="{{route('donations.create')}}" class="nav-link">
+                            <a href="{{route('donations.create')}}" class="nav-link {{ request()->routeIs('donations.create') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Create</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('donations.index')}}" class="nav-link">
+                            <a href="{{route('donations.index')}}" class="nav-link {{ request()->routeIs('donations.index') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>list</p>
                             </a>
@@ -212,8 +204,8 @@
 
 
 
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
+                <li class="nav-item {{ request()->routeIs('updateNews.create')  || request()->routeIs('updateNews.index') || request()->routeIs('updateNews.edit') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->routeIs('updateNews.create') || request()->routeIs('updateNews.index') ? 'active' : '' }}">e
                         <i class="nav-icon fa-solid fa-repeat"></i>
                         <p>
                             Scroll News
@@ -222,13 +214,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{route('updateNews.create')}}" class="nav-link">
+                            <a href="{{route('updateNews.create')}}" class="nav-link {{ request()->routeIs('updateNews.create') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>upload</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('updateNews.index')}}" class="nav-link">
+                            <a href="{{route('updateNews.index')}}" class="nav-link  {{ request()->routeIs('updateNews.index') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>list</p>
                             </a>
@@ -238,27 +230,18 @@
                 </li>
 
 
-
-
-
-
-
-
-
-                <li class="nav-item">
-                    <a href="{{route('slogan.index')}}" class="nav-link">
+                <li class="nav-item {{ request()->routeIs('slogan.create')  || request()->routeIs('slogan.index') || request()->routeIs('slogan.edit') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link  {{ request()->routeIs('slogan.create') || request()->routeIs('slogan.index') ? 'active' : '' }}">
                         <i class="nav-icon fa-solid fa-hand-fist"></i>
                         <p>
                             welcome
 
                         </p>
                     </a>
-
                 </li>
-
-
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
+                
+                <li class="nav-item {{ request()->routeIs('notice.create')  || request()->routeIs('notice.index') || request()->routeIs('notice.edit') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->routeIs('notice.create') || request()->routeIs('notice.index') ? 'active' : '' }}">
                         <i class="nav-icon fa-solid fa-file-lines"></i>
                         <p>
                             Notice Board
@@ -267,13 +250,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{route('notice.create')}}" class="nav-link">
+                            <a href="{{route('notice.create')}}" class="nav-link {{ request()->routeIs('notice.create') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Create</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('notice.index')}}" class="nav-link">
+                            <a href="{{route('notice.index')}}" class="nav-link {{ request()->routeIs('notice.index') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>list</p>
                             </a>
@@ -283,8 +266,8 @@
                 </li>
 
 
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
+                <li class="nav-item {{ request()->routeIs('card.create')  || request()->routeIs('card.index') || request()->routeIs('card.edit') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->routeIs('card.create') || request()->routeIs('card.index') ? 'active' : '' }}">
                         <i class="nav-icon fa-solid fa-id-badge"></i>
                         <p>
                             Executive Committee
@@ -293,13 +276,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{route('card.create')}}" class="nav-link">
+                            <a href="{{route('card.create')}}" class="nav-link {{ request()->routeIs('card.create') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Create</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('card.index')}}" class="nav-link">
+                            <a href="{{route('card.index')}}" class="nav-link {{ request()->routeIs('card.index') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>list</p>
                             </a>
@@ -308,8 +291,8 @@
                     </ul>
                 </li>
 
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
+                <li class="nav-item {{request()->routeIs('importanLink.create') || request()->routeIs('importanLink.index') || request()->routeIs('importanLink.edit') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->routeIs('importanLink.create') || request()->routeIs('importanLink.index') ? 'active' : '' }}">
                         <i class="nav-icon fa-solid fa-paperclip"></i>
                         <p>
                             Important link
@@ -318,13 +301,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{route('importanLink.create')}}" class="nav-link">
+                            <a href="{{route('importanLink.create')}}" class="nav-link {{ request()->routeIs('importanLink.create') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Create</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('importanLink.index')}}" class="nav-link">
+                            <a href="{{route('importanLink.index')}}" class="nav-link {{ request()->routeIs('importanLink.index') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>list</p>
                             </a>
@@ -333,8 +316,8 @@
                     </ul>
                 </li>
 
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
+                <li class="nav-item {{request()->routeIs('event.create') || request()->routeIs('event.index') || request()->routeIs('event.edit') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->routeIs('event.create') || request()->routeIs('event.index') ? 'active' : '' }}">
                         <i class="nav-icon fa-solid fa-calendar-check"></i>
                         <p>
                             Event & Impact Stories
@@ -343,13 +326,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{route('event.create')}}" class="nav-link">
+                            <a href="{{route('event.create')}}" class="nav-link {{ request()->routeIs('event.create') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>upload</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('event.index')}}" class="nav-link">
+                            <a href="{{route('event.index')}}" class="nav-link {{ request()->routeIs('event.create') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>list</p>
                             </a>
@@ -358,21 +341,8 @@
                     </ul>
                 </li>
 
-
-
-
-
-
-
-
-
-
-
-
-                <li class="nav-item">
-
-
-                    <a href="#" class="nav-link">
+                <li class="nav-item {{request()->routeIs('news.create') || request()->routeIs('news.index') || request()->routeIs('news.edit') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->routeIs('news.create') || request()->routeIs('news.index') ? 'active' : '' }}"> 
                         <i class="nav-icon fa-solid fa-newspaper"></i>
                         <p>
                             News
@@ -382,13 +352,13 @@
 
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{route('news.create')}}" class="nav-link">
+                            <a href="{{route('news.create')}}" class="nav-link {{ request()->routeIs('news.create') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Create</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('news.index')}}" class="nav-link">
+                            <a href="{{route('news.index')}}" class="nav-link {{ request()->routeIs('news.index') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>list</p>
                             </a>
@@ -399,8 +369,31 @@
                 </li>
 
 
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
+                <li class="nav-item {{request()->routeIs('photogroup.create') 
+                || request()->routeIs('photogroup.index') 
+                || request()->routeIs('photogroup.edit')
+
+                || request()->routeIs('photo_admin.create')
+                || request()->routeIs('photo_admin.index')
+                || request()->routeIs('photo_admin.edit')
+
+                || request()->routeIs('videogal.create') 
+                ||  request()->routeIs('videogal.index')
+                ||  request()->routeIs('videogal.edit')
+                ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->routeIs('photogroup.create')
+                    || request()->routeIs('photogroup.index') 
+                    || request()->routeIs('photogroup.edit')
+
+                    || request()->routeIs('photo_admin.create')
+                    || request()->routeIs('photo_admin.index')
+                    || request()->routeIs('photo_admin.edit')
+
+                    || request()->routeIs('videogal.create') 
+                    || request()->routeIs('videogal.index')
+                    || request()->routeIs('videogal.edit')
+                     
+                     ? 'active' : '' }}">
                         <i class="nav-icon fa-solid fa-photo-film"></i>
                         <p>
                             Gallery
@@ -412,8 +405,8 @@
 
 
                        <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
+                        <li class="nav-item {{request()->routeIs('photogroup.create') || request()->routeIs('photogroup.index') || request()->routeIs('photogroup.edit') ? 'menu-open' : '' }}">
+                            <a href="#" class="nav-link {{ request()->routeIs('photogroup.create') || request()->routeIs('photogroup.index') || request()->routeIs('photogroup.edit') ? 'active' : '' }}">
                                 <i class="nav-icon fa-solid fa-image"></i>
                                 <p>
                                      photo Group
@@ -422,13 +415,13 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{route('photogroup.create')}}" class="nav-link">
+                                    <a href="{{route('photogroup.create')}}" class="nav-link {{ request()->routeIs('photogroup.create') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p> Create</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('photogroup.index')}}" class="nav-link">
+                                    <a href="{{route('photogroup.index')}}" class="nav-link {{ request()->routeIs('photogroup.index') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>list</p>
                                     </a>
@@ -441,8 +434,8 @@
 
 
                     <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
+                        <li class="nav-item {{request()->routeIs('photo_admin.create') || request()->routeIs('photo_admin.index') || request()->routeIs('photo_admin.edit') ? 'menu-open' : '' }}">
+                            <a href="#" class="nav-link {{ request()->routeIs('photo_admin.create') || request()->routeIs('photo_admin.index') || request()->routeIs('photo_admin.edit') ? 'active' : '' }}">
                                 <i class="nav-icon fa-solid fa-image"></i>
                                 <p>
                                     Photo
@@ -451,13 +444,13 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{route('photo_admin.create')}}" class="nav-link">
+                                    <a href="{{route('photo_admin.create')}}" class="nav-link  {{ request()->routeIs('photo_admin.create') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Upload</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('photo_admin.index')}}" class="nav-link">
+                                    <a href="{{route('photo_admin.index')}}" class="nav-link  {{ request()->routeIs('photo_admin.index') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>list</p>
                                     </a>
@@ -469,8 +462,8 @@
                     </ul>
 
                     <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
+                        <li class="nav-item {{request()->routeIs('videogal.create') || request()->routeIs('videogal.index') || request()->routeIs('videogal.edit') ? 'menu-open' : '' }}">
+                            <a href="#" class="nav-link  {{ request()->routeIs('videogal.create') || request()->routeIs('videogal.index') || request()->routeIs('videogal.index')  ? 'active' : '' }}">
                                 <i class="nav-icon fa-solid fa-video"></i>
                                 <p>
                                     video
@@ -479,13 +472,13 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{route('videogal.create')}}" class="nav-link">
+                                    <a href="{{route('videogal.create')}}" class="nav-link {{ request()->routeIs('videogal.create') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>upload</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('videogal.index')}}" class="nav-link">
+                                    <a href="{{route('videogal.index')}}" class="nav-link {{ request()->routeIs('videogal.index') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>list</p>
                                     </a>
@@ -500,8 +493,8 @@
                 </li>
 
 
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
+                <li class="nav-item  {{request()->routeIs('JobApplication.create') || request()->routeIs('JobApplication.index') || request()->routeIs('videogal.edit') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->routeIs('JobApplication.create') || request()->routeIs('JobApplication.index') ? 'active' : '' }}">
                         <i class="nav-icon fa-brands fa-pix"></i>
                         <p>
                             Other Pages
@@ -539,8 +532,8 @@
 
 
                     <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
+                        <li class="nav-item  {{request()->routeIs('JobApplication.create') || request()->routeIs('JobApplication.index') || request()->routeIs('JobApplication.edit') ? 'menu-open' : '' }}">
+                            <a href="#" class="nav-link {{ request()->routeIs('JobApplication.create') || request()->routeIs('JobApplication.index') ? 'active' : '' }}">
                                 <i class="nav-icon fa-solid fa-file-pen"></i>
                                 <p>
                                     Career
@@ -550,13 +543,13 @@
 
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{route('JobApplication.create')}}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                    <a href="{{route('JobApplication.create')}}" class="nav-link {{ request()->routeIs('JobApplication.create') ? 'active' : '' }}">
+                                        <i class="far fa-ciJobApplicationrcle nav-icon"></i>
                                         <p>upload</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('JobApplication.index')}}" class="nav-link">
+                                    <a href="{{route('JobApplication.index')}}" class="nav-link {{ request()->routeIs('viJobApplicationeogal.index') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>list</p>
                                     </a>
@@ -637,8 +630,8 @@
 
 
 
-                <li class="nav-item">
-                    <a href="{{route('websetting.index')}}" class="nav-link">
+                <li class="nav-item {{request()->routeIs('websetting.create') || request()->routeIs('websetting.index') || request()->routeIs('websetting.edit') ? 'menu-open' : '' }}">
+                    <a href="{{route('websetting.index')}}" class="nav-link {{ request()->routeIs('websetting.create') || request()->routeIs('websetting.index') ? 'active' : '' }}">
                         <i class="nav-icon fa-solid fa-gears"></i>
                         <p>
                             Site Settings
@@ -652,8 +645,8 @@
 
 
 
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
+                <li class="nav-item {{request()->routeIs('manu.create') || request()->routeIs('manu.index') || request()->routeIs('manu.edit') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link  {{ request()->routeIs('manu.create') || request()->routeIs('manu.index') ? 'active' : '' }}">
                         <i class="nav-icon fa-solid fa-list-check"></i>
                         <p>
                             Menu
@@ -662,13 +655,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{route('manu.create')}}" class="nav-link">
+                            <a href="{{route('manu.create')}}" class="nav-link {{ request()->routeIs('manu.create') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Create</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('manu.index')}}" class="nav-link">
+                            <a href="{{route('manu.index')}}" class="nav-link {{ request()->routeIs('manu.index') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>list</p>
                             </a>
@@ -678,8 +671,8 @@
                 </li>
 
 
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
+                <li class="nav-item {{request()->routeIs('page.create') || request()->routeIs('page.index') || request()->routeIs('page.edit') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link  {{ request()->routeIs('page.create') || request()->routeIs('page.index') ? 'active' : '' }}">
                         <i class="nav-icon fa-solid fa-file-circle-plus"></i>
                         <p>
                             Content
@@ -688,13 +681,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{route('page.create')}}" class="nav-link">
+                            <a href="{{route('page.create')}}" class="nav-link  {{ request()->routeIs('page.create') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Create</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('page.index')}}" class="nav-link">
+                            <a href="{{route('page.index')}}" class="nav-link  {{ request()->routeIs('page.index') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>list</p>
                             </a>
