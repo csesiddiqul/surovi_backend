@@ -19,20 +19,16 @@
     <link rel="stylesheet" href="{{asset('admin/plugins/daterangepicker/daterangepicker.css')}} ">
     <!-- iCheck for checkboxes and radio inputs -->
     <link rel="stylesheet" href=" {{asset('admin/plugins/icheck-bootstrap/icheck-bootstrap.min.css')}} ">
-    <!-- Bootstrap Color Picker -->
-    <link rel="stylesheet" href=" {{asset('admin/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css')}} ">
+
     <!-- Tempusdominus Bootstrap 4 -->
     <link rel="stylesheet" href=" {{asset('admin/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}">
     <!-- Select2 -->
     <link rel="stylesheet" href=" {{asset('admin/plugins/select2/css/select2.min.css')}}">
     <link rel="stylesheet" href=" {{asset('admin/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
-    <!-- Bootstrap4 Duallistbox -->
-    <link rel="stylesheet" href=" {{asset('plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css')}} ">
+
     <!-- BS Stepper -->
     <link rel="stylesheet" href=" {{asset('admin/plugins/bs-stepper/css/bs-stepper.min.css')}}">
-    <!-- dropzonejs -->
-    <link rel="stylesheet" href="{{asset('admin/ plugins/dropzone/min/dropzone.min.css')}}">
-    <!-- Theme style -->
+
 
     <link rel="stylesheet" href="{{asset('admin/plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
     <!-- Theme style -->
@@ -54,12 +50,6 @@
 <!-- Theme style -->
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
-
-    <!-- Preloader -->
-    <div class="preloader flex-column justify-content-center align-items-center">
-        <img class="animation__wobble" src="{{$logoData->logo}}" alt="AdminLTELogo" height="100" width="100">
-    </div>
-
 
 
 
@@ -153,9 +143,8 @@
 <script src="{{asset('admin/plugins/jquery-mousewheel/jquery.mousewheel.js')}}"></script>
 <script src="{{asset('admin/plugins/raphael/raphael.min.js')}}"></script>
 <script src="{{asset('admin/plugins/jquery-mapael/jquery.mapael.min.js')}}"></script>
-<script src="{{asset('admin/plugins/jquery-mapael/maps/usa_states.min.js')}}"></script>
-<!-- ChartJS -->
-<script src="{{asset('admin/plugins/chart.js/Chart.min.js')}}"></script>
+
+
 
 <!-- AdminLTE for demo purposes -->
 
@@ -176,7 +165,7 @@
 <script src=" {{asset('admin/plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
 <script src=" {{asset('admin/plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
 <!-- ChartJS -->
-<script src=" {{asset('admin/plugins/chart.js/Chart.min.js')}}"></script>
+
 
 <!-- AdminLTE for demo purposes -->
 <script>
@@ -185,8 +174,6 @@
     });
 </script>
 
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="{{asset('admin/dist/js/pages/dashboard2.js')}}"></script>
 
 </body>
 </html>

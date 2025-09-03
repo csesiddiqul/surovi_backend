@@ -26,7 +26,6 @@
                     <th>SI</th>
 
                     <th>Title</th>
-                    <th>Event Type</th>
                     <th>Img</th>
                     <th>Priority</th>
                     <th>Status</th>
