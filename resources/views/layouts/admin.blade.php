@@ -52,6 +52,7 @@
 <div class="wrapper">
 
 
+    @include('sweetalert::alert')
 
     <!-- Navbar -->
      @include('adinc.navbar')

@@ -51,9 +51,7 @@
 
     <section class="about-news">
 
-        @foreach($slogan as $key => $slogandata)
-
-        <div class="container">
+    <div class="container">
             <h1 class="title" > welcome to surovi</h1>
             <div class='back-color p-2'>
             <div class="row">
@@ -66,7 +64,7 @@
                 <div class="col-md-3">
                     <div class="">
 
-                            <img src="{{$slogandata->file}}" class="img-fluid">
+                            <img src="{{$slogan->file}}" class="img-fluid">
 
 
                     </div>
@@ -76,7 +74,7 @@
                     <div class="">
 
                         <p class="welcom-slogan">
-                            {{substr($slogandata->slogan,0,290)}}
+                            {{substr($slogan->slogan,0,290)}}
                         </p>
 
                     </div>
@@ -87,7 +85,7 @@
                     <div class="">
 
                         <p class="welcom-slogan">
-                            {{\Illuminate\Support\Str::limit(substr($slogandata->slogan,290),350)}}
+                            {{\Illuminate\Support\Str::limit(substr($slogan->slogan,290),350)}}
                             <a href="{{route('welcome')}}" class="readmore float-end ">Read More..</a>
                         </p>
 
@@ -100,8 +98,6 @@
             </div>
         </div>
 
-
-        @endforeach
     </section>
 
 

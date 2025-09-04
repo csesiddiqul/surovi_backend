@@ -35,7 +35,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="exampleInputFile">Image Input</label>
+                                    <label for="exampleInputFile">Image Input (1296 × 505 px)</label>
                                     <div class="input-group">
                                         <div class="custom-file">
                                             <input type="file" name="file" value="{{old('file')}}" class="form-control" id="">
