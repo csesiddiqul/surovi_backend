@@ -52,10 +52,6 @@ class SliderController extends Controller
         $imge->move($storeLocation, $storeFileN);
 
         $dbsl = '/Storage/slider/' . $storeFileN;
-
-
-
-
         $slider = new slider();
 
         $slider->title = $request->title;
@@ -138,9 +134,6 @@ class SliderController extends Controller
      */
     public function destroy(slider $slider)
     {
-
-
-
 
         @unlink(str_replace('/Storage', 'Storage', $slider->url));
         $slider->delete();

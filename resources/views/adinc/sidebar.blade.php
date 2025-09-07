@@ -108,6 +108,57 @@
                     </ul>
                 </li>
 
+                 <li class="nav-item {{ request()->routeIs('achievement.create')  || request()->routeIs('achievement.index') || request()->routeIs('achievement.edit') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->routeIs('achievement.create') || request()->routeIs('achievement.index') || request()->routeIs('achievement.edit') ? 'active' : '' }}">
+                        <i class="nav-icon fa-solid fa-images"></i>
+                        <p>
+                             Achievements
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('achievement.create')}}" class="nav-link {{ request()->routeIs('achievement.create') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>upload</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('achievement.index')}}" class="nav-link {{ request()->routeIs('achievement.index') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>list</p>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+
+                
+                 <li class="nav-item {{ request()->routeIs('sponsorChild.create')  || request()->routeIs('sponsorChild.index') || request()->routeIs('sponsorChild.edit') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->routeIs('sponsorChild.create') || request()->routeIs('sponsorChild.index') || request()->routeIs('sponsorChild.edit') ? 'active' : '' }}">
+                        <i class="nav-icon fa-solid fa-images"></i>
+                        <p>
+                             SponsorChild
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('sponsorChild.create')}}" class="nav-link {{ request()->routeIs('sponsorChild.create') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>upload</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('sponsorChild.index')}}" class="nav-link {{ request()->routeIs('sponsorChild.index') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>list</p>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+
 
 
 

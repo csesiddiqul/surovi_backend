@@ -1,0 +1,151 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\SponsorChild;
+use Illuminate\Http\Request;
+
+class SponsorChildController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $sponsorChild = SponsorChild::get();
+        return view('sponsorChild.index',compact('sponsorChild'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('sponsorChild.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+         
+        $this->validate($request, [
+            'name' => 'required',
+            'phone_number' => 'required',
+            'file' => 'required|file',
+            'description'=> 'nullable',
+            'priority' => 'required',
+            'status' => 'required| numeric|in:1,2'
+        ]);
+        
+        $imge = $request->file('file');
+        $storeFileN = time() . '_' . uniqid() . '.' . $imge->getClientOriginalExtension();
+
+        $storeLocation = public_path('storage/sponsorChild/');
+        $imge->move($storeLocation, $storeFileN);
+
+        $dbsl = '/storage/sponsorChild/' . $storeFileN;
+
+
+        $sponsorChild = new sponsorChild();
+
+        $sponsorChild->name = $request->name;
+        $sponsorChild->phone_number = $request->phone_number;
+        $sponsorChild->img = $dbsl;
+        $sponsorChild->description = $request->description;
+        $sponsorChild->priority = $request->priority;
+        $sponsorChild->status = $request->status;
+        $sponsorChild->save();
+
+        // return back()->with('message','Create Successfully');
+
+        return redirect()->route('sponsorChild.index');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\SponsorChild  $sponsorChild
+     * @return \Illuminate\Http\Response
+     */
+    public function show(SponsorChild $sponsorChild)
+    {
+        return view('sponsorChild.edit', compact('sponsorChild'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\SponsorChild  $sponsorChild
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $sponsorChild = SponsorChild::where('id','=',$id)->first();
+        return view('sponsorChild.edit', compact('sponsorChild'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\SponsorChild  $sponsorChild
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, SponsorChild $sponsorChild)
+    {
+         $this->validate($request, [
+            'name' => 'required',
+            'phone_number' => 'required',
+            'file' => 'nullable|file',
+            'description' => 'required',
+            'priority' => 'required',
+            'status' => 'required|numeric|in:1,2'
+        ]);
+
+        $dbsl = $sponsorChild->img;
+        if ($request->hasFile('file')) {
+
+            $imge = $request->file;
+            $storeFileN = time() . '_' . uniqid() . '.' . $imge->getClientOriginalExtension();
+            $storeLocation = $_SERVER['DOCUMENT_ROOT'] . '/storage/sponsorChild/';
+            $imge->move($storeLocation, $storeFileN);
+
+            $dbsl = '/storage/sponsorChild/' . $storeFileN;
+
+            @unlink(str_replace('/Storage', 'Storage', $sponsorChild->img));
+        }
+
+
+        $sponsorChild->name = $request->name;
+        $sponsorChild->phone_number = $request->phone_number;
+        $sponsorChild->img = $dbsl;
+        $sponsorChild->description = $request->description;
+        $sponsorChild->priority = $request->priority;
+        $sponsorChild->status = $request->status;
+
+        $sponsorChild->save();
+        return redirect()->route('sponsorChild.index')->with('message', 'Create Successfully');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\SponsorChild  $sponsorChild
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(SponsorChild $sponsorChild)
+    {
+        @unlink(str_replace('/Storage', 'Storage', $sponsorChild->Img));
+        $sponsorChild->delete();
+        return redirect()->route('sponsorChild.index');
+    }
+}
