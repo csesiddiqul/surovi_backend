@@ -21,6 +21,10 @@ use App\Http\Controllers\backend\DonationsController;
 */
 
 Auth::routes(['register' => false]);
+
+Route::get('/index', [PublicController::class, 'index2'])->name('index2');
+
+
 Route::get('/', [PublicController::class, 'index'])->name('index');
 Route::get('/development', [PublicController::class, 'development'])->name('development');
 Route::get('/mission', [PublicController::class, 'mission'])->name('mission');
