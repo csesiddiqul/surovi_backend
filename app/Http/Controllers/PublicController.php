@@ -31,13 +31,102 @@ use phpDocumentor\Reflection\Utils;
 
 class PublicController extends Controller
 {
+    public function index2()
+    {
+        $sliders = Slider::select('id', 'title', 'url', 'priority')
+            ->where('status', 1)
+            ->orderBy('priority')
+            ->get();
+
+        $services = Service::select('id', 'title', 'icon', 'description')
+            ->where('status', 1)
+            ->limit(3)
+            ->get();
+
+        $notice = Notice::select('id', 'title', 'priority')
+            ->where('status', 1)
+            ->orderBy('priority')
+            ->limit(10)
+            ->get();
+
+        $slogan = Slogan::select('id', 'file', 'slogan', 'status')
+            ->where('status', 1)
+            ->first();
+
+        $card = Card::select('id', 'name', 'description', 'img', 'Priority', 'status', 'position', 'mobile', 'email')
+            ->where('status', 1)
+            ->orderBy('priority')
+            ->limit(2)
+            ->get();
+
+        $news = News::select('id', 'title', 'img', 'priority')
+            ->where('status', 1)
+            ->orderBy('priority')
+            ->limit(6)
+            ->get();
+
+        $event = Event::select('id', 'title', 'img', 'priority')
+            ->where('status', 1)
+            ->where('event_type', 1)
+            ->orderBy('priority')
+            ->limit(6)
+            ->get();
+
+        $imlink = ImportantLink::select('id', 'title', 'url', 'priority')
+            ->where('status', 1)
+            ->orderBy('priority')
+            ->limit(15)
+            ->get();
+
+        $photoin = photo_gallery::select('id', 'title', 'img', 'priority', 'group_id')
+            ->where('status', 1)
+            ->orderBy('priority')
+            ->limit(3)
+            ->get();
+
+        $video = VideoGallery::select('id', 'title', 'video', 'priority')
+            ->where('status', 1)
+            ->orderBy('priority')
+            ->limit(3)
+            ->get();
+
+        $project = Project::select('id', 'title', 'img')
+            ->where('projectType', 1)
+            ->limit(6)
+            ->get();
+
+        $updateNews = UpdateNews::select('id', 'news', 'Priority', 'created_at')
+            ->where('status', 1)
+            ->limit(3)
+            ->get();
+
+        return view("public.index", compact(
+            'sliders',
+            'services',
+            'notice',
+            'slogan',
+            'card',
+            'news',
+            'event',
+            'imlink',
+            'photoin',
+            'video',
+            'project',
+            'updateNews'
+        ));
+    }
+
+
+
     public function index()
     {
 
         $slider = slider::where('status', 1)->orderBy('priority', 'ASC')->get();
         $services = service::where('status', 1)->limit(3)->get();
         $notice = Notice::where('status', 1)->limit(10)->orderBy('priority', 'ASC')->get();
-        $slogan = slogan::where('status', 1)->limit(1)->get();
+        $slogan = Slogan::select('id', 'file', 'slogan', 'status')
+            ->where('status', 1)
+            ->first();
         $card = card::where('status', 1)->limit(2)->orderBy('priority', 'ASC')->get();
         $news = news::where('status', 1)->limit(6)->orderBy('priority', 'ASC')->get();
         $event = event::where([['event_type', '=', 1], ['status', '=', 1]])->limit(6)->orderBy('priority', 'ASC')->get();
@@ -46,8 +135,6 @@ class PublicController extends Controller
         $video = videoGallery::where('status', 1)->limit(3)->orderBy('priority', 'ASC')->get();
         $project = project::where('projectType', 1)->limit(6)->get();
         $updateNews = UpdateNews::where('status', 1)->limit(3)->get();
-
-
         return view('publice_page.index', compact('slider', 'services', 'notice', 'slogan', 'card', 'news', 'imlink', 'event', 'photoin', 'video', 'project', 'updateNews'));
     }
 

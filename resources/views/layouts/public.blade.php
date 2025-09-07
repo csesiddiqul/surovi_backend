@@ -1,10 +1,9 @@
 @php
-
     $logoData = \App\Models\websiteSetting::first();
 @endphp
 
 
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8">

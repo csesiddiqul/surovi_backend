@@ -76,7 +76,6 @@
                                         <option value="">Chose</option>
                                         <option value="1">Up Coming</option>
                                         <option value="2">Previous</option>
-                                        <option value="3">Impact Stories</option>
                                     </select>
 
                                     @error('event_type')

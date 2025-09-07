@@ -62,7 +62,7 @@
                                         <option value="">Chose</option>
                                         <option value="1" {{$event->event_type == 1 ? 'selected': ''}}>Up Coming</option>
                                         <option value="2" {{$event->event_type == 2 ? 'selected': ''}}>Previous</option>
-                                        <option value="3" {{$event->event_type == 3 ? 'selected': ''}}>Impact Stories</option>
+                                       
                                     </select>
 
                                     @error('event_type')

@@ -1,65 +1,84 @@
 @extends('layouts.admin')
+
 @section('content')
-    <div class="card">
-        <div class="card-header">
+<div class="card">
+
+
+    <div class="card-header">
             <h3 class="card-title">Slider list</h3>
+            <a href="{{route('slider.create')}}" class="btn btn-info badge-success float-right"> <i class="fa-solid fa-plus"></i> Add Video  </a>
+    </div>
 
-            <a href="{{route('slider.create')}}" class="btn btn-info badge-success float-right"> <i class="fa-solid fa-plus"></i> Add Slider  </a>
+    <!-- Search -->
+    <div class="card-body">
+        <form method="GET" action="{{ route('slider.index') }}" class="mb-3">
+            <div class="input-group">
+                <input type="text" name="search" class="form-control"
+                       placeholder="Search by title..."
+                       value="{{ request('search') }}">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </form>
 
-        </div>
-        <!-- /.card-header -->
-        <div class="card-body">
-
-
-            <table id="example2" class="table table-bordered table-hover">
-                <thead>
+        <!-- Slider Table -->
+        <table class="table table-bordered table-hover">
+            <thead>
                 <tr>
                     <th>SI</th>
                     <th>Title</th>
                     <th>Img</th>
-
                     <th>Priority</th>
-
                     <th>Status</th>
                     <th>Action</th>
                 </tr>
-                </thead>
-                <tbody>
-
-                @foreach($results as $key => $slider)
+            </thead>
+            <tbody>
+                @forelse($results as $key => $slider)
                 <tr>
-                    <td>{{$key+1}}</td>
-                    <td>{{$slider->title}}</td>
-                    <td><img src="{{$slider->url}}" alt="" width="20%"></td>
-
-
-                    <td>{{$slider->Priority}}</td>
-                    <td>{{($slider->status == 1 ? 'Active' : 'De-Active')}}</td>
+                    <td>{{ $results->firstItem() + $key }}</td>
+                    <td>{{ $slider->title }}</td>
                     <td>
-                        <a href="{{route('slider.edit',$slider->id)}}"  class="btn btn-success btn-xs"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
-
-
-
-                        <a href="#" class="btn btn-danger btn-xs"
-                        onclick="event.preventDefault();
-                                    if(confirm('Are you sure you want to delete this slider?')) {
-                                        document.getElementById('deleteSlider{{$slider->id}}').submit();
-                                    }">
-                        <i class="fa-solid fa-trash-can"></i> Delete
+                        <img src="{{ asset($slider->url) }}" alt="slider image" width="120" class="img-thumbnail">
+                    </td>
+                    <td>{{ $slider->priority }}</td>
+                    <td>
+                        <span class="badge {{ $slider->status == 1 ? 'bg-success' : 'bg-danger' }}">
+                            {{ $slider->status == 1 ? 'Active' : 'De-Active' }}
+                        </span>
+                    </td>
+                    <td>
+                        <a href="{{ route('slider.edit',$slider->id) }}" class="btn btn-success btn-sm">
+                            <i class="fa-solid fa-pen-to-square"></i> Edit
                         </a>
 
-                        <form id="deleteSlider{{$slider->id}}" action="{{ route('slider.destroy', $slider->id) }}" method="POST" class="d-none">
+                        <a href="#" class="btn btn-danger btn-sm"
+                           onclick="event.preventDefault();
+                               if(confirm('Are you sure you want to delete this slider?')) {
+                                   document.getElementById('deleteSlider{{ $slider->id }}').submit();
+                               }">
+                            <i class="fa-solid fa-trash-can"></i> Delete
+                        </a>
+
+                        <form id="deleteSlider{{ $slider->id }}"
+                              action="{{ route('slider.destroy', $slider->id) }}"
+                              method="POST" class="d-none">
                             @csrf
                             @method('DELETE')
                         </form>
-
                     </td>
                 </tr>
-                @endforeach
+                @empty
+                <tr>
+                    <td colspan="6" class="text-center">No sliders found.</td>
+                </tr>
+                @endforelse
+            </tbody>
+        </table>
 
-                </tbody>
-            </table>
+        <!-- Pagination -->
+        <div class="mt-3">
+            {{ $results->appends(request()->query())->links() }}
         </div>
-        <!-- /.card-body -->
     </div>
+</div>
 @endsection

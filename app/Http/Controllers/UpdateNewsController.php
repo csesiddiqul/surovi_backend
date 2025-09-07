@@ -77,8 +77,9 @@ class UpdateNewsController extends Controller
      * @param  \App\Models\UpdateNews  $updateNews
      * @return \Illuminate\Http\Response
      */
-    public function edit(UpdateNews $updateNews)
+    public function edit($id)
     {
+        $updateNews = UpdateNews::where('id','=',$id)->first();
         return view('update_news.edit',compact('updateNews'));
     }
 

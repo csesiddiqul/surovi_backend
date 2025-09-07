@@ -56,8 +56,8 @@
 
 
 
-                <li class="nav-item {{ request()->routeIs('users.create')  || request()->routeIs('users.index') || request()->routeIs('users.edit') ? 'menu-open' : '' }}">
-                    <a href="#" class="nav-link {{ request()->routeIs('users.create') || request()->routeIs('users.index') ? 'active' : '' }}">
+                <li class="nav-item {{ request()->routeIs('users.create')  || request()->routeIs('users') || request()->routeIs('users.edit') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->routeIs('users.create') || request()->routeIs('users') ? 'active' : '' }}">
                         <i class="nav-icon fa-solid fa-user"></i>
                         <p>
                             User
@@ -256,7 +256,7 @@
 
 
                 <li class="nav-item {{ request()->routeIs('updateNews.create')  || request()->routeIs('updateNews.index') || request()->routeIs('updateNews.edit') ? 'menu-open' : '' }}">
-                    <a href="#" class="nav-link {{ request()->routeIs('updateNews.create') || request()->routeIs('updateNews.index') ? 'active' : '' }}">e
+                    <a href="#" class="nav-link {{ request()->routeIs('updateNews.create') || request()->routeIs('updateNews.index') ? 'active' : '' }}">
                         <i class="nav-icon fa-solid fa-repeat"></i>
                         <p>
                             Scroll News
@@ -290,7 +290,7 @@
                         </p>
                     </a>
                 </li>
-                
+
                 <li class="nav-item {{ request()->routeIs('notice.create')  || request()->routeIs('notice.index') || request()->routeIs('notice.edit') ? 'menu-open' : '' }}">
                     <a href="#" class="nav-link {{ request()->routeIs('notice.create') || request()->routeIs('notice.index') ? 'active' : '' }}">
                         <i class="nav-icon fa-solid fa-file-lines"></i>
@@ -371,7 +371,7 @@
                     <a href="#" class="nav-link {{ request()->routeIs('event.create') || request()->routeIs('event.index') ? 'active' : '' }}">
                         <i class="nav-icon fa-solid fa-calendar-check"></i>
                         <p>
-                            Event & Impact Stories
+                            Event & News
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
@@ -392,8 +392,8 @@
                     </ul>
                 </li>
 
-                <li class="nav-item {{request()->routeIs('news.create') || request()->routeIs('news.index') || request()->routeIs('news.edit') ? 'menu-open' : '' }}">
-                    <a href="#" class="nav-link {{ request()->routeIs('news.create') || request()->routeIs('news.index') ? 'active' : '' }}"> 
+                {{-- <li class="nav-item {{request()->routeIs('news.create') || request()->routeIs('news.index') || request()->routeIs('news.edit') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->routeIs('news.create') || request()->routeIs('news.index') ? 'active' : '' }}">
                         <i class="nav-icon fa-solid fa-newspaper"></i>
                         <p>
                             News
@@ -417,33 +417,33 @@
 
                     </ul>
 
-                </li>
+                </li> --}}
 
 
-                <li class="nav-item {{request()->routeIs('photogroup.create') 
-                || request()->routeIs('photogroup.index') 
+                <li class="nav-item {{request()->routeIs('photogroup.create')
+                || request()->routeIs('photogroup.index')
                 || request()->routeIs('photogroup.edit')
 
                 || request()->routeIs('photo_admin.create')
                 || request()->routeIs('photo_admin.index')
                 || request()->routeIs('photo_admin.edit')
 
-                || request()->routeIs('videogal.create') 
+                || request()->routeIs('videogal.create')
                 ||  request()->routeIs('videogal.index')
                 ||  request()->routeIs('videogal.edit')
                 ? 'menu-open' : '' }}">
                     <a href="#" class="nav-link {{ request()->routeIs('photogroup.create')
-                    || request()->routeIs('photogroup.index') 
+                    || request()->routeIs('photogroup.index')
                     || request()->routeIs('photogroup.edit')
 
                     || request()->routeIs('photo_admin.create')
                     || request()->routeIs('photo_admin.index')
                     || request()->routeIs('photo_admin.edit')
 
-                    || request()->routeIs('videogal.create') 
+                    || request()->routeIs('videogal.create')
                     || request()->routeIs('videogal.index')
                     || request()->routeIs('videogal.edit')
-                     
+
                      ? 'active' : '' }}">
                         <i class="nav-icon fa-solid fa-photo-film"></i>
                         <p>
