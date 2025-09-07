@@ -14,23 +14,21 @@
 @endsection
 @section('content')
     <!-- carousel Section -->
-    <div id="carouselExampleCaptions" class="carousel slide container">
-    <!-- Slides -->
-    <div class="carousel-inner" style="border-radius: 8px;">
+   <div id="carouselExampleCaptions" class="carousel slide carousel-fade container" data-bs-ride="carousel" data-bs-interval="4000">
+    <div class="carousel-inner" style="border-radius: 12px; overflow: hidden;">
         @foreach ($sliders as $key => $slider)
             <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
                 <img src="{{ asset($slider->url) }}" class="d-block w-100" alt="{{ $slider->title ?? 'Slider Image' }}">
 
                 @if(isset($slider->title))
                     <div class="carousel-caption d-none d-md-block slider-caption">
-                        <h5>{{ $slider->title }}</h5>
+                        <h5 class="animated-caption">{{ $slider->title }}</h5>
                     </div>
                 @endif
             </div>
         @endforeach
     </div>
 
-    <!-- Controls -->
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
@@ -41,6 +39,9 @@
         <span class="visually-hidden">Next</span>
     </button>
 </div>
+
+
+
 
     <!-- carousel Section -->
 
@@ -922,3 +923,18 @@
 
     </div>
 @endsection
+
+
+@push('js')
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var myCarousel = document.querySelector('#carouselExampleCaptions');
+    var carousel = new bootstrap.Carousel(myCarousel, {
+        interval: 4000,   // 4 seconds
+        ride: 'carousel',
+        pause: false       // hover করলে pause হবে না
+    });
+});
+</script>
+
+@endpush

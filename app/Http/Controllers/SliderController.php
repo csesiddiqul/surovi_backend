@@ -24,7 +24,7 @@ class SliderController extends Controller
                     ->orWhere('status', 'like', "%{$search}%");
             });
         }
-        $results = $query->orderBy('created_at', 'desc')->paginate(10);
+        $results = $query->orderBy('created_at', 'DESC')->paginate(10);
         return view('slider.index', compact('results'));
     }
 

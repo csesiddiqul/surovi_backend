@@ -30,6 +30,7 @@
     <script src="{{ asset('client/js/script.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
 
+    @stack('js')
 </body>
 
 </html>

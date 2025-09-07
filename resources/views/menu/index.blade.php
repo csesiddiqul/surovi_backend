@@ -36,7 +36,7 @@
                     <tr>
                         <td>{{$key+1}}</td>
                         <td>{{$menudata->name}}</td>
-                        <td>{{$menudata->prantsId == 0 ? '' : $menudata->parent->name}}</td>
+                        <td>{{$menudata->prantsId == 0 ? '' : $menudata?->parent?->name}}</td>
                         <td>{{$menudata->type == 1 ? 'url' : 'Dropdwon' }}</td>
                         <td>{!! \Illuminate\Support\Str::limit(nl2br($menudata->slug),10) !!}</td>
                         <td>{{$menudata->Priority}}</td>
