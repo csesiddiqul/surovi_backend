@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\UpdateNews;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UpdateNewsController extends Controller
 {
@@ -54,6 +55,7 @@ class UpdateNewsController extends Controller
         $updateNews->status = $request->status;
 
         $updateNews->save();
+         Alert::success('Success', 'UpdateNews created successfully');
         return redirect()->route('updateNews.index');
 
 
@@ -105,7 +107,7 @@ class UpdateNewsController extends Controller
         $updateNews->status = $request->status;
 
         $updateNews->save();
-
+         Alert::success('Success', 'UpdateNews created successfully');
         return back()->with('message','Create Successfully');
     }
 
@@ -119,6 +121,7 @@ class UpdateNewsController extends Controller
     {
 
             $updateNews->delete();
+             Alert::success('Success', 'UpdateNews created successfully');
             return redirect()->route('updateNews.index');
 
 

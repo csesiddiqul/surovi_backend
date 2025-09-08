@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\card;
 use Illuminate\Http\Request;
 use phpDocumentor\Reflection\Utils;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class CardController extends Controller
 {
@@ -70,7 +71,8 @@ class CardController extends Controller
         $card->status = $request->status;
 
         $card->save();
-
+        Alert::success('Success', 'card created successfully');
+        
         return redirect()->route('card.index');
 
     }
@@ -142,7 +144,7 @@ if ($request->hasFile('file')){
 
 
         $card->save();
-
+        Alert::success('Success', 'card created successfully');
         return back()->with('message','Create Successfully');
     }
 
@@ -155,21 +157,10 @@ if ($request->hasFile('file')){
     public function destroy(card $card)
     {
 
-
-
-
-            @unlink(str_replace('/Storage','Storage',$card->img));
-            $card->delete();
-            return redirect()->route('card.index');
-
-
-
-
+        @unlink(str_replace('/Storage','Storage',$card->img));
+        $card->delete();
+        Alert::success('Success', 'card created successfully');
         return redirect()->route('card.index');
-
-
-
-
 
     }
 }

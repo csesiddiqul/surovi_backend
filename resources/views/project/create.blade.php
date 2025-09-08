@@ -53,7 +53,7 @@
 
                                 <div class="form-group">
                                     <label for="exampleInputDescription"> Location (District & City Corporation/Pourasava)</label>
-                                    <textarea class="form-control editor" name="Location" id="editor" cols="30" rows="10"></textarea>
+                                    <textarea class="form-control editor" name="Location" id="editorTow" cols="30" rows="10"></textarea>
 
 
                                 </div>
@@ -136,7 +136,7 @@
             <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
             <script>
                 ClassicEditor
-                    .create( document.querySelector( '#editor' ) )
+                    .create( document.querySelector( '#editorTow' ) )
                     .then( editor => {
                         console.log( editor );
                     } )
@@ -145,17 +145,6 @@
                     } );
             </script>
 
-        {{--            CKEDITOR.stylesSet.add( 'estilos', [
-                 // Block-level styles
-                 { name: 'Blue Title', element: 'h2', styles: { 'color': 'Blue' } },
-                 { name: 'Red Title' , element: 'h3', styles: { 'color': 'Red' } },
-
-                 // Inline styles
-                 { name: 'CSS Style', element: 'span', attributes: { 'class': 'my_style' } },
-                 { name: 'Marker: Yellow', element: 'span', styles: { 'background-
-
-                 color': 'Yellow' } }
-              ] ); --}}
 
     </section>
 

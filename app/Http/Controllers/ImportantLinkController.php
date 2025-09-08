@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\importantLink;
 use Illuminate\Http\Request;
 use phpDocumentor\Reflection\Utils;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ImportantLinkController extends Controller
 {
@@ -15,8 +16,9 @@ class ImportantLinkController extends Controller
      */
     public function index()
     {
-        $importanLink = importantLink::all();
-        return view('importanLink.index',compact('importanLink'));
+
+        $importantLink = importantLink::all();
+        return view('importantLink.index',compact('importantLink'));
     }
 
     /**
@@ -26,7 +28,7 @@ class ImportantLinkController extends Controller
      */
     public function create()
     {
-        return view('importanLink.create');
+        return view('importantLink.create');
     }
 
     /**
@@ -39,24 +41,25 @@ class ImportantLinkController extends Controller
     {
 
 
-
         $this->validate($request,[
             'title' => 'required',
             'url' => 'required',
             'priority'=> 'required',
             'status' => 'required|numeric|in:1,2'
         ]);
-        $importanLink = new importantLink();
 
-        $importanLink->title = $request->title;
-        $importanLink->url = $request->url;
+        $importantLink = new importantLink();
 
-        $importanLink->priority = $request->priority;
-        $importanLink->status = $request->status;
+        $importantLink->title = $request->title;
+        $importantLink->url = $request->url;
 
-        $importanLink->save();
+        $importantLink->priority = $request->priority;
+        $importantLink->status = $request->status;
 
-        return back()->with('message','Create Successfully');
+        $importantLink->save();
+         Alert::success('Success', 'importantLink created successfully');
+
+        return redirect()->route('importantLink.index');
     }
 
     /**
@@ -79,7 +82,7 @@ class ImportantLinkController extends Controller
     public function edit($id)
     {
         $importantLink = importantLink::find($id);
-        return view('importanLink.edit',compact('importantLink'));
+        return view('importantLink.edit',compact('importantLink'));
     }
 
 
@@ -108,8 +111,8 @@ class ImportantLinkController extends Controller
         $importantLink->status = $request->status;
 
         $importantLink->save();
-
-        return back()->with('message','Create Successfully');
+         Alert::success('Success', 'importantLink created successfully');
+         return redirect()->route('importantLink.index');
     }
 
     /**
@@ -120,22 +123,10 @@ class ImportantLinkController extends Controller
      */
     public function destroy($id)
     {
-
         $data = importantLink::count();
-
         $importantLink = importantLink::find($id);
-
-
-
-        if($data > 15){
-
-            $importantLink->delete();
-
-            return redirect()->route('importanLink.index');
-        }
-
-
-
-        return redirect()->route('importanLink.index');
+        $importantLink->delete();
+        Alert::success('Success', 'importantLink created successfully');
+        return redirect()->route('importantLink.index');
     }
 }

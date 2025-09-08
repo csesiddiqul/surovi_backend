@@ -73,7 +73,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('service', \App\Http\Controllers\ServiceController::class);
     Route::resource('slogan', \App\Http\Controllers\SloganController::class);
     Route::resource('card', \App\Http\Controllers\CardController::class);
-    Route::resource('importanLink', \App\Http\Controllers\ImportantLinkController::class);
+    Route::resource('importantLink', \App\Http\Controllers\ImportantLinkController::class);
     Route::resource('event', \App\Http\Controllers\EventController::class);
     Route::resource('websetting', \App\Http\Controllers\WebsiteSettingController::class);
     Route::resource('manu', \App\Http\Controllers\MenuController::class);

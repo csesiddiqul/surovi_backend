@@ -51,7 +51,8 @@
                             <i class="fa-solid fa-pen-to-square"></i> Edit
                         </a>
 
-                        <a href="#" class="btn btn-danger btn-sm"
+
+                         <a href="#" class="btn btn-danger btn-sm"
                            onclick="event.preventDefault();
                                if(confirm('Are you sure you want to delete this slider?')) {
                                    document.getElementById('deleteSlider{{ $slider->id }}').submit();
@@ -65,6 +66,9 @@
                             @csrf
                             @method('DELETE')
                         </form>
+
+
+
                     </td>
                 </tr>
                 @empty

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Menu;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class MenuController extends Controller
 {
@@ -60,8 +61,8 @@ class MenuController extends Controller
         $manu->status = $request->status;
 
         $manu->save();
-
-        return back()->with('message', 'Create Successfully');
+         Alert::success('Success', 'manu created successfully');
+        return redirect()->route('manu.index');
     }
 
     /**
@@ -119,8 +120,8 @@ class MenuController extends Controller
         $manu->status = $request->status;
 
         $manu->save();
-
-        return back()->with('message', 'Create Successfully');
+         Alert::success('Success', 'manu created successfully');
+         return redirect()->route('manu.index');
 
 
     }
@@ -138,7 +139,7 @@ class MenuController extends Controller
         $mid = Menu::find($id);
         if ($mid->menu_type == 2)
             $mid->delete();
-
+        Alert::success('Success', 'manu created successfully');
         return redirect()->route('manu.index');
 
     }

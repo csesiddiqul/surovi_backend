@@ -29,7 +29,7 @@
                         <td>{{$key+1}}</td>
                         <td>{{$projectData->title}}</td>
                         <td><img src="{{$projectData->img}}" alt="" width="20%"></td>
-                 
+
                         <td>{{$projectData->typeBenef}}</td>
 
                         <td>{{($projectData->projectType == 1 ? 'Ongoing' : 'Complate')}}</td>
@@ -40,13 +40,20 @@
                             <a href="{{route('project.edit',$projectData->id)}}" class="btn btn-success btn-xs"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
 
 
-                            <a href="{{route('project.destroy',$projectData->id)}}" class="btn btn-danger btn-xs"  onclick="event.preventDefault(); document.getElementById('deleteService + {{$projectData->id}}').submit()";> <i class="fa-solid fa-trash-can"></i> Delete</a>
+                        <a href="#" class="btn btn-danger btn-sm"
+                           onclick="event.preventDefault();
+                               if(confirm('Are you sure you want to delete this project?')) {
+                                   document.getElementById('deleteProject{{ $projectData->id }}').submit();
+                               }">
+                            <i class="fa-solid fa-trash-can"></i> Delete
+                        </a>
 
-                            <form id="deleteService + {{$projectData->id}}" action="{{route('project.destroy',$projectData->id)}}" method="POST" class="d-none">
-                                @csrf
-
-                                @method('DELETE')
-                            </form>
+                        <form id="deleteProject{{ $projectData->id }}"
+                              action="{{ route('project.destroy', $projectData->id) }}"
+                              method="POST" class="d-none">
+                            @csrf
+                            @method('DELETE')
+                        </form>
                         </td>
                     </tr>
                 @endforeach

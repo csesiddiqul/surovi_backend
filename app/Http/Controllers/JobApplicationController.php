@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\jobApplication;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class JobApplicationController extends Controller
 {
@@ -41,19 +42,17 @@ class JobApplicationController extends Controller
             'title' => 'required',
             'Location' => 'required',
             'Type' => 'required',
-
             'status' => 'required | numeric|in:1,2'
         ]);
 
         $jobdata = new jobApplication();
-
         $jobdata->title = $request->title;
         $jobdata->Type = $request->Type;
         $jobdata->location = $request->Location;
         $jobdata->status = $request->status;
 
         $jobdata->save();
-
+        Alert::success('Success', 'jobApplication created successfully');
         return redirect()->route('JobApplication.index');
     }
 
@@ -108,7 +107,7 @@ class JobApplicationController extends Controller
         $jobdata->status = $request->status;
 
         $jobdata->save();
-
+        Alert::success('Success', 'jobApplication created successfully');
         return redirect()->route('JobApplication.index');
 
     }
@@ -116,7 +115,7 @@ class JobApplicationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\jobApplication  $jobApplication
+     * @param  \App\Models\jobApplication  $jobApplicationJobApplication
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -124,7 +123,8 @@ class JobApplicationController extends Controller
         $jobdata = jobApplication::find($id);
 
         $jobdata->delete();
+        Alert::success('Success', 'jobApplication created successfully');
 
-        return redirect()->route('JobApplication.index');
+       return redirect()->route('JobApplication.index');
     }
 }

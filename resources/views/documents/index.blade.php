@@ -32,12 +32,18 @@
                     <td>
                         <a href="{{route('documents.edit',$documentData->id)}}" onclick="return confirm('Are you sure Edit data?')" class="btn btn-success btn-xs"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
 
+                        <a href="#" class="btn btn-danger btn-sm"
+                           onclick="event.preventDefault();
+                               if(confirm('Are you sure you want to delete this documents?')) {
+                                   document.getElementById('deleteDocuments{{ $documentData->id }}').submit();
+                               }">
+                            <i class="fa-solid fa-trash-can"></i> Delete
+                        </a>
 
-                        <a href="{{route('documents.destroy',$documentData->id)}}" class="btn btn-danger btn-xs"  onclick="event.preventDefault(); document.getElementById('deleteService + {{$documentData->id}}').submit()";> <i class="fa-solid fa-trash-can"></i> Delete</a>
-
-                        <form id="deleteService + {{$documentData->id}}" action="{{route('documents.destroy',$documentData->id)}}" method="POST" class="d-none">
+                        <form id="deleteDocuments{{ $documentData->id }}"
+                              action="{{ route('documents.destroy', $documentData->id) }}"
+                              method="POST" class="d-none">
                             @csrf
-
                             @method('DELETE')
                         </form>
                     </td>

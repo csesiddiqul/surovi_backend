@@ -43,15 +43,18 @@
                     <td>
                         <a href="{{route('page.edit',$pageData->id)}}" onclick="return confirm('Are you sure Edit data?')" class="btn btn-success btn-xs"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
 
+                       <a href="#" class="btn btn-danger btn-sm"
+                           onclick="event.preventDefault();
+                               if(confirm('Are you sure you want to delete this page?')) {
+                                   document.getElementById('deletePage{{ $pageData->id }}').submit();
+                               }">
+                            <i class="fa-solid fa-trash-can"></i> Delete
+                        </a>
 
-
-
-
-                        <a href="{{route('page.destroy',$pageData->id)}}" class="btn btn-danger btn-xs"  onclick="event.preventDefault(); document.getElementById('deleteSlider + {{$pageData->id}}').submit()";> <i class="fa-solid fa-trash-can"></i> Delete</a>
-
-                        <form id="deleteSlider + {{$pageData->id}}" action="{{route('page.destroy',$pageData->id)}}" method="POST" class="d-none">
+                        <form id="deletePage{{ $pageData->id }}"
+                              action="{{ route('page.destroy', $pageData->id) }}"
+                              method="POST" class="d-none">
                             @csrf
-
                             @method('DELETE')
                         </form>
                     </td>

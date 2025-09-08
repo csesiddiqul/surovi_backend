@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\photo_gallery;
 use App\Models\photo_group;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PhotoGalleryController extends Controller
 {
@@ -70,7 +71,7 @@ class PhotoGalleryController extends Controller
         $phga->status = $request->status;
 
         $phga->save();
-
+        Alert::success('Success', 'photo_admin created successfully');
        return redirect(route('photo_admin.index'));
     }
 
@@ -145,12 +146,8 @@ class PhotoGalleryController extends Controller
         $photo->status = $request->status;
 
         $photo->save();
-
+        Alert::success('Success', 'photo_admin created successfully');
         return back()->with('message','Create Successfully');
-
-
-
-
 
     }
 
@@ -163,21 +160,10 @@ class PhotoGalleryController extends Controller
     public function destroy($id)
     {
         $photo = photo_gallery::find($id);
-
-
-
-
-
-
-
-
-
-
             unlink(str_replace('/Storage','Storage',$photo->img));
             $photo->delete();
-
+            Alert::success('Success', 'photo_admin created successfully');
             return redirect()->route('photo_admin.index');
-
 
     }
 }

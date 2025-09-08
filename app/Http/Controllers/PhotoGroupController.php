@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\photo_group;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PhotoGroupController extends Controller
 {
@@ -65,7 +66,7 @@ class PhotoGroupController extends Controller
         $group->status = $request->status;
 
         $group->save();
-
+        Alert::success('Success', 'photo_group created successfully');
         return redirect(route('photogroup.index'));
     }
 
@@ -140,6 +141,7 @@ class PhotoGroupController extends Controller
         $group->status = $request->status;
 
         $group->save();
+          Alert::success('Success', 'photo_group created successfully');
 
         return redirect(route('photogroup.index'));
     }
@@ -153,19 +155,9 @@ class PhotoGroupController extends Controller
     public function destroy($id)
     {
         $group = photo_group::find($id);
-
-
-
-
-
-
-
-
-
-
         unlink(str_replace('/Storage','Storage',$group->img));
         $group->delete();
-
+        Alert::success('Success', 'photo_group created successfully');
         return redirect()->route('photogroup.index');
 
     }

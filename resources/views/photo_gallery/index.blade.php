@@ -50,19 +50,27 @@
                     <td>{{($photodata->status == 1 ? 'Active' : 'De-Active')}}</td>
 
                     <td>
-                        <a href="{{route('photo_admin.edit',$photodata->id)}}" onclick="return confirm('Are you sure Edit data?')" class="btn btn-success btn-xs"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
+                        <a href="{{route('photo_admin.edit',$photodata->id)}}"  class="btn btn-success btn-xs"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
 
 
 
+                        <a href="#" class="btn btn-danger btn-sm" onclick="
+                               event.preventDefault();
+                               if(confirm('Are you sure you want to delete this Data?')) {
+                                   document.getElementById('phGallary{{ $photodata->id }}').submit();
+                               }
+                               ">
+                            <i class="fa-solid fa-trash-can"></i> Delete
+                        </a>
 
-
-                        <a href="{{route('event.destroy',$photodata->id)}}" class="btn btn-danger btn-xs"  onclick="event.preventDefault(); document.getElementById('deleteNews + {{$photodata->id}}').submit()";> <i class="fa-solid fa-trash-can"></i> Delete</a>
-
-                        <form id="deleteNews + {{$photodata->id}}" action="{{route('photo_admin.destroy',$photodata->id)}}" method="POST" class="d-none">
+                        <form id="phGallary{{ $photodata->id }}" action="{{ route('photo_admin.destroy', $photodata->id) }}"
+                              method="POST" class="d-none">
                             @csrf
-
                             @method('DELETE')
                         </form>
+
+
+
                     </td>
                 </tr>
                 @endforeach

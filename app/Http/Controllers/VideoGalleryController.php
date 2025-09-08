@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\videoGallery;
 use Illuminate\Http\Request;
 use phpDocumentor\Reflection\Utils;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class VideoGalleryController extends Controller
 {
@@ -60,8 +61,9 @@ class VideoGalleryController extends Controller
         $phga->status = $request->status;
 
         $phga->save();
+         Alert::success('Success', 'videogal created successfully');
 
-        return back()->with('message','Create Successfully');
+        return redirect()->route('videogal.index');
     }
 
     /**
@@ -111,9 +113,6 @@ class VideoGalleryController extends Controller
 
             ]);
 
-
-
-
         $video->title = $request->title;
         $video->video = str_replace('watch?v=','embed/',$request->file);
         $video->description = $request->description;
@@ -121,10 +120,9 @@ class VideoGalleryController extends Controller
         $video->status = $request->status;
 
         $video->save();
+         Alert::success('Success', 'videogal created successfully');
 
-        return back()->with('message','Create Successfully');
-
-
+        return redirect()->route('videogal.index');
 
     }
 
@@ -138,8 +136,10 @@ class VideoGalleryController extends Controller
     {
         $video = videoGallery::find($id);
 
-        unlink(str_replace('/Storage','Storage',$video->video));
+        @unlink(str_replace('/Storage','Storage',$video->video));
+       
         $video->delete();
+         Alert::success('Success', 'videogal created successfully');
         return redirect()->route('videogal.index');
     }
 }

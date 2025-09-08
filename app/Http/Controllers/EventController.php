@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\event;
 use Illuminate\Http\Request;
 use phpDocumentor\Reflection\Utils;
+use RealRashid\SweetAlert\Facades\Alert;
+
+
 
 class EventController extends Controller
 {
@@ -66,7 +69,7 @@ class EventController extends Controller
         $evetn->status = $request->status;
 
         $evetn->save();
-
+        Alert::success('Success', 'event created successfully');
         return redirect()->route('event.index');
     }
 
@@ -133,8 +136,8 @@ class EventController extends Controller
         $event->status = $request->status;
 
         $event->save();
-
-        return back()->with('message', 'Create Successfully');
+        Alert::success('Success', 'event created successfully');
+        return redirect()->route('event.index');
     }
 
     /**
@@ -147,6 +150,7 @@ class EventController extends Controller
     {
         $getev = Event::where('id', '=', $event)->firstOrFail();
         $getev->delete();
+        Alert::success('Success', 'event created successfully');
         return redirect()->route('event.index');
     }
 }

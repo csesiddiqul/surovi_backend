@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Sdg;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class SdgController extends Controller
 {
@@ -78,6 +79,7 @@ class SdgController extends Controller
         ]);
 
         // 5. Redirect with success message
+        Alert::success('Success', 'Sdg created successfully');
         return redirect()->route('sdg.index')->with('success', 'SDG created successfully!');
     }
 
@@ -158,6 +160,7 @@ class SdgController extends Controller
         ]);
 
         // 6. Redirect back
+        Alert::success('Success', 'Sdg created successfully');
         return redirect()->route('sdg.index')->with('success', 'SDG updated successfully!');
     }
 
@@ -171,6 +174,7 @@ class SdgController extends Controller
     public function destroy(Sdg $sdg)
     {
         $sdg->delete();
+        Alert::success('Success', 'Sdg created successfully');
         return redirect()->route('sdg.index')->with('success', 'SDG Delete successfully!');
     }
 }

@@ -11,7 +11,7 @@
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">Important link list</h3>
-            <a href="{{route('importanLink.create')}}" class="btn btn-info badge-success float-right"> <i class="fa-solid fa-plus"></i> Add Link  </a>
+            <a href="{{route('importantLink.create')}}" class="btn btn-info badge-success float-right"> <i class="fa-solid fa-plus"></i> Add Link  </a>
 
         </div>
         <!-- /.card-header -->
@@ -29,7 +29,7 @@
                 </thead>
                 <tbody>
 
-                @foreach($importanLink as $key => $imlink)
+                @foreach($importantLink as $key => $imlink)
                     <tr>
                         <td>{{$key+1}}</td>
 
@@ -40,15 +40,25 @@
 
                         <td>{{($imlink->status == 1 ? 'Active' : 'De-Active')}}</td>
                         <td>
-                            <a href="{{route('importanLink.edit',$imlink->id)}}" class="btn btn-success btn-xs"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
+                            <a href="{{route('importantLink.edit',$imlink->id)}}" class="btn btn-success btn-xs"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
 
-                            <a href="{{route('importanLink.destroy',$imlink->id)}}" class="btn btn-danger btn-xs"  onclick="event.preventDefault(); document.getElementById('deleteNotice'+{{$imlink->id}}).submit()";> <i class="fa-solid fa-trash-can"></i> Delete</a>
+                                <a href="{{ route('importantLink.destroy', $imlink->id) }}"
+                                    class="btn btn-danger btn-xs"
+                                        onclick="event.preventDefault();
+                                                    if(confirm('Are you sure you want to delete this link?')) {
+                                                    document.getElementById('deleteNotice{{$imlink->id}}').submit();
+                                                }">
+                                        <i class="fa-solid fa-trash-can"></i> Delete
+                                </a>
 
-                            <form id="deleteNotice{{$imlink->id}}" action="{{route('importanLink.destroy',$imlink->id)}}" method="POST" class="d-none">
-                                @csrf
+                                <form id="deleteNotice{{$imlink->id}}"
+                                    action="{{ route('importantLink.destroy', $imlink->id) }}"
+                                    method="POST"
+                                    class="d-none">
+                                    @csrf
+                                    @method('DELETE')
+                                </form>
 
-                                @method('DELETE')
-                            </form>
                         </td>
                     </tr>
                 @endforeach

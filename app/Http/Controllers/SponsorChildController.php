@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\SponsorChild;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class SponsorChildController extends Controller
 {
@@ -66,7 +67,7 @@ class SponsorChildController extends Controller
         $sponsorChild->save();
 
         // return back()->with('message','Create Successfully');
-
+        Alert::success('Success', 'SponsorChild created successfully');
         return redirect()->route('sponsorChild.index');
     }
 
@@ -133,6 +134,7 @@ class SponsorChildController extends Controller
         $sponsorChild->status = $request->status;
 
         $sponsorChild->save();
+        Alert::success('Success', 'SponsorChild created successfully');
         return redirect()->route('sponsorChild.index')->with('message', 'Create Successfully');
     }
 
@@ -146,6 +148,7 @@ class SponsorChildController extends Controller
     {
         @unlink(str_replace('/Storage', 'Storage', $sponsorChild->Img));
         $sponsorChild->delete();
+        Alert::success('Success', 'SponsorChild created successfully');
         return redirect()->route('sponsorChild.index');
     }
 }

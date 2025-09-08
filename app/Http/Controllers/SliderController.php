@@ -52,6 +52,7 @@ class SliderController extends Controller
             'priority' => 'required',
             'status' => 'required| numeric|in:1,2'
         ]);
+
         $dbsl = ImageHelper::resizeAndSave($request->file('file'), '/Storage/slider/', 1296, 505);
         $slider = new slider();
         $slider->title = $request->title;
@@ -124,12 +125,9 @@ class SliderController extends Controller
      */
     public function destroy(slider $slider)
     {
-
-
-
-
         @unlink(str_replace('/Storage', 'Storage', $slider->url));
         $slider->delete();
+        Alert::success('Success', 'Slider delete successfully');
         return redirect()->route('slider.index');
     }
 }

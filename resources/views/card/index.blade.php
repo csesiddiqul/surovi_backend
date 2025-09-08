@@ -38,25 +38,33 @@
                     <td>{!! \Illuminate\Support\Str::limit($cardData->position,40) !!}</td>
                     <td>{!! \Illuminate\Support\Str::limit($cardData->mobile,40) !!}</td>
                     <td>{!! \Illuminate\Support\Str::limit($cardData->email,40) !!}</td>
-                 
+
 
                     <td>{{$cardData->Priority}}</td>
                     <td>{{($cardData->status == 1 ? 'Active' : 'De-Active')}}</td>
 
                     <td>
-                        <a href="{{route('card.edit',$cardData->id)}}" onclick="return confirm('Are you sure Edit data?')" class="btn btn-success btn-xs"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
+                        <a href="{{route('card.edit',$cardData->id)}}"  class="btn btn-success btn-xs"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
 
 
 
 
 
-                        <a href="{{route('card.destroy',$cardData->id)}}" class="btn btn-danger btn-xs"  onclick="event.preventDefault(); document.getElementById('deletecard + {{$cardData->id}}').submit()";> <i class="fa-solid fa-trash-can"></i> Delete</a>
+                        <a href="#" class="btn btn-danger btn-xs"
+                        onclick="if(confirm('Are you sure you want to delete this card?')) {
+                            event.preventDefault();
+                            document.getElementById('deletecard{{ $cardData->id }}').submit();
+                        } else {
+                            event.preventDefault();
+                        }">
+                        <i class="fa-solid fa-trash-can"></i> Delete
+                        </a>
 
-                        <form id="deletecard + {{$cardData->id}}" action="{{route('card.destroy',$cardData->id)}}" method="POST" class="d-none">
+                        <form id="deletecard{{ $cardData->id }}" action="{{ route('card.destroy', $cardData->id) }}" method="POST" class="d-none">
                             @csrf
-
                             @method('DELETE')
                         </form>
+
                     </td>
                 </tr>
                 @endforeach
