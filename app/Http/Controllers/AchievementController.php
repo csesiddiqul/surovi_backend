@@ -12,12 +12,19 @@ class AchievementController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $query = Achievement::query();
+        if ($request->has('search') && !empty($request->search)) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                    ->orWhere('description', 'like', "%{$search}%");
+            });
+        }
 
-        $achievement = Achievement::get();
-          return view('achievement.index',compact('achievement'));
-         
+        $results = $query->orderBy('created_at', 'DESC')->paginate(10);
+        return view('achievement.index', compact('results'));
     }
 
     /**
@@ -38,10 +45,10 @@ class AchievementController extends Controller
      */
     public function store(Request $request)
     {
-         $this->validate($request, [
+        $this->validate($request, [
             'title' => 'required',
             'file' => 'required|file',
-            'description'=> 'nullable',
+            'description' => 'nullable',
             'priority' => 'required',
             'status' => 'required| numeric|in:1,2'
         ]);
@@ -74,9 +81,9 @@ class AchievementController extends Controller
      * @param  \App\Models\Achievement  $achievement
      * @return \Illuminate\Http\Response
      */
-    public function show( achievement $achievement)
+    public function show(achievement $achievement)
     {
-          return view('achievement.edit', compact('achievement'));
+        return view('achievement.edit', compact('achievement'));
     }
 
     /**
@@ -87,8 +94,8 @@ class AchievementController extends Controller
      */
     public function edit($id)
     {
-        $achievement = Achievement::where('id','=',$id)->first();
-        return view('achievement.edit',compact('achievement'));
+        $achievement = Achievement::where('id', '=', $id)->first();
+        return view('achievement.edit', compact('achievement'));
     }
 
     /**
@@ -98,7 +105,7 @@ class AchievementController extends Controller
      * @param  \App\Models\Achievement  $achievement
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,achievement $achievement)
+    public function update(Request $request, achievement $achievement)
     {
         $this->validate($request, [
             'title' => 'required',
@@ -129,7 +136,6 @@ class AchievementController extends Controller
 
         $achievement->save();
         return redirect()->route('achievement.index')->with('message', 'Create Successfully');
-
     }
 
     /**
@@ -144,6 +150,4 @@ class AchievementController extends Controller
         $achievement->delete();
         return redirect()->route('achievement.index');
     }
-
-    
 }

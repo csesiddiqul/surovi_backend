@@ -1,5 +1,4 @@
 @php
-
     $logoData = \App\Models\websiteSetting::first();
 @endphp
 

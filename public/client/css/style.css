@@ -1,7 +1,7 @@
 /* labib */
 :root {
     /* --highlight-bg-color: #dc2323f0; */
-    --highlight-bg-color: #dc2323da;
+    --highlight-bg-color: #dc2323;
     --custom-marque-yellow: #ffe200;
     --highlight-text-color: #fff;
     --highlight-bg-white: #f5f5f5;
@@ -10,10 +10,65 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
+
+
+.pagination {
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+    border-radius: .25rem;
+}
+
+.page-item .page-link {
+    color: var( --highlight-bg-color);
+    /* red text */
+    background-color: var( --highlight-text-color);
+    /* white bg */
+    border: 1px solid var( --highlight-bg-color);
+    margin: 0 3px;
+    border-radius: 6px;
+    transition: all 0.2s ease-in-out;
+}
+
+.page-item .page-link:hover {
+    color: var( --highlight-text-color);
+    background-color: var( --highlight-bg-color);
+    /* red hover */
+    border-color: var( --highlight-bg-color);
+}
+
+.page-item.active .page-link {
+    z-index: 1;
+    color: var( --highlight-text-color);
+    background-color: var( --highlight-bg-color);
+    border-color: var( --highlight-bg-color);
+}
+
+.page-item.disabled .page-link {
+    color: #aaa;
+    background-color: #f8f9fa;
+    border-color: #dee2e6;
+}
+
+
 body {
     font-family: 'Inter', sans-serif;
     background-color: var(--highlight-bg-white)
 }
+
+
+.btn-outline-danger {
+    transition: all 0.4s ease;
+}
+
+.btn-outline-danger:hover {
+    background: var(--highlight-bg-color);
+    color: #fff !important;
+    transform: scale(1.05);
+    box-shadow: 0 3 15px var(--highlight-bg-color);
+}
+
+
 
 .custom-text-warning {
     color: var(--custom-marque-yellow)
@@ -651,7 +706,7 @@ h2::after {
 }
 
 .overlay i {
-    color: #fff;
+    color: var( --highlight-text-color);
     font-size: 2rem;
 }
 
@@ -724,7 +779,7 @@ h2::after {
 .social-icon {
     display: inline-block;
     margin-right: 10px;
-    color: #fff;
+    color: var( --highlight-text-color);
     width: 40px;
     height: 40px;
     line-height: 40px;
@@ -751,7 +806,7 @@ h2::after {
 
 .social-icon:hover {
     transform: translateY(-5px) scale(1.1);
-    color: #fff;
+    color: var( --highlight-text-color);
 }
 
 /* 3D Button Effect */
@@ -832,7 +887,7 @@ html {
 
 .btn-subscribe {
     background: #007bff;
-    color: #fff;
+    color: var( --highlight-text-color);
     border: none;
     padding: 6px 14px;
     border-radius: 4px;
@@ -849,7 +904,7 @@ html {
     height: 36px;
     border-radius: 50%;
     background: #333;
-    color: #fff;
+    color: var( --highlight-text-color);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -866,7 +921,7 @@ html {
     bottom: 20px;
     right: 25px;
     background: #007bff;
-    color: #fff;
+    color: var( --highlight-text-color);
     border: none;
     border-radius: 50%;
     width: 45px;
@@ -886,7 +941,7 @@ html {
 .footer {
     position: relative;
     background: url('https://gnbangla.org/wp-content/uploads/2024/02/GNB-Homepage-Footer-01.jpg') no-repeat center center/cover;
-    color: #fff;
+    color: var( --highlight-text-color);
     font-size: 15px;
     line-height: 1.8;
     padding: 40px 0;
@@ -970,7 +1025,7 @@ html {
 
 .social-icon:hover {
     background: #800000;
-    color: #fff;
+    color: var( --highlight-text-color);
     transform: scale(1.15);
 }
 
@@ -1044,5 +1099,5 @@ html {
 .custom-donate-btn:hover {
     transform: scale(1.15);
     box-shadow: 0 0 25px #ff6f81;
-    color: #fff;
+    color: var( --highlight-text-color);
 }
