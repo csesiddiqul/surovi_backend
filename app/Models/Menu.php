@@ -40,4 +40,9 @@ class Menu extends Model
             ->groupBy('prantsId');
         return $listFullMenu;
     }
+
+    public function getPage()
+    {
+        return   $this->hasOne(page::class, 'manuid', 'id');
+    }
 }

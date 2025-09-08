@@ -45,74 +45,30 @@
     <!-- Project Section -->
     <div class="container">
         <div class="row history">
+
+            @foreach ($ourWorks as $ourWork)
+
+
             <div class="col-md-3 ">
-                <a class="text-decoration-none  history-translateY" href="#">
+                <a class="text-decoration-none  history-translateY" href="{{ route('pages',$ourWork['slug']) }}">
                     <div class="card card-b-color">
                         <div class="card-title-history">
-                            <b class="font-15">Education and Skill Development</b>
+                            <b class="font-15"> {!! Str::limit($ourWork['name'], 14, '..') !!}</b>
                         </div>
                         <div class="card-body">
-
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                                additional content. This content is a little bit longer with supporting text below
-                                supporting.</p>
-                        </div>
-
-                    </div>
-                </a>
-            </div>
-
-            <div class="col-md-3">
-                <a class="text-decoration-none history-translateY" href="#">
-                    <div class="card card-b-color">
-                        <div class="card-title-history">
-                            <b class="font-15">Water, Sanitation & Hygiene (WASH) </b>
-                        </div>
-                        <div class="card-body">
-
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                                additional content. This content is a little bit longer with supporting text below
-                                supporting.</p>
-                        </div>
-
-                    </div>
-                </a>
-            </div>
-
-            <div class="col-md-3">
-                <a class="text-decoration-none history-translateY" href="#">
-                    <div class="card card-b-color">
-                        <div class="card-title-history">
-                            <b class="font-15">Emergency Response & Humanitarian Support </b>
-                        </div>
-                        <div class="card-body">
-
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                                additional content. This content is a little bit longer with supporting text below
-                                supporting.</p>
-                        </div>
-
-                    </div>
-                </a>
-            </div>
-
-            <div class="col-md-3">
-                <a class="text-decoration-none history-translateY" href="#">
-                    <div class="card card-b-color">
-                        <div class="card-title-history">
-                            <b class="font-15">Sponsorship & Scholarship</b>
-                        </div>
-                        <div class="card-body pb-2">
-
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                                additional content. This content is a little bit longer with supporting text below
-                                supporting. This content is a little bit.
-
+                           <p class="card-text">
+                                {{ \Illuminate\Support\Str::limit(strip_tags(str_replace('&nbsp;', ' ', $ourWork['description'])), 150, '..') }}
                             </p>
+
                         </div>
+
                     </div>
                 </a>
             </div>
+            @endforeach
+
+
+
 
 
             <!-- card2 Section -->

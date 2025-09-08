@@ -13,31 +13,9 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-            <div class="image">
-
-            </div>
-            <div class="info">
-                <a href="#" class="d-block" style="text-transform: capitalize">
-                   {{auth()->user()->name}}
-
-                </a>
+        
 
 
-            </div>
-        </div>
-
-        <!-- SidebarSearch Form -->
-        <div class="form-inline">
-            <div class="input-group" data-widget="sidebar-search">
-                <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-                <div class="input-group-append">
-                    <button class="btn btn-sidebar">
-                        <i class="fas fa-search fa-fw"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
@@ -546,33 +524,33 @@
 
 
 
-                  <li class="nav-item  {{request()->routeIs('JobApplication.create') 
-                || request()->routeIs('JobApplication.index') 
-                || request()->routeIs('JobApplication.edit') 
+                  <li class="nav-item  {{request()->routeIs('JobApplication.create')
+                || request()->routeIs('JobApplication.index')
+                || request()->routeIs('JobApplication.edit')
 
-              || request()->routeIs('project.create') 
-                || request()->routeIs('project.index') 
-                || request()->routeIs('project.edit') 
+              || request()->routeIs('project.create')
+                || request()->routeIs('project.index')
+                || request()->routeIs('project.edit')
 
-              || request()->routeIs('documents.create') 
-                || request()->routeIs('documents.index') 
-                || request()->routeIs('documents.edit') 
-                
+              || request()->routeIs('documents.create')
+                || request()->routeIs('documents.index')
+                || request()->routeIs('documents.edit')
+
                 ? 'menu-open' : '' }}">
 
-                
 
-                    <a href="#" class="nav-link 
-                    {{ request()->routeIs('JobApplication.create') 
-                    || request()->routeIs('JobApplication.index') 
 
-                    || request()->routeIs('project.create') 
+                    <a href="#" class="nav-link
+                    {{ request()->routeIs('JobApplication.create')
+                    || request()->routeIs('JobApplication.index')
+
+                    || request()->routeIs('project.create')
                     || request()->routeIs('project.index')
 
-                    || request()->routeIs('documents.create') 
+                    || request()->routeIs('documents.create')
                     || request()->routeIs('documents.index')
-                    
-                    
+
+
                     ? 'active' : '' }}">
                         <i class="nav-icon fa-brands fa-pix"></i>
                         <p>
@@ -581,7 +559,7 @@
                         </p>
                     </a>
 
-              
+
 
                     <!--<ul class="nav nav-treeview">-->
                     <!--    <li class="nav-item">-->
