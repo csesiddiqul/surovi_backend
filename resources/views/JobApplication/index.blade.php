@@ -36,13 +36,20 @@
                             <a href="{{route('JobApplication.edit',$jobApplidata->id)}}" class="btn btn-success btn-xs"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
 
 
-                            <a href="{{route('JobApplication.destroy',$jobApplidata->id)}}" class="btn btn-danger btn-xs"  onclick="event.preventDefault(); document.getElementById('deleteService + {{$jobApplidata->id}}').submit()";> <i class="fa-solid fa-trash-can"></i> Delete</a>
+                        <a href="#" class="btn btn-danger btn-sm"
+                           onclick="event.preventDefault();
+                               if(confirm('Are you sure you want to delete this jobApplication?')) {
+                                   document.getElementById('deleteJobApplication{{ $jobApplidata->id }}').submit();
+                               }">
+                            <i class="fa-solid fa-trash-can"></i> Delete
+                        </a>
 
-                            <form id="deleteService + {{$jobApplidata->id}}" action="{{route('JobApplication.destroy',$jobApplidata->id)}}" method="POST" class="d-none">
-                                @csrf
-
-                                @method('DELETE')
-                            </form>
+                        <form id="deleteJobApplication{{ $jobApplidata->id }}"
+                              action="{{ route('JobApplication.destroy', $jobApplidata->id) }}"
+                              method="POST" class="d-none">
+                            @csrf
+                            @method('DELETE')
+                        </form>
                         </td>
                     </tr>
                 @endforeach

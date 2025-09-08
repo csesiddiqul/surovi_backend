@@ -50,14 +50,18 @@
                         <a href="{{route('videogal.edit',$videodata->id)}}" onclick="return confirm('Are you sure Edit data?')" class="btn btn-success btn-xs"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
 
 
+                       <a href="#" class="btn btn-danger btn-sm"
+                           onclick="event.preventDefault();
+                               if(confirm('Are you sure you want to delete this videogal?')) {
+                                   document.getElementById('deleteSlider{{ $videodata->id }}').submit();
+                               }">
+                            <i class="fa-solid fa-trash-can"></i> Delete
+                        </a>
 
-
-
-                        <a href="{{route('event.destroy',$videodata->id)}}" class="btn btn-danger btn-xs"  onclick="event.preventDefault(); document.getElementById('deleteNews + {{$videodata->id}}').submit()";> <i class="fa-solid fa-trash-can"></i> Delete</a>
-
-                        <form id="deleteNews + {{$videodata->id}}" action="{{route('videogal.destroy',$videodata->id)}}" method="POST" class="d-none">
+                        <form id="deleteVideogal{{ $videodata->id }}"
+                              action="{{ route('videogal.destroy', $videodata->id) }}"
+                              method="POST" class="d-none">
                             @csrf
-
                             @method('DELETE')
                         </form>
                     </td>

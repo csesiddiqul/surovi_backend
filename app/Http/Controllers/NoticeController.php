@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Notice;
 use Illuminate\Http\Request;
 use phpDocumentor\Reflection\Utils;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class NoticeController extends Controller
 {
@@ -68,6 +69,7 @@ class NoticeController extends Controller
        $notice->save();
 
        //return back();
+       Alert::success('Success', 'Notice created successfully');
         return redirect()->route('notice.index');
 
 
@@ -81,6 +83,7 @@ class NoticeController extends Controller
      */
     public function show(Notice $notice)
     {
+        Alert::success('Success', 'Notice created successfully');
         return view('notice.show',compact('notice'));
     }
 
@@ -137,7 +140,7 @@ class NoticeController extends Controller
 
 
 
-
+        Alert::success('Success', 'Notice created successfully');
         return redirect()->route('notice.index');
     }
 
@@ -149,15 +152,6 @@ class NoticeController extends Controller
      */
     public function destroy(Notice $notice)
     {
-
-
-
-
-
-
-
-
-
 
         $getlist = Notice::count();
 
@@ -172,6 +166,7 @@ class NoticeController extends Controller
         }else{
 
             $notice->delete();
+            Alert::success('Success', 'Notice created successfully');
             return redirect()->route('notice.index');
 
         }

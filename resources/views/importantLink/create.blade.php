@@ -9,11 +9,11 @@
                     <!-- general form elements -->
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Create Link</h3>
+                            <h3 class="card-title"> Important Create Link</h3>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form action="{{route('importanLink.store')}}" method="post">
+                        <form action="{{route('importantLink.store')}}" method="post">
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">

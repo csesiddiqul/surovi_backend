@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\project;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ProjectController extends Controller
 {
@@ -37,12 +38,10 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-
-
         $this->validate($request, [
             'title' => 'required',
             'file' => 'nullable|file',
-            'Location' => 'required',
+            'Location' => 'nullable',
             'typeBenef' => 'required',
             'projectType' => 'required',
             'Priority' => 'required',
@@ -51,22 +50,16 @@ class ProjectController extends Controller
 
 
         if ($request->file){
-
             $imge = $request->file;
             $storeFileN = $imge->getClientOriginalName();
             $storeLocation = $_SERVER['DOCUMENT_ROOT']. '/Storage/page/';
             $imge->move($storeLocation,$storeFileN);
-
             $dbsl = '/Storage/page/'.$storeFileN;
         }else{
             $dbsl = '';
         }
 
-
-
-
         $projectData = new project();
-
         $projectData->title = $request->title;
         $projectData->location_data= $request->Location;
         $projectData->typeBenef = $request->typeBenef;
@@ -77,7 +70,7 @@ class ProjectController extends Controller
         $projectData->status = $request->status;
 
         $projectData->save();
-
+        Alert::success('Success', 'project created successfully');
         return redirect()->route('project.index');
     }
 
@@ -161,8 +154,8 @@ class ProjectController extends Controller
 
         $projectData->save();
 
-
-        return back()->with('message','Create Successfully');
+        Alert::success('Success', 'project created successfully');
+        return redirect()->route('project.index');
     }
 
     /**
@@ -174,20 +167,12 @@ class ProjectController extends Controller
     public function destroy($id)
     {
         $project = project::find($id);
-
-
         if($project->img){
             @unlink(str_replace('/Storage','Storage',$project->img));
-
-            $project->delete();
-            return redirect()->route('project.index');
-
-        }else{
-
-            $project->delete();
-            return redirect()->route('project.index');
-
         }
+
+        $project->delete();
+        return redirect()->route('project.index');
         
     }
 }

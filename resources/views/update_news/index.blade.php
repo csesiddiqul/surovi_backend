@@ -38,7 +38,13 @@
                             <a href="{{route('updateNews.edit',$updateNews->id)}}" onclick="return confirm('Are you sure Edit data?')" class="btn btn-success btn-xs"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
 
 
-                            <a href="{{route('updateNews.destroy',$updateNews->id)}}" class="btn btn-danger btn-xs"  onclick="event.preventDefault(); document.getElementById('deleteService + {{$updateNews->id}}').submit()";> <i class="fa-solid fa-trash-can"></i> Delete</a>
+                                <a href="#" class="btn btn-danger btn-xs"
+                                    onclick="event.preventDefault();
+                                                if(confirm('Are you sure you want to delete this updateNews?')) {
+                                                    document.getElementById('updateNews{{$updateNews->id}}').submit();
+                                                }">
+                                    <i class="fa-solid fa-trash-can"></i> Delete
+                                </a>
 
                             <form id="deleteService + {{$updateNews->id}}" action="{{route('updateNews.destroy',$updateNews->id)}}" method="POST" class="d-none">
                                 @csrf

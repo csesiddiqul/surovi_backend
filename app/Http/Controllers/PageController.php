@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\page;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PageController extends Controller
 {
@@ -88,7 +89,9 @@ class PageController extends Controller
         $page->status = $request->status;
         $page->save();
 
-        return back()->with('message','Create Successfully');
+        
+        Alert::success('Success', 'page created successfully');
+        return redirect()->route('page.index');
     }
 
     /**
@@ -156,7 +159,9 @@ class PageController extends Controller
 
         $page->save();
 
-        return back()->with('message','Create Successfully');
+        
+        Alert::success('Success', 'page created successfully');
+        return redirect()->route('page.index');
     }
 
     /**
@@ -179,6 +184,9 @@ class PageController extends Controller
 		}else{
 
 		$page->delete();
+        
+        Alert::success('Success', 'page created successfully');
+     
         return redirect()->route('page.index');
 
 		}

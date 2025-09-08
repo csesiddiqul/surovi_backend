@@ -342,8 +342,8 @@
                     </ul>
                 </li>
 
-                <li class="nav-item {{request()->routeIs('importanLink.create') || request()->routeIs('importanLink.index') || request()->routeIs('importanLink.edit') ? 'menu-open' : '' }}">
-                    <a href="#" class="nav-link {{ request()->routeIs('importanLink.create') || request()->routeIs('importanLink.index') ? 'active' : '' }}">
+                <li class="nav-item {{request()->routeIs('importantLink.create') || request()->routeIs('importantLink.index') || request()->routeIs('importantLink.edit') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->routeIs('importantLink.create') || request()->routeIs('importantLink.index') ? 'active' : '' }}">
                         <i class="nav-icon fa-solid fa-paperclip"></i>
                         <p>
                             Important link
@@ -352,13 +352,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{route('importanLink.create')}}" class="nav-link {{ request()->routeIs('importanLink.create') ? 'active' : '' }}">
+                            <a href="{{route('importantLink.create')}}" class="nav-link {{ request()->routeIs('importantLink.create') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Create</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('importanLink.index')}}" class="nav-link {{ request()->routeIs('importanLink.index') ? 'active' : '' }}">
+                            <a href="{{route('importantLink.index')}}" class="nav-link {{ request()->routeIs('importantLink.index') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>list</p>
                             </a>
@@ -544,14 +544,44 @@
                 </li>
 
 
-                <li class="nav-item  {{request()->routeIs('JobApplication.create') || request()->routeIs('JobApplication.index') || request()->routeIs('videogal.edit') ? 'menu-open' : '' }}">
-                    <a href="#" class="nav-link {{ request()->routeIs('JobApplication.create') || request()->routeIs('JobApplication.index') ? 'active' : '' }}">
+
+
+                  <li class="nav-item  {{request()->routeIs('JobApplication.create') 
+                || request()->routeIs('JobApplication.index') 
+                || request()->routeIs('JobApplication.edit') 
+
+              || request()->routeIs('project.create') 
+                || request()->routeIs('project.index') 
+                || request()->routeIs('project.edit') 
+
+              || request()->routeIs('documents.create') 
+                || request()->routeIs('documents.index') 
+                || request()->routeIs('documents.edit') 
+                
+                ? 'menu-open' : '' }}">
+
+                
+
+                    <a href="#" class="nav-link 
+                    {{ request()->routeIs('JobApplication.create') 
+                    || request()->routeIs('JobApplication.index') 
+
+                    || request()->routeIs('project.create') 
+                    || request()->routeIs('project.index')
+
+                    || request()->routeIs('documents.create') 
+                    || request()->routeIs('documents.index')
+                    
+                    
+                    ? 'active' : '' }}">
                         <i class="nav-icon fa-brands fa-pix"></i>
                         <p>
                             Other Pages
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
+
+              
 
                     <!--<ul class="nav nav-treeview">-->
                     <!--    <li class="nav-item">-->
@@ -614,8 +644,8 @@
 
 
                     <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
+                        <li class="nav-item {{request()->routeIs('project.create') || request()->routeIs('project.index') || request()->routeIs('project.edit') ? 'menu-open' : '' }}">
+                            <a href="#" class="nav-link  {{ request()->routeIs('project.create') || request()->routeIs('project.index') ? 'active' : '' }}">
                                 <i class="nav-icon fa-solid fa-file-pen"></i>
                                 <p>
                                      Projects
@@ -625,13 +655,13 @@
 
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{route('project.create')}}" class="nav-link">
+                                    <a href="{{route('project.create')}}" class="nav-link  {{ request()->routeIs('project.create') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>upload</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('project.index')}}" class="nav-link">
+                                    <a href="{{route('project.index')}}" class="nav-link  {{ request()->routeIs('project.index') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>list</p>
                                     </a>
@@ -646,8 +676,8 @@
 
 
                     <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
+                        <li class="nav-item {{request()->routeIs('documents.create') || request()->routeIs('documents.index') || request()->routeIs('documents.edit') ? 'menu-open' : '' }}">
+                            <a href="#" class="nav-link {{ request()->routeIs('documents.create') || request()->routeIs('documents.index') ? 'active' : '' }}">
                                 <i class="nav-icon fa-solid fa-file-lines"></i>
                                 <p>
                                     Publications
@@ -657,13 +687,13 @@
 
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{route('documents.create')}}" class="nav-link">
+                                    <a href="{{route('documents.create')}}" class="nav-link {{ request()->routeIs('documents.create') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>upload</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('documents.index')}}" class="nav-link">
+                                    <a href="{{route('documents.index')}}" class="nav-link {{ request()->routeIs('documents.index') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>list</p>
                                     </a>

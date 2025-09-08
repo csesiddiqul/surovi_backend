@@ -9,11 +9,11 @@
                     <!-- general form elements -->
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Updata Link</h3>
+                            <h3 class="card-title"> Important Updata Link</h3>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form action="{{route('importanLink.update', $importantLink->id)}}" method="post">
+                        <form action="{{route('importantLink.update', $importantLink->id)}}" method="post">
                             @csrf
                             @method('PUT')
 

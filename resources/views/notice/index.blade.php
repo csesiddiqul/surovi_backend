@@ -44,7 +44,13 @@
 
                             <a class="btn btn-info btn-xs" onclick="return confirm('Are you sure Show data?')" href="{{route('notice.show',$notice->id)}}">Show</a>
 
-                            <a href="{{route('notice.destroy',$notice->id)}}" class="btn btn-danger btn-xs"  onclick="event.preventDefault(); document.getElementById('deleteNotice'+{{$notice->id}}).submit()";> <i class="fa-solid fa-trash-can"></i> Delete</a>
+                                <a href="#" class="btn btn-danger btn-sm"
+                                    onclick="event.preventDefault();
+                                        if(confirm('Are you sure you want to delete this notice?')) {
+                                            document.getElementById('deleteNotice{{ $notice->id }}').submit();
+                                        }">
+                                        <i class="fa-solid fa-trash-can"></i> Delete
+                                </a>
 
                             <form id="deleteNotice{{$notice->id}}" action="{{route('notice.destroy',$notice->id)}}" method="POST" class="d-none">
                                 @csrf

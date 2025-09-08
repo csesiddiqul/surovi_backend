@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\documents;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class DocumentsController extends Controller
 {
@@ -65,7 +66,7 @@ class DocumentsController extends Controller
 
 
         $document->save();
-
+        Alert::success('Success', 'documents created successfully');
         return redirect()->route('documents.index');
     }
 
@@ -137,8 +138,8 @@ class DocumentsController extends Controller
 
 
         $document->save();
-
-        return back()->with('message','Create Successfully');
+        Alert::success('Success', 'documents created successfully');
+        return redirect()->route('documents.index');
 
 
 
@@ -158,6 +159,7 @@ class DocumentsController extends Controller
         $doc = documents::find($id);
         unlink(str_replace('/Storage','Storage',$doc->file));
         $doc->delete();
+        Alert::success('Success', 'documents created successfully');
         return redirect()->route('documents.index');
     }
 }
