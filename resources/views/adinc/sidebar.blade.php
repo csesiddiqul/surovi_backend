@@ -3,7 +3,7 @@
     $logoData = \App\Models\websiteSetting::first();
 @endphp
 
-<aside class="main-sidebar sidebar-light-primary elevation-4">
+<aside class="main-sidebar sidebar-light-danger elevation-4">
     <!-- Brand Logo -->
     <a href="{{route('home')}}" class="brand-link">
         <img src="{{$logoData->logo}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
@@ -133,7 +133,7 @@
                     </ul>
                 </li>
 
-                
+
                  <li class="nav-item {{ request()->routeIs('sponsorChild.create')  || request()->routeIs('sponsorChild.index') || request()->routeIs('sponsorChild.edit') ? 'menu-open' : '' }}">
                     <a href="#" class="nav-link {{ request()->routeIs('sponsorChild.create') || request()->routeIs('sponsorChild.index') || request()->routeIs('sponsorChild.edit') ? 'active' : '' }}">
                         <i class="nav-icon fa-solid fa-images"></i>
