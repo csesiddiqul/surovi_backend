@@ -42,13 +42,12 @@
         </div>
     </div>
 
-    {{-- নিচের description continuation --}}
     <div class="row mt-4">
         <div class="col-12">
             <div class="card border-0 shadow-sm p-4">
                 <div class="card-body">
                     <p class="text-muted" style="line-height: 1.8; font-size: 1rem;">
-                        {!! \Illuminate\Support\Str::limit(substr($page->description, 650), 64000) !!}
+                        {!! $page->description !!}
                     </p>
                 </div>
             </div>
@@ -57,10 +56,8 @@
 </div>
 @endsection
 
-
 @push('js')
 <script>
 
 </script>
-
 @endpush

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Account;
 use App\Models\Achievement;
 use App\Models\card;
-use App\Models\demo_mod;
 use App\Models\developInte;
 use App\Models\documents;
 use App\Models\Donations;
@@ -28,46 +27,9 @@ use App\Models\UpdateNews;
 use App\Models\videoGallery;
 use App\Models\websiteSetting;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
-use phpDocumentor\Reflection\Utils;
 
 class PublicController extends Controller
 {
-
-    public function achievementList(Request $request)
-    {
-        $query = Achievement::select('id', 'title', 'img', 'description', 'Priority')
-            ->where('status', 1);
-
-        // Search handle
-        if ($request->has('search') && !empty($request->search)) {
-            $search = $request->search;
-            $query->where(function ($q) use ($search) {
-                $q->where('title', 'LIKE', "%{$search}%")
-                    ->orWhere('description', 'LIKE', "%{$search}%");
-            });
-        }
-
-        $achievements = $query->orderBy('Priority')
-            ->paginate(8);
-
-        return view('public.page.achievementList', compact('achievements'));
-    }
-
-    public function achievementDetails($id)
-    {
-        $achievement = Achievement::where('id', $id)->select('id', 'title', 'img', 'description', 'Priority')
-            ->where('status', 1)
-            ->first();
-
-        $achievements = Achievement::where('id', '!=', $id)->select('id', 'title', 'img', 'description', 'Priority')
-            ->where('status', 1)
-            ->orderBy('Priority')
-            ->limit(3)
-            ->get();
-
-        return view('public.page.achievementDetails', compact('achievement', 'achievements'));
-    }
 
     public function index2()
     {
@@ -145,8 +107,27 @@ class PublicController extends Controller
             ->limit(3)
             ->get();
 
+
+
+        $ourWorks = Menu::with('getPage')
+            ->where('prantsId', '=', 71)
+            ->select('id', 'name', 'slug')
+            ->where('status', '=', 1)
+            ->orderBy('priority')
+            ->limit(value: 4)
+            ->get()
+            ->map(function ($menu) {
+                return [
+                    'name' => $menu->name,
+                    'slug' => $menu->slug,
+                    'description' => $menu->getPage ? $menu->getPage->description : null,
+                ];
+            });;
+
+
         return view("public.index", compact(
             'sliders',
+            'ourWorks',
             'achievements',
             'services',
             'notice',
@@ -161,6 +142,44 @@ class PublicController extends Controller
             'updateNews'
         ));
     }
+
+
+
+    public function achievementList(Request $request)
+    {
+        $query = Achievement::select('id', 'title', 'img', 'description', 'Priority')
+            ->where('status', 1);
+
+        // Search handle
+        if ($request->has('search') && !empty($request->search)) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'LIKE', "%{$search}%")
+                    ->orWhere('description', 'LIKE', "%{$search}%");
+            });
+        }
+
+        $achievements = $query->orderBy('Priority')
+            ->paginate(8);
+
+        return view('public.page.achievementList', compact('achievements'));
+    }
+
+    public function achievementDetails($id)
+    {
+        $achievement = Achievement::where('id', $id)->select('id', 'title', 'img', 'description', 'Priority')
+            ->where('status', 1)
+            ->first();
+
+        $achievements = Achievement::where('id', '!=', $id)->select('id', 'title', 'img', 'description', 'Priority')
+            ->where('status', 1)
+            ->orderBy('Priority')
+            ->limit(3)
+            ->get();
+
+        return view('public.page.achievementDetails', compact('achievement', 'achievements'));
+    }
+
 
 
 
