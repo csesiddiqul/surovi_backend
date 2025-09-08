@@ -22,10 +22,10 @@ use App\Http\Controllers\backend\DonationsController;
 
 Auth::routes(['register' => false]);
 
-Route::get('/index', [PublicController::class, 'index2'])->name('index2');
+Route::get('/', [PublicController::class, 'index2'])->name('index');
+Route::get('pages/{slug}', [PublicController::class, 'pages'])->name('pages');
 
-
-Route::get('/', [PublicController::class, 'index'])->name('index');
+// Route::get('/', [PublicController::class, 'index'])->name('index');
 Route::get('/development', [PublicController::class, 'development'])->name('development');
 Route::get('/mission', [PublicController::class, 'mission'])->name('mission');
 Route::post('/send_email', [contactController::class, 'sendEmail'])->name('send.email');
@@ -38,7 +38,7 @@ Route::get('/job_application', [PublicController::class, 'job_applicaton'])->nam
 Route::get('photo_gallery', [PublicController::class, 'photo_gallery'])->name('photo_gallery');
 Route::get('video_gallery', [PublicController::class, 'video_gallery'])->name('video_gallery');
 Route::get('welcome', [PublicController::class, 'welcome'])->name('welcome');
-Route::get('pages/{slug}', [PublicController::class, 'pages'])->name('pages');
+
 Route::get('all_notice/{notice_id}', [PublicController::class, 'all_notice'])->name('all_notice');
 Route::get('singaleEvent/{event_id}', [PublicController::class, 'singaleEvent'])->name('singaleEvent');
 Route::get('singalePhoto/{photo_id}', [PublicController::class, 'singalePhoto'])->name('singalePhoto');
@@ -61,7 +61,8 @@ Route::get('pubDocuments', action: [PublicController::class, 'pubDocuments'])->n
 Route::get('donate_now', [PublicController::class, 'donate_now'])->name('donate_now');
 Route::get('public-donate/{id}', [PublicController::class, 'donate'])->name('pub.donate');
 Route::post('public-donate/{id?}', [DonateinfoController::class, 'store'])->name('donate.custom');
-
+Route::get('achievement-list', [PublicController::class, 'achievementList'])->name('achievement-list');
+Route::get('achievement-details/{id?}', [PublicController::class, 'achievementDetails'])->name('achievement-details');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

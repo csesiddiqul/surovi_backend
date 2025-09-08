@@ -66,12 +66,12 @@
 
                     </ul>
                     <ul class="navbar-nav ms-auto">
-                       <li class="nav-item">
-    <a class="btn custom-donate-btn rounded-pill px-4 py-2 me-2" href="donate.html">Donate Now</a>
-</li>
+                        <li class="nav-item">
+                            <a class="btn custom-donate-btn rounded-pill px-4 py-2 me-2" href="donate.html">Donate Now</a>
+                        </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark d-flex align-items-center gap-2 px-2" href="#">
+                            <a class="nav-link text-dark d-flex align-items-center gap-2 px-2" href="{{ route('login') }}">
                                 <img src="https://thalassaemiasamity.org//client/assets/images/icon/user.png"
                                     alt="Login" height="36" width="36" class="rounded-circle shadow-sm">
                             </a>

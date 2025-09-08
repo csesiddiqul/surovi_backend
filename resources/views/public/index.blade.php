@@ -14,7 +14,7 @@
 @endsection
 @section('content')
     <!-- carousel Section -->
-   <div id="carouselExampleCaptions" class="carousel slide carousel-fade container" data-bs-ride="carousel" data-bs-interval="4000">
+    <div id="carouselExampleCaptions" class="carousel slide carousel-fade container" data-bs-ride="carousel" data-bs-interval="4000">
     <div class="carousel-inner" style="border-radius: 12px; overflow: hidden;">
         @foreach ($sliders as $key => $slider)
             <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
@@ -38,12 +38,8 @@
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
     </button>
-</div>
-
-
-
-
-    <!-- carousel Section -->
+    </div>
+    <!--end carousel Section -->
 
 
     <!-- Project Section -->
@@ -124,84 +120,56 @@
 
         </div>
     </div>
-
+   <!--end Project Section -->
 
 
     <!-- Achievements   Section -->
     <div class="container">
         <div class="achievements  text-center mb-4">
-            <h2 class="fw-bold d-inline-block position-relative pb-2">Our Achievements</h2>
+            <h2 class="fw-bold d-inline-block position-relative pb-2">Our Achievements </h2>
         </div>
-        <div class="row">
-
-            <div class="col-md-4">
-                <div class="card ">
-                    <img src="{{ asset('client/img/acivment2.png') }}" class="card-img-top" alt="...">
-                    <div class="achievements-img">
-                        <img class="acivment-imgas" src="{{ asset('client/img/achivement3.png')}}" alt="">
-                    </div>
-                    <div class="achievements-card-title">
-                        <b> international</b>
-                    </div>
-                    <div class="card-body">
-
-                        <p class="card-text text-center">This is a wider card with supporting text below .
-                            supporting.</p>
-                    </div>
-                    <a class="text-decoration-none" href="#">
-                        <div class="achievements-footer text-center">
-                            <b class="">View Details</b>
+        <div class="row g-4">
+            @foreach ($achievements as $achievement)
+                <div class="col-md-4">
+                    <div class="card ">
+                        <img src="{{ $achievement->img}}" class="card-img-top" alt="...">
+                        <div class="achievements-img">
+                            <img class="acivment-imgas" src="{{ asset('client/img/achivement3.png')}}" alt="">
                         </div>
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card ">
-                    <img src="{{ asset('client/img/acivment2.png') }}" class="card-img-top" alt="...">
-                    <div class="achievements-img">
-                        <img class="acivment-imgas" src="{{ asset('client/img/achivement3.png') }}" alt="">
-                    </div>
-                    <div class="achievements-card-title">
-                        <b> international</b>
-                    </div>
-                    <div class="card-body">
-
-                        <p class="card-text text-center">This is a wider card with supporting text below .
-                            supporting.</p>
-                    </div>
-                    <a class="text-decoration-none" href="#">
-                        <div class="achievements-footer text-center">
-                            <b class="">View Details</b>
+                        <div class="achievements-card-title">
+                            <b> {{ $achievement->title}}</b>
                         </div>
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card ">
-                            <img src="{{ asset('client/img/acivment2.png') }}" class="card-img-top" alt="...">
-                    <div class="achievements-img">
-                        <img class="acivment-imgas" src="{{ asset('client/img/achivement3.png') }}" alt="">
-                    </div>
-                    <div class="achievements-card-title">
-                        <b> international</b>
-                    </div>
-                    <div class="card-body">
-
-                        <p class="card-text text-center">This is a wider card with supporting text below .
-                            supporting.</p>
-                    </div>
-                    <a class="text-decoration-none" href="#">
-                        <div class="achievements-footer text-center">
-                            <b class="">View Details</b>
+                        <div class="card-body">
+                            <p class="card-text text-center">
+                                {{ rtrim(substr(str_replace('&nbsp;', ' ', strip_tags(string: $achievement->description)), 0, 70)) }}{{ strlen(strip_tags($achievement->description)) > 100 ? '...' : '' }}
+                            </p>
                         </div>
-                    </a>
+                        <a class="text-decoration-none" href="{{ route('achievement-details',$achievement->id) }}">
+                            <div class="achievements-footer text-center">
+                                <b class="">View Details</b>
+                            </div>
+                        </a>
+                    </div>
                 </div>
-            </div>
+            @endforeach
         </div>
+
+
+        <div class="text-center mt-4">
+            <a href="{{ route('achievement-list') }}" class="btn btn-outline-danger px-5 py-2 rounded-pill shadow-sm"
+                style="transition: all 0.4s;">
+                <i class="bi bi-trophy me-2"></i> See All Achievements
+            </a>
+        </div>
+
+
+
+
     </div>
-    <!-- Achievements   Section -->
+
+    <!--end Achievements   Section -->
+
+
     <!-- project  Section -->
     <div class="container">
         <div class="achievements text-center my-4">
@@ -297,6 +265,14 @@
                     </a>
                 </div>
             </div>
+        </div>
+
+
+        <div class="text-center mt-4">
+            <a href="all-achievements" class="btn btn-outline-danger px-5 py-2 rounded-pill shadow-sm"
+                style="transition: all 0.4s;">
+                <i class="bi bi-rocket-takeoff-fill me-2"></i> See All Project
+            </a>
         </div>
     </div>
 
@@ -459,6 +435,13 @@
 
 
 
+        </div>
+
+         <div class="text-center mt-4">
+            <a href="all-achievements" class="btn btn-outline-danger px-5 py-2 rounded-pill shadow-sm"
+                style="transition: all 0.4s;">
+                <i class="bi bi-newspaper me-2"></i> Events & News
+            </a>
         </div>
     </div>
     <!-- event  Section -->

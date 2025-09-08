@@ -6,26 +6,20 @@
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-
         </li>
     </ul>
-
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
         <!-- Navbar Search -->
         <li class="nav-item">
-            <a class="nav-link" href="{{route('index')}}" role="button" target="_blank">
+            <a class="nav-link" href="{{route('index')}}" role="button" >
                 <i class="fas fa-home"></i>
             </a>
-
         </li>
-
         <!-- Messages Dropdown Menu -->
         <li class="nav-item dropdown">
-
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <a href="#" class="dropdown-item">
                     <!-- Message Start -->

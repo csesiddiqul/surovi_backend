@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Account;
+use App\Models\Achievement;
 use App\Models\card;
 use App\Models\demo_mod;
 use App\Models\developInte;
@@ -31,11 +33,54 @@ use phpDocumentor\Reflection\Utils;
 
 class PublicController extends Controller
 {
+
+    public function achievementList(Request $request)
+    {
+        $query = Achievement::select('id', 'title', 'img', 'description', 'Priority')
+            ->where('status', 1);
+
+        // Search handle
+        if ($request->has('search') && !empty($request->search)) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'LIKE', "%{$search}%")
+                    ->orWhere('description', 'LIKE', "%{$search}%");
+            });
+        }
+
+        $achievements = $query->orderBy('Priority')
+            ->paginate(8);
+
+        return view('public.page.achievementList', compact('achievements'));
+    }
+
+    public function achievementDetails($id)
+    {
+        $achievement = Achievement::where('id', $id)->select('id', 'title', 'img', 'description', 'Priority')
+            ->where('status', 1)
+            ->first();
+
+        $achievements = Achievement::where('id', '!=', $id)->select('id', 'title', 'img', 'description', 'Priority')
+            ->where('status', 1)
+            ->orderBy('Priority')
+            ->limit(3)
+            ->get();
+
+        return view('public.page.achievementDetails', compact('achievement', 'achievements'));
+    }
+
     public function index2()
     {
         $sliders = Slider::select('id', 'title', 'url', 'priority')
             ->where('status', 1)
             ->orderBy('priority')
+            ->get();
+
+
+        $achievements = Achievement::select('id', 'title', 'img', 'description', 'Priority')
+            ->where('status', 1)
+            ->orderBy('Priority')
+            ->limit(3)
             ->get();
 
         $services = Service::select('id', 'title', 'icon', 'description')
@@ -102,6 +147,7 @@ class PublicController extends Controller
 
         return view("public.index", compact(
             'sliders',
+            'achievements',
             'services',
             'notice',
             'slogan',
@@ -404,20 +450,12 @@ class PublicController extends Controller
 
     public function pages($slug)
     {
-
-
         $slg = Menu::where('slug', $slug)->first();
-
         $id = $slg->id;
-
-
-
         $page = page::find($id);
-
         if (empty($page)) {
-            return 'plase crate a page';
+            return 'please crate a page';
         }
-
-        return view('publice_page.demo', compact('page', 'slg'));
+        return view('public.page.page', compact('page', 'slg'));
     }
 }
