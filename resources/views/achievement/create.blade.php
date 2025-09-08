@@ -8,10 +8,12 @@
                 <!-- left column -->
                 <div class="col-md-12">
                     <!-- general form elements -->
-                    <div class="card card-primary">
+                    <div class="card card-danger">
                         <div class="card-header">
-                            <h3 class="card-title">Create achievement</h3>
+                            <h3 class="card-title">Create Achievement</h3>
+                             <a href="{{route('achievement.index')}}" class="btn btn-sm btn-white float-right"> <i class="fa-solid fa-arrow-left"></i>  Back  </a>
                         </div>
+
                         <!-- /.card-header -->
                         <!-- form start -->
                         <form action="{{route('achievement.store')}}" method="post" enctype="multipart/form-data">
@@ -24,7 +26,7 @@
 
                             @csrf
                             <div class="card-body">
-                                
+
                                 <div class="form-group">
                                     <label for="exampleInputFile">Image input</label>
                                     <div class="input-group">
@@ -102,7 +104,7 @@
                             <!-- /.card-body -->
 
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-success">Submit</button>
                             </div>
                         </form>
                     </div>
