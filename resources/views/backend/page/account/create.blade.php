@@ -9,13 +9,13 @@
           <div class="card card-primary">
             <form class="form p-2" action="{{Route('account.store')}}" method="post" enctype="multipart/form-data">
               @csrf
-              <div class="card-body">
-                  <div class="d-flex justify-content-between mb-2">
-                    <h5>Add Account</h5>
-                    <div class="">
-                      <a href="{{Route('account.index')}}"><i class="material-icons text-white rounded-circle bg-primary p-1">keyboard_backspace</i></a>
-                    </div>
-                  </div>
+               <div class="card card-danger">
+
+                        <div class="card-header">
+                            <h3 class="card-title">Create Account</h3>
+                             <a href="{{route('account.index')}}" class="btn btn-sm btn-white float-right"> <i class="fa-solid fa-arrow-left"></i>  Back  </a>
+                        </div>
+
 
                   <div class="form-group row mb-4">
                   <label class="col-form-label col-12 col-md-2 col-lg-2">Title</label>
@@ -73,7 +73,7 @@
                   <div class="form-group row mb-4">
                     <label class="col-form-label col-12 col-md-2 col-lg-2"></label>
                     <div class="col-sm-12 col-md-9">
-                        <button type="submit"  class="btn btn-primary">Create</button>
+                        <button type="submit"  class="btn btn-success">Create</button>
                     </div>
                   </div>
               </div>

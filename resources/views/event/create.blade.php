@@ -7,11 +7,13 @@
                 <!-- left column -->
                 <div class="col-md-12">
                     <!-- general form elements -->
-                    <div class="card card-primary">
-                        <div class="card-header">
-                            <h3 class="card-title">Create Event</h3>
+                       <div class="card card-danger">
+
+                         <div class="card-header">
+                                <h3 class="card-title">Create Event</h3>
+                                <a href="{{route('event.index')}}" class="btn btn-sm btn-white float-right"> <i class="fa-solid fa-arrow-left"></i>  Back  </a>
                         </div>
-                        <!-- /.card-header -->
+                            <!-- /.card-header -->
                         <!-- form start -->
                         <form action="{{route('event.store')}}" method="post" enctype="multipart/form-data">
                             @if(session('message'))
@@ -119,7 +121,7 @@
                             <!-- /.card-body -->
 
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-success">Submit</button>
                             </div>
                         </form>
                     </div>
