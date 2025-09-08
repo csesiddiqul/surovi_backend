@@ -8,10 +8,13 @@
                 <!-- left column -->
                 <div class="col-md-12">
                     <!-- general form elements -->
-                    <div class="card card-primary">
+                    <div class="card card-danger">
+
                         <div class="card-header">
-                            <h3 class="card-title">Create AponsorChild</h3>
+                            <h3 class="card-title">Create Sponsor Child</h3>
+                             <a href="{{route('sponsorChild.index')}}" class="btn btn-sm btn-white float-right"> <i class="fa-solid fa-arrow-left"></i>  Back  </a>
                         </div>
+
                         <!-- /.card-header -->
                         <!-- form start -->
                         <form action="{{route('sponsorChild.store')}}" method="post" enctype="multipart/form-data">
@@ -25,7 +28,7 @@
                             @csrf
                             <div class="card-body">
 
-                            
+
                                 <div class="form-group">
                                     <label for="exampleInputTitle">Name</label>
                                     <input type="text" value="{{old('name')}}" name="name" class="form-control" id="exampleInputName" placeholder="Enter Name">
@@ -36,7 +39,7 @@
                                     @enderror
 
                                 </div>
-                                
+
                                 <div class="form-group">
                                     <label for="exampleInputTitle">Phone Number</label>
                                     <input type="text" value="{{old('phone_number')}}" name="phone_number" class="form-control" id="exampleInputphone_number" placeholder="Enter phone_number">
@@ -47,7 +50,7 @@
                                     @enderror
 
                                 </div>
-                                
+
                                 <div class="form-group">
                                     <label for="exampleInputFile">Image input</label>
                                     <div class="input-group">
