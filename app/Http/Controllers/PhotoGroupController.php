@@ -13,10 +13,18 @@ class PhotoGroupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $gpd = photo_group::all();
-        return view('photo_group.index',compact('gpd'));
+          $query = photo_group::query();
+            if ($request->has('search') && !empty($request->search)) {
+                $search = $request->search;
+                $query->where(function ($q) use ($search) {
+                    $q->where('group_name', 'like', "%{$search}%")
+                        ->orWhere('img', 'like', "%{$search}%");
+                });
+        }
+        $gpds = $query->orderBy('created_at', 'DESC')->paginate(10);
+        return view('photo_group.index',compact('gpds'));
     }
 
     /**
@@ -37,8 +45,6 @@ class PhotoGroupController extends Controller
      */
     public function store(Request $request)
     {
-
-
 
         $this->validate($request,
             [
@@ -106,8 +112,6 @@ class PhotoGroupController extends Controller
     {
         $group = photo_group::find($id);
 
-
-
         $this->validate($request,
             [
                 'groupName' => 'required',
@@ -118,8 +122,6 @@ class PhotoGroupController extends Controller
             ]);
 
         $dbsl = $group->img;
-
-
         if ($request->hasFile('file')){
 
             $imge = $request->file;
@@ -132,16 +134,13 @@ class PhotoGroupController extends Controller
             @unlink(str_replace('/Storage','Storage',$group->img));
         }
 
-
-
-
         $group->group_name = $request->groupName;
         $group->img = $dbsl;
         $group->priority = $request->priority;
         $group->status = $request->status;
 
         $group->save();
-          Alert::success('Success', 'photo_group created successfully');
+          Alert::success('Success', 'photo_group update successfully');
 
         return redirect(route('photogroup.index'));
     }
@@ -157,7 +156,7 @@ class PhotoGroupController extends Controller
         $group = photo_group::find($id);
         unlink(str_replace('/Storage','Storage',$group->img));
         $group->delete();
-        Alert::success('Success', 'photo_group created successfully');
+        Alert::success('Success', 'photo_group delete successfully');
         return redirect()->route('photogroup.index');
 
     }

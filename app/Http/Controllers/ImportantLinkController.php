@@ -14,11 +14,22 @@ class ImportantLinkController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
 
-        $importantLink = importantLink::all();
-        return view('importantLink.index',compact('importantLink'));
+         $query = importantLink::query();
+            if ($request->has('search') && !empty($request->search)) {
+                $search = $request->search;
+                $query->where(function ($q) use ($search) {
+                    $q->where('title', 'like', "%{$search}%")
+                        ->orWhere('url', 'like', "%{$search}%");
+
+                });
+        }
+        $importantLinks = $query->orderBy('created_at', 'DESC')->paginate(10);
+
+
+        return view('importantLink.index',compact('importantLinks'));
     }
 
     /**

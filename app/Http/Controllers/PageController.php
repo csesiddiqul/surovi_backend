@@ -13,11 +13,19 @@ class PageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $page = page::all();
+          $query = page::query();
+            if ($request->has('search') && !empty($request->search)) {
+                $search = $request->search;
+                $query->where(function ($q) use ($search) {
+                    $q->where('title', 'like', "%{$search}%")
+                        ->orWhere('description','like',"%{$search}%");
+                });
+        }
+        $pages = $query->orderBy('created_at', 'DESC')->paginate(10);
 
-        return view('pages.index' ,compact('page'));
+        return view('pages.index' ,compact('pages'));
     }
 
     /**
@@ -38,9 +46,6 @@ class PageController extends Controller
      */
     public function store(Request $request)
     {
-
-
-
 
          $rid = $request->prantsid;
 
@@ -74,8 +79,6 @@ class PageController extends Controller
              $dbsl = '';
          }
 
-
-
         $page = new page();
         $page->id = $request->prantsid;
         $page->title = $request->title;
@@ -89,7 +92,7 @@ class PageController extends Controller
         $page->status = $request->status;
         $page->save();
 
-        
+
         Alert::success('Success', 'page created successfully');
         return redirect()->route('page.index');
     }
@@ -126,9 +129,6 @@ class PageController extends Controller
     public function update(Request $request, page $page)
     {
 
-
-
-
         $this->validate($request,[
             'title' => 'required',
             'description' => 'required',
@@ -149,9 +149,6 @@ class PageController extends Controller
 
             @unlink(str_replace('/Storage','Storage',$page->img));
         }
-
-
-
         $page->title = $request->title;
         $page->img = $dbsl;
         $page->description = $request->description;
@@ -159,8 +156,8 @@ class PageController extends Controller
 
         $page->save();
 
-        
-        Alert::success('Success', 'page created successfully');
+
+        Alert::success('Success', 'page update successfully');
         return redirect()->route('page.index');
     }
 
@@ -172,26 +169,12 @@ class PageController extends Controller
      */
     public function destroy(page $page)
     {
-
-
-
 		if($page->img){
 			@unlink(str_replace('/Storage','Storage',$page->img));
 
 			$page->delete();
+            Alert::success('Success', 'page delete successfully');
 			return redirect()->route('page.index');
-
-		}else{
-
-		$page->delete();
-        
-        Alert::success('Success', 'page created successfully');
-     
-        return redirect()->route('page.index');
-
-		}
-
-
-
+        }
     }
 }

@@ -14,10 +14,19 @@ class CardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $card = card::all();
-       return view('card.index',compact('card'));
+        $query = card::query();
+            if ($request->has('search') && !empty($request->search)) {
+                $search = $request->search;
+                $query->where(function ($q) use ($search) {
+                    $q->where('name', 'like', "%{$search}%")
+                        ->orWhere('description', 'like', "%{$search}%")
+                        ->orWhere('img','like',"%{$search}%");
+                });
+        }
+        $cards = $query->orderBy('created_at', 'DESC')->paginate(1);
+       return view('card.index',compact('cards'));
     }
 
     /**
@@ -55,10 +64,6 @@ class CardController extends Controller
         $imge->move($storeLocation,$storeFileN);
 
         $dbsl = '/Storage/card/'.$storeFileN;
-
-
-
-
         $card = new card();
 
         $card->name = $request->name;
@@ -72,7 +77,7 @@ class CardController extends Controller
 
         $card->save();
         Alert::success('Success', 'card created successfully');
-        
+
         return redirect()->route('card.index');
 
     }
@@ -131,7 +136,6 @@ if ($request->hasFile('file')){
     @unlink(str_replace('/Storage','Storage',$card->img));
 }
 
-
         $card->name = $request->name;
         $card->description = $request->description;
         $card->img = $dbsl;
@@ -140,11 +144,8 @@ if ($request->hasFile('file')){
         $card->email = $request->email;
         $card->priority = $request->priority;
         $card->status = $request->status;
-
-
-
         $card->save();
-        Alert::success('Success', 'card created successfully');
+        Alert::success('Success', 'card update successfully');
         return back()->with('message','Create Successfully');
     }
 
@@ -159,7 +160,7 @@ if ($request->hasFile('file')){
 
         @unlink(str_replace('/Storage','Storage',$card->img));
         $card->delete();
-        Alert::success('Success', 'card created successfully');
+        Alert::success('Success', 'card delete successfully');
         return redirect()->route('card.index');
 
     }

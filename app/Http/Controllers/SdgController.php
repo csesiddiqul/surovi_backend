@@ -14,12 +14,22 @@ class SdgController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $sdg = Sdg::where('id', '!=', 1)
-            ->orderBy('priority', 'asc')
-            ->get();
-        return view('sdg.index', compact('sdg'));
+
+        $query = Sdg::query();
+            if ($request->has('search') && !empty($request->search)) {
+                $search = $request->search;
+                $query->where(function ($q) use ($search) {
+                    $q->where('goal', 'like', "%{$search}%")
+                        ->orWhere('title', 'like', "%{$search}%")
+                        ->orWhere('description','like',"%{$search}%");
+                });
+        }
+        $sdgs = $query->orderBy('created_at', 'DESC')->paginate(10);
+
+
+        return view('sdg.index', compact('sdgs'));
     }
 
     /**

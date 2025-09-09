@@ -15,10 +15,22 @@ class AccountController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index() //: Response
+    public function index(Request $request) //: Response
     {
-        $account = Account::orderBy('priority', 'ASC')->get();
-        return view('backend.page.account.index', compact('account'));
+
+        $query = Account::query();
+            if ($request->has('search') && !empty($request->search)) {
+                $search = $request->search;
+                $query->where(function ($q) use ($search) {
+                    $q->where('title', 'like', "%{$search}%")
+                        ->orWhere('image', 'like', "%{$search}%")
+                        ->orWhere('description','like',"%{$search}%");
+                });
+        }
+        $accounts = $query->orderBy('created_at', 'DESC')->paginate(1);
+
+
+        return view('backend.page.account.index', compact('accounts'));
     }
 
     /**

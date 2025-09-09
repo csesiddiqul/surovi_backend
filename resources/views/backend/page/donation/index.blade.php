@@ -11,8 +11,15 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
-
-            <table id="example2" class="table table-bordered table-hover">
+            <form method="Get" action="{{ route('donations.index') }}" class="mb-3">
+                <div class="input-group">
+                    <input type="text" name="search" class="form-control"
+                    placeholder="search by title..."
+                    value="{{ request('search') }}">
+                    <button type="submit" class="btn btn-cuccess">Search</button>
+                </div>
+            </form>
+            <table class="table table-bordered table-hover">
                 <thead>
                 <tr>
                     <th>SI</th>

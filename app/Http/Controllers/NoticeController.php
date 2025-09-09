@@ -14,9 +14,18 @@ class NoticeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $results = Notice::all();
+         $query = Notice::query();
+            if ($request->has('search') && !empty($request->search)) {
+                $search = $request->search;
+                $query->where(function ($q) use ($search) {
+                    $q->where('title', 'like', "%{$search}%")
+                        ->orWhere('description', 'like', "%{$search}%")
+                        ->orWhere('file','like',"%{$search}%");
+                });
+        }
+        $results = $query->orderBy('created_at', 'DESC')->paginate(10);
         return view('notice.index',compact('results'));
     }
 
@@ -140,7 +149,7 @@ class NoticeController extends Controller
 
 
 
-        Alert::success('Success', 'Notice created successfully');
+        Alert::success('Success', 'Notice update successfully');
         return redirect()->route('notice.index');
     }
 
@@ -160,18 +169,8 @@ class NoticeController extends Controller
             @unlink(str_replace('/Storage','Storage',$notice->file));
 
             $notice->delete();
-
+            Alert::success('Success', 'Notice delete successfully');
             return redirect()->route('notice.index');
-
-        }else{
-
-            $notice->delete();
-            Alert::success('Success', 'Notice created successfully');
-            return redirect()->route('notice.index');
-
         }
-
-
-        return redirect()->route('notice.index');
     }
 }

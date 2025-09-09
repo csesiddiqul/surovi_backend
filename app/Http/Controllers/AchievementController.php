@@ -71,7 +71,7 @@ class AchievementController extends Controller
         $achievement->save();
 
         // return back()->with('message','Create Successfully');
-        
+
         return redirect()->route('achievement.index');
     }
 
@@ -135,7 +135,7 @@ class AchievementController extends Controller
         $achievement->status = $request->status;
 
         $achievement->save();
-       
+
         return redirect()->route('achievement.index')->with('message', 'Create Successfully');
     }
 
@@ -149,8 +149,8 @@ class AchievementController extends Controller
     {
         @unlink(str_replace('/Storage', 'Storage', $achievement->Img));
         $achievement->delete();
-        
+
         return redirect()->route('achievement.index');
-        
+
     }
 }
