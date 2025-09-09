@@ -132,95 +132,27 @@
             <h2 class="fw-bold d-inline-block position-relative pb-2">On-Going Projects</h2>
         </div>
         <div class="row g-4">
-            <div class="col-md-4">
-                <div class="card h-100">
-                    <img src="{{ asset('client/img/img4.jpg') }}"  class="card-img-top" alt="">
-                    <div class="card-body text-center">
-                        <h5 class="card-title fw-bold">Safe Water & Sanitation </h5>
-                        <p class="card-text">Kurigram, Sunamgonj & Lakshmipur District in Bangladesh</p>
-                    </div>
-                    <a class="text-decoration-none" href="#">
-                        <div class="achievements-footer text-center">
-                            <b class="">View Details</b>
-                        </div>
-                    </a>
-                </div>
-            </div>
 
-            <div class="col-md-4">
-                <div class="card h-100">
-                    <img src="{{ asset('client/img/img4.jpg') }}" class="card-img-top" alt="">
-                    <div class="card-body text-center">
-                        <h5 class="card-title fw-bold">Hands in Girls Health (HIGH)</h5>
-                        <p class="card-text"> Narayangonj and Laxmipur Pourasava Laxmipur Pourasava </p>
-                    </div>
-                    <a class="text-decoration-none" href="#">
-                        <div class="achievements-footer text-center">
-                            <b class="">View Details</b>
-                        </div>
-                    </a>
-                </div>
-            </div>
 
-            <div class="col-md-4">
-                <div class="card h-100">
-                    <img src="{{ asset('client/img/img5.jpg') }}" class="card-img-top" alt="Diagnostic">
-                    <div class="card-body text-center">
-                        <h5 class="card-title fw-bold"> Qurbani/Udhiya in Bangladesh</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural.</p>
-                    </div>
-                    <a class="text-decoration-none" href="#">
-                        <div class="achievements-footer text-center">
-                            <b class="">View Details</b>
+            @foreach ($projects as $project)
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <img src="{{ asset('client/img/img4.jpg') }}"  class="card-img-top" alt="">
+                        <div class="card-body text-center">
+                            <h5 class="card-title fw-bold">   <b> {{ $project->title}}</b></h5>
+                            <p class="card-text">dd {{ rtrim(substr(str_replace('&nbsp;', ' ', strip_tags(string: $project->location_data)), 0, 70)) }}{{ strlen(strip_tags($achievement->location_data)) > 100 ? '...' : '' }}</p>
                         </div>
-                    </a>
+                        <a class="text-decoration-none" href="#">
+                            <div class="achievements-footer text-center">
+                                <b class="">View Details</b>
+                            </div>
+                        </a>
+                    </div>
                 </div>
-            </div>
+            @endforeach
 
-            <div class="col-md-4">
-                <div class="card h-100">
-                    <img src="{{ asset('client/img/img4.jpg') }}" class="card-img-top" alt="">
-                    <div class="card-body text-center">
-                        <h5 class="card-title fw-bold">Safe Water & Sanitation </h5>
-                        <p class="card-text">Kurigram, Sunamgonj & Lakshmipur District in Bangladesh</p>
-                    </div>
-                    <a class="text-decoration-none" href="#">
-                        <div class="achievements-footer text-center">
-                            <b class="">View Details</b>
-                        </div>
-                    </a>
-                </div>
-            </div>
 
-            <div class="col-md-4">
-                <div class="card h-100">
-                    <img src="{{ asset('client/img/img5.jpg') }}" class="card-img-top" alt="">
-                    <div class="card-body text-center">
-                        <h5 class="card-title fw-bold">Hands in Girls Health (HIGH)</h5>
-                        <p class="card-text"> Narayangonj and Laxmipur Pourasava Laxmipur Pourasava </p>
-                    </div>
-                    <a class="text-decoration-none" href="#">
-                        <div class="achievements-footer text-center">
-                            <b class="">View Details</b>
-                        </div>
-                    </a>
-                </div>
-            </div>
 
-            <div class="col-md-4">
-                <div class="card h-100">
-                    <img src="{{ asset('client/img/img6.jpg') }}" class="card-img-top" alt="Diagnostic">
-                    <div class="card-body text-center">
-                        <h5 class="card-title fw-bold"> Qurbani/Udhiya in Bangladesh</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural </p>
-                    </div>
-                    <a class="text-decoration-none" href="#">
-                        <div class="achievements-footer text-center">
-                            <b class="">View Details</b>
-                        </div>
-                    </a>
-                </div>
-            </div>
         </div>
 
 

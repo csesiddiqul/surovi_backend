@@ -97,7 +97,7 @@ class PublicController extends Controller
             ->limit(3)
             ->get();
 
-        $project = Project::select('id', 'title', 'img')
+         $projects = Project::select('id', 'title', 'img','location_data')
             ->where('projectType', 1)
             ->limit(6)
             ->get();
@@ -129,6 +129,7 @@ class PublicController extends Controller
             'sliders',
             'ourWorks',
             'achievements',
+            'projects',
             'services',
             'notice',
             'slogan',
@@ -138,7 +139,6 @@ class PublicController extends Controller
             'imlink',
             'photoin',
             'video',
-            'project',
             'updateNews'
         ));
     }
