@@ -14,7 +14,16 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
-            <table id="example2" class="table table-bordered table-hover">
+                <form method="Get" action="{{ route('updateNews.index') }}" class="mb-3">
+                <div class="input-group">
+                    <input type="text" name="search" class="form-control"
+                    placeholder="search by title..."
+                    value="{{ request('search') }}">
+                    <button type="submit" class="btn btn-success">Search</button>
+                </div>
+
+            </form>
+            <table  class="table table-bordered table-hover">
                 <thead>
                 <tr>
                     <th>SI</th>
@@ -46,7 +55,7 @@
                                     <i class="fa-solid fa-trash-can"></i> Delete
                                 </a>
 
-                            <form id="deleteService + {{$updateNews->id}}" action="{{route('updateNews.destroy',$updateNews->id)}}" method="POST" class="d-none">
+                            <form id="updateNews{{$updateNews->id}}" action="{{route('updateNews.destroy',$updateNews->id)}}" method="POST" class="d-none">
                                 @csrf
 
                                 @method('DELETE')
@@ -57,6 +66,11 @@
 
                 </tbody>
             </table>
+            <!-- Pagination -->
+        <div class="mt-3">
+            {{ $results->appends(request()->query())->links() }}
+        </div>
+
         </div>
         <!-- /.card-body -->
     </div>

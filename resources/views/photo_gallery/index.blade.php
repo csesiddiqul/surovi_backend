@@ -10,8 +10,16 @@
         <!-- /.card-header -->
         <div class="card-body">
 
+            <form method="Get" action="{{ route('photo_admin.index') }}" class="mb-3">
+                <div class="input-group">
+                    <input type="text" name="search" class="form-control"
+                    placeholder="search by title..."
+                    value="{{ request('search') }}">
+                    <button type="submit" class="btn btn-success">Search</button>
+                </div>
+            </form>
 
-            <table id="example2" class="table table-bordered table-hover">
+            <table class="table table-bordered table-hover">
                 <thead>
                 <tr>
                     <th>SI</th>
@@ -26,7 +34,7 @@
                 </thead>
                 <tbody>
 
-                @foreach($photoGa as $key=> $photodata)
+                @foreach($photoGas as $key=> $photodata)
                 <tr>
                     <td>{{$key+1}}</td>
 
@@ -77,6 +85,11 @@
 
                 </tbody>
             </table>
+            <!-- Pagination -->
+            <div class="mt-3">
+                {{ $photoGas->appends(request()->query())->links() }}
+            </div>
+
         </div>
         <!-- /.card-body -->
     </div>

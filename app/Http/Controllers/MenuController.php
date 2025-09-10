@@ -139,7 +139,7 @@ class MenuController extends Controller
         $mid = Menu::find($id);
         if ($mid->menu_type == 2)
             $mid->delete();
-        Alert::success('Success', 'manu created successfully');
+        Alert::success('Success', 'manu Delete successfully');
         return redirect()->route('manu.index');
 
     }

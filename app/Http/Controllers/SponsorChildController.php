@@ -13,10 +13,20 @@ class SponsorChildController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $sponsorChild = SponsorChild::get();
-        return view('sponsorChild.index',compact('sponsorChild'));
+        $query = SponsorChild::query();
+        if ($request->has('search') && !empty($request->search)) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                    ->orWhere('phone_number', 'like', "%{$search}%")
+                    ->orWhere('description','like',"%{$search}%");
+            });
+        }
+        $sponsorChilds = $query->orderBy('created_at', 'DESC')->paginate(10);
+
+        return view('sponsorChild.index',compact('sponsorChilds'));
     }
 
     /**
@@ -37,7 +47,7 @@ class SponsorChildController extends Controller
      */
     public function store(Request $request)
     {
-         
+
         $this->validate($request, [
             'name' => 'required',
             'phone_number' => 'required',
@@ -46,7 +56,7 @@ class SponsorChildController extends Controller
             'priority' => 'required',
             'status' => 'required| numeric|in:1,2'
         ]);
-        
+
         $imge = $request->file('file');
         $storeFileN = time() . '_' . uniqid() . '.' . $imge->getClientOriginalExtension();
 
@@ -134,7 +144,7 @@ class SponsorChildController extends Controller
         $sponsorChild->status = $request->status;
 
         $sponsorChild->save();
-        Alert::success('Success', 'SponsorChild created successfully');
+        Alert::success('Success', 'SponsorChild update successfully');
         return redirect()->route('sponsorChild.index')->with('message', 'Create Successfully');
     }
 
@@ -148,7 +158,7 @@ class SponsorChildController extends Controller
     {
         @unlink(str_replace('/Storage', 'Storage', $sponsorChild->Img));
         $sponsorChild->delete();
-        Alert::success('Success', 'SponsorChild created successfully');
+        Alert::success('Success', 'SponsorChild delete successfully');
         return redirect()->route('sponsorChild.index');
     }
 }

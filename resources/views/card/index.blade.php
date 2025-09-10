@@ -10,8 +10,17 @@
         <!-- /.card-header -->
         <div class="card-body">
 
+               <form method="Get" action="{{ route('card.index') }}" class="mb-3">
+                <div class="input-group">
+                    <input type="text" name="search" class="form-control"
+                    placeholder="search by title..."
+                    value="{{ request('search') }}">
+                    <button type="submit" class="btn btn-success">Search</button>
+                </div>
 
-            <table id="example2" class="table table-bordered table-hover">
+            </form>
+
+            <table class="table table-bordered table-hover">
                 <thead>
                 <tr>
                     <th>SI</th>
@@ -27,7 +36,7 @@
                 </thead>
                 <tbody>
 
-                @foreach($card as $key => $cardData)
+                @foreach($cards as $key => $cardData)
                 <tr>
                     <td>{{$key+1}}</td>
 
@@ -46,18 +55,14 @@
                     <td>
                         <a href="{{route('card.edit',$cardData->id)}}"  class="btn btn-success btn-xs"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
 
-
-
-
-
                         <a href="#" class="btn btn-danger btn-xs"
-                        onclick="if(confirm('Are you sure you want to delete this card?')) {
-                            event.preventDefault();
-                            document.getElementById('deletecard{{ $cardData->id }}').submit();
-                        } else {
-                            event.preventDefault();
-                        }">
-                        <i class="fa-solid fa-trash-can"></i> Delete
+                            onclick="if(confirm('Are you sure you want to delete this card?')) {
+                                event.preventDefault();
+                                document.getElementById('deletecard{{ $cardData->id }}').submit();
+                            } else {
+                                event.preventDefault();
+                            }">
+                            <i class="fa-solid fa-trash-can"></i> Delete
                         </a>
 
                         <form id="deletecard{{ $cardData->id }}" action="{{ route('card.destroy', $cardData->id) }}" method="POST" class="d-none">
@@ -71,6 +76,12 @@
 
                 </tbody>
             </table>
+
+            <!-- Pagination -->
+            <div class="mt-3">
+                {{ $cards->appends(request()->query())->links() }}
+            </div>
+
         </div>
         <!-- /.card-body -->
     </div>

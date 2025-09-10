@@ -13,11 +13,19 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $project = project::all();
+         $query = project::query();
+            if ($request->has('search') && !empty($request->search)) {
+                $search = $request->search;
+                $query->where(function ($q) use ($search) {
+                    $q->where('title', 'like', "%{$search}%")
+                        ->orWhere('img', 'like', "%{$search}%");
+                });
+        }
+        $projects = $query->orderBy('created_at', 'DESC')->paginate(10);
 
-        return view('project.index',compact('project'));
+        return view('project.index',compact('projects'));
     }
 
     /**
@@ -108,13 +116,7 @@ class ProjectController extends Controller
      */
     public function update(Request $request,$id)
     {
-
-
-
         $projectData = project::find($id);
-
-
-
         $this->validate($request, [
             'title' => 'required',
             'file' =>  'nullable|file',
@@ -124,11 +126,7 @@ class ProjectController extends Controller
             'Priority' => 'required',
             'status' => 'required | numeric|in:1,2'
         ]);
-
-
-
         $dbsl = $projectData->img;
-
         if ($request->hasFile('file')){
 
             $imge = $request->file;
@@ -141,8 +139,6 @@ class ProjectController extends Controller
             @unlink(str_replace('/Storage','Storage',$projectData->img));
         }
 
-
-
         $projectData->title = $request->title;
         $projectData->img = $dbsl;
         $projectData->location_data= $request->Location;
@@ -150,11 +146,8 @@ class ProjectController extends Controller
         $projectData->projectType = $request->projectType;
         $projectData->Priority = $request->Priority;
         $projectData->status = $request->status;
-
-
         $projectData->save();
-
-        Alert::success('Success', 'project created successfully');
+        Alert::success('Success', 'project update successfully');
         return redirect()->route('project.index');
     }
 
@@ -172,7 +165,8 @@ class ProjectController extends Controller
         }
 
         $project->delete();
+        Alert::success('Success', 'project delete successfully');
         return redirect()->route('project.index');
-        
+
     }
 }

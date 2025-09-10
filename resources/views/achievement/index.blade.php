@@ -16,7 +16,7 @@
                 <input type="text" name="search" class="form-control"
                        placeholder="Search by title..."
                        value="{{ request('search') }}">
-                <button type="submit" class="btn btn-primary">Search</button>
+                <button type="submit" class="btn btn-success">Search</button>
             </div>
         </form>
 

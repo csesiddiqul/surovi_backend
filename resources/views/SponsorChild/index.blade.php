@@ -9,9 +9,17 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
+            <form method="GEt" action="{{ route('sponsorChild.index') }}" class="mb-3" >
+                <div class="input-group">
+                    <input type="text" name="search" class="form-control"
+                    placeholder="search by title..."
+                    value="{{request('search')}}">
+                    <button type="submit" class="btn btn-success">Search</button>
 
+                </div>
+            </form>
 
-            <table id="example2" class="table table-bordered table-hover">
+            <table  class="table table-bordered table-hover">
                 <thead>
                 <tr>
                     <th>SI</th>
@@ -26,7 +34,7 @@
                 </thead>
                 <tbody>
 
-                @foreach($sponsorChild as $key => $sponsorChild)
+                @foreach($sponsorChilds as $key => $sponsorChild)
                 <tr>
                     <td>{{$key+1}}</td>
                     <td>{{$sponsorChild->name}}</td>
@@ -59,6 +67,13 @@
 
                 </tbody>
             </table>
+
+
+            <div class="mt-3">
+                {{ $sponsorChilds->appends(request()->query())->links() }}
+            </div>
+            
+
         </div>
         <!-- /.card-body -->
     </div>

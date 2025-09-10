@@ -14,12 +14,24 @@ class PhotoGalleryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $photoGa = photo_gallery::all();
         $group = photo_group::all();
 
-        return view('photo_gallery.index',compact('photoGa','group'));
+         $query = photo_gallery::query();
+            if ($request->has('search') && !empty($request->search)) {
+                $search = $request->search;
+                $query->where(function ($q) use ($search) {
+                    $q->where('goal', 'like', "%{$search}%")
+                        ->orWhere('title', 'like', "%{$search}%")
+                        ->orWhere('description','like',"%{$search}%");
+                });
+        }
+        $photoGas = $query->orderBy('created_at', 'DESC')->paginate(10);
+
+
+
+        return view('photo_gallery.index',compact('photoGas','group'));
     }
 
     /**

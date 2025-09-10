@@ -13,7 +13,7 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
-        
+
 
 
 
@@ -103,6 +103,31 @@
                         </li>
                         <li class="nav-item">
                             <a href="{{route('achievement.index')}}" class="nav-link {{ request()->routeIs('achievement.index') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>list</p>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+
+                <li class="nav-item {{ request()->routeIs('advisoryCommittee.create')  || request()->routeIs('advisoryCommittee.index') || request()->routeIs('advisoryCommittee.edit') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->routeIs('advisoryCommittee.create') || request()->routeIs('advisoryCommittee.index') || request()->routeIs('advisoryCommittee.edit') ? 'active' : '' }}">
+                        <i class="nav-icon fa-solid fa-images"></i>
+                        <p>
+                             Advisory Committee
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('advisoryCommittee.create')}}" class="nav-link {{ request()->routeIs('advisoryCommittee.create') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>upload</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('advisoryCommittee.index')}}" class="nav-link {{ request()->routeIs('advisoryCommittee.index') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>list</p>
                             </a>
@@ -650,9 +675,6 @@
 
                     </ul>
 
-
-
-
                     <ul class="nav nav-treeview">
                         <li class="nav-item {{request()->routeIs('documents.create') || request()->routeIs('documents.index') || request()->routeIs('documents.edit') ? 'menu-open' : '' }}">
                             <a href="#" class="nav-link {{ request()->routeIs('documents.create') || request()->routeIs('documents.index') ? 'active' : '' }}">
@@ -685,10 +707,6 @@
 
                 </li>
 
-
-
-
-
                 <li class="nav-item {{request()->routeIs('websetting.create') || request()->routeIs('websetting.index') || request()->routeIs('websetting.edit') ? 'menu-open' : '' }}">
                     <a href="{{route('websetting.index')}}" class="nav-link {{ request()->routeIs('websetting.create') || request()->routeIs('websetting.index') ? 'active' : '' }}">
                         <i class="nav-icon fa-solid fa-gears"></i>
@@ -699,11 +717,6 @@
                     </a>
 
                 </li>
-
-
-
-
-
                 <li class="nav-item {{request()->routeIs('manu.create') || request()->routeIs('manu.index') || request()->routeIs('manu.edit') ? 'menu-open' : '' }}">
                     <a href="#" class="nav-link  {{ request()->routeIs('manu.create') || request()->routeIs('manu.index') ? 'active' : '' }}">
                         <i class="nav-icon fa-solid fa-list-check"></i>

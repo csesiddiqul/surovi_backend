@@ -10,8 +10,16 @@
         <!-- /.card-header -->
         <div class="card-body">
 
+            <form method="Get" action="{{ route('videogal.index') }}" class="mb-3">
+                <div class="input-group">
+                    <input type="text" name="search" class="form-control"
+                    placeholder="search by title..."
+                    value="{{ request('search') }}">
+                    <button type="submit" class="btn btn-success">Search</button>
+                </div>
+            </form>
 
-            <table id="example2" class="table table-bordered table-hover">
+            <table class="table table-bordered table-hover">
                 <thead>
                 <tr>
                     <th>SI</th>
@@ -25,7 +33,7 @@
                 </thead>
                 <tbody>
 
-                @foreach($video as $key=> $videodata)
+                @foreach($videos as $key=> $videodata)
                 <tr>
                     <td>{{$key+1}}</td>
 
@@ -53,7 +61,7 @@
                        <a href="#" class="btn btn-danger btn-sm"
                            onclick="event.preventDefault();
                                if(confirm('Are you sure you want to delete this videogal?')) {
-                                   document.getElementById('deleteSlider{{ $videodata->id }}').submit();
+                                   document.getElementById('deleteVideogal{{ $videodata->id }}').submit();
                                }">
                             <i class="fa-solid fa-trash-can"></i> Delete
                         </a>
@@ -70,6 +78,10 @@
 
                 </tbody>
             </table>
+            <!-- Pagination -->
+            <div class="mt-3">
+                {{ $videos->appends(request()->query())->links() }}
+            </div>
         </div>
         <!-- /.card-body -->
     </div>

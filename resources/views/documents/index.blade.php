@@ -9,7 +9,16 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
-            <table id="example2" class="table table-bordered table-hover">
+            <form method="Get" action="{{ route('documents.index') }}" class="mb-3">
+                <div class="input-group">
+                    <input type="text" name="search" class="form-control"
+                    placeholder="search by title..."
+                    value="{{ request('search') }}">
+                    <button type="submit" class="btn btn-success">Search</button>
+                </div>
+            </form>
+
+            <table class="table table-bordered table-hover">
                 <thead>
                 <tr>
                     <th>SI</th>
@@ -52,6 +61,12 @@
 
                 </tbody>
             </table>
+
+        <!-- Pagination -->
+        <div class="mt-3">
+            {{ $results->appends(request()->query())->links() }}
+        </div>
+
         </div>
         <!-- /.card-body -->
     </div>

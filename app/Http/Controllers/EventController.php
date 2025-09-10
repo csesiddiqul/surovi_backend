@@ -16,11 +16,21 @@ class EventController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $event = event::all();
 
-        return view('event.index', compact('event'));
+        $query = event::query();
+            if ($request->has('search') && !empty($request->search)) {
+                $search = $request->search;
+                $query->where(function ($q) use ($search) {
+                    $q->where('title', 'like', "%{$search}%")
+                        ->orWhere('description', 'like', "%{$search}%")
+                        ->orWhere('img','like',"%{$search}%");
+                });
+        }
+        $events = $query->orderBy('created_at', 'DESC')->paginate(10);
+
+        return view('event.index', compact('events'));
     }
 
     /**
@@ -126,8 +136,6 @@ class EventController extends Controller
             @unlink(str_replace('/Storage', 'Storage', $event->img));
         }
 
-
-
         $event->title = $request->title;
         $event->img = $dbsl;
         $event->description = $request->description;
@@ -136,7 +144,7 @@ class EventController extends Controller
         $event->status = $request->status;
 
         $event->save();
-        Alert::success('Success', 'event created successfully');
+        Alert::success('Success', 'event update successfully');
         return redirect()->route('event.index');
     }
 
@@ -150,7 +158,7 @@ class EventController extends Controller
     {
         $getev = Event::where('id', '=', $event)->firstOrFail();
         $getev->delete();
-        Alert::success('Success', 'event created successfully');
+        Alert::success('Success', 'event delete successfully');
         return redirect()->route('event.index');
     }
 }

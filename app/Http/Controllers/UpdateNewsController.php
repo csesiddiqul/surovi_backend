@@ -13,9 +13,17 @@ class UpdateNewsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $results = UpdateNews::all();
+        $query = UpdateNews::query();
+        if ($request->has('search') && !empty($request->search)) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('news', 'like', "%{$search}%");
+
+            });
+        }
+        $results = $query->orderBy('created_at', 'DESC')->paginate(10);
 
         return view('update_news.index',compact('results'));
     }
@@ -39,8 +47,6 @@ class UpdateNewsController extends Controller
     public function store(Request $request)
     {
 
-
-
         $this->validate($request,[
             'news'=>'required',
             'priority'=>'required',
@@ -48,17 +54,12 @@ class UpdateNewsController extends Controller
         ]);
 
         $updateNews = new UpdateNews();
-
-
         $updateNews->news = $request->news;
         $updateNews->priority = $request->priority;
         $updateNews->status = $request->status;
-
         $updateNews->save();
          Alert::success('Success', 'UpdateNews created successfully');
         return redirect()->route('updateNews.index');
-
-
 
     }
 
@@ -99,15 +100,12 @@ class UpdateNewsController extends Controller
             'priority'=>'required',
             'status'=>'numeric|in:1,2',
         ]);
-
-
-
         $updateNews->news = $request->news;
         $updateNews->priority = $request->priority;
         $updateNews->status = $request->status;
 
         $updateNews->save();
-         Alert::success('Success', 'UpdateNews created successfully');
+         Alert::success('Success', 'UpdateNews update successfully');
         return back()->with('message','Create Successfully');
     }
 
@@ -117,18 +115,11 @@ class UpdateNewsController extends Controller
      * @param  \App\Models\UpdateNews  $updateNews
      * @return \Illuminate\Http\Response
      */
-    public function destroy(UpdateNews $updateNews)
+    public function destroy($id)
     {
-
-            $updateNews->delete();
-             Alert::success('Success', 'UpdateNews created successfully');
-            return redirect()->route('updateNews.index');
-
-
-
-
-
-
-
+        $updateNews = UpdateNews::where('id','=',$id)->first();
+        $updateNews->delete();
+        Alert::success('Success', 'UpdateNews delete successfully');
+        return redirect()->route('updateNews.index');
     }
 }

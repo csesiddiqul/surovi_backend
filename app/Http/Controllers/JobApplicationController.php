@@ -13,11 +13,18 @@ class JobApplicationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $jobAppli = jobApplication::all();
+         $query = jobApplication::query();
+            if ($request->has('search') && !empty($request->search)) {
+                $search = $request->search;
+                $query->where(function ($q) use ($search) {
+                    $q->where('title', 'like', "%{$search}%");
 
-        return view('JobApplication.index',compact('jobAppli'));
+                });
+        }
+        $jobApplis = $query->orderBy('created_at', 'DESC')->paginate(10);
+        return view('JobApplication.index',compact('jobApplis'));
     }
 
     /**

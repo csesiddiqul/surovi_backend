@@ -13,9 +13,19 @@ class DocumentsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $results = documents::all();
+   
+        $query = documents::query();
+            if ($request->has('search') && !empty($request->search)) {
+                $search = $request->search;
+                $query->where(function ($q) use ($search) {
+                    $q->where('title', 'like', "%{$search}%")
+                        ->orWhere('date', 'like', "%{$search}%")
+                        ->orWhere('file','like',"%{$search}%");
+                });
+        }
+        $results = $query->orderBy('created_at', 'DESC')->paginate(10);
 
         return view('documents.index',compact('results'));
     }

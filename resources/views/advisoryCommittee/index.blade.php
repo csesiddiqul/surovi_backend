@@ -5,13 +5,13 @@
 
 
     <div class="card-header">
-            <h3 class="card-title">Slider list</h3>
-            <a href="{{route('slider.create')}}" class="btn btn-info badge-success float-right"> <i class="fa-solid fa-plus"></i> Add Video  </a>
+            <h3 class="card-title">Advisory Committee list</h3>
+            <a href="{{route('advisoryCommittee.create')}}" class="btn btn-info badge-success float-right"> <i class="fa-solid fa-plus"></i> Add New  </a>
     </div>
 
     <!-- Search -->
     <div class="card-body">
-        <form method="GET" action="{{ route('slider.index') }}" class="mb-3">
+        <form method="GET" action="{{ route('advisoryCommittee.index') }}" class="mb-3">
             <div class="input-group">
                 <input type="text" name="search" class="form-control"
                        placeholder="Search by title..."
@@ -25,43 +25,45 @@
             <thead>
                 <tr>
                     <th>SI</th>
-                    <th>Title</th>
                     <th>Img</th>
-                    <th>Priority</th>
+                    <th>Title</th>
+                    <th>designation</th>
                     <th>Status</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse($results as $key => $slider)
+                @forelse($results as $key => $advisoryCommittee)
                 <tr>
                     <td>{{ $results->firstItem() + $key }}</td>
-                    <td>{{ $slider->title }}</td>
+
                     <td>
-                        <img src="{{ asset($slider->url) }}" alt="slider image" width="120" class="img-thumbnail">
+                        <img src="{{ asset($advisoryCommittee->img) }}" alt="advisoryCommittee image" width="120" class="img-thumbnail">
                     </td>
-                    <td>{{ $slider->priority }}</td>
+                    <td>{{ $advisoryCommittee->title }}</td>
+                    <td>{{ $advisoryCommittee->designation }}</td>
+                    <td>{{ $advisoryCommittee->priority }}</td>
                     <td>
-                        <span class="badge {{ $slider->status == 1 ? 'bg-success' : 'bg-danger' }}">
-                            {{ $slider->status == 1 ? 'Active' : 'De-Active' }}
+                        <span class="badge {{ $advisoryCommittee->status == 1 ? 'bg-success' : 'bg-danger' }}">
+                            {{ $advisoryCommittee->status == 1 ? 'Active' : 'De-Active' }}
                         </span>
                     </td>
                     <td>
-                        <a href="{{ route('slider.edit',$slider->id) }}" class="btn btn-success btn-sm">
+                        <a href="{{ route('advisoryCommittee.edit',$advisoryCommittee->id) }}" class="btn btn-success btn-sm">
                             <i class="fa-solid fa-pen-to-square"></i> Edit
                         </a>
 
 
                          <a href="#" class="btn btn-danger btn-sm"
                            onclick="event.preventDefault();
-                               if(confirm('Are you sure you want to delete this slider?')) {
-                                   document.getElementById('deleteSlider{{ $slider->id }}').submit();
+                               if(confirm('Are you sure you want to delete this advisoryCommittee?')) {
+                                   document.getElementById('deleteAdvisoryCommittee{{ $advisoryCommittee->id }}').submit();
                                }">
                             <i class="fa-solid fa-trash-can"></i> Delete
                         </a>
 
-                        <form id="deleteSlider{{ $slider->id }}"
-                              action="{{ route('slider.destroy', $slider->id) }}"
+                        <form id="deleteAdvisoryCommittee{{ $advisoryCommittee->id }}"
+                              action="{{ route('advisoryCommittee.destroy', $advisoryCommittee->id) }}"
                               method="POST" class="d-none">
                             @csrf
                             @method('DELETE')
@@ -73,7 +75,7 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="6" class="text-center">No sliders found.</td>
+                    <td colspan="6" class="text-center">No advisoryCommittees found.</td>
                 </tr>
                 @endforelse
             </tbody>

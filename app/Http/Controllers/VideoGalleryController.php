@@ -14,11 +14,19 @@ class VideoGalleryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $video = videoGallery::all();
-
-        return view('video_gallery.index',compact('video'));
+         $query = videoGallery::query();
+            if ($request->has('search') && !empty($request->search)) {
+                $search = $request->search;
+                $query->where(function ($q) use ($search) {
+                    $q->where('title', 'like', "%{$search}%")
+                        ->orWhere('description', 'like', "%{$search}%")
+                        ->orWhere('video','like',"%{$search}%");
+                });
+        }
+        $videos = $query->orderBy('created_at', 'DESC')->paginate(10);
+        return view('video_gallery.index',compact('videos'));
     }
 
     /**
@@ -48,12 +56,7 @@ class VideoGalleryController extends Controller
                 'status' => 'required|numeric|in:1,2'
 
             ]);
-
-
-
-
         $phga = new videoGallery();
-
         $phga->title = $request->title;
         $phga->video = str_replace('watch?v=','embed/',$request->file);
         $phga->description = $request->description;
@@ -120,10 +123,8 @@ class VideoGalleryController extends Controller
         $video->status = $request->status;
 
         $video->save();
-         Alert::success('Success', 'videogal created successfully');
-
+         Alert::success('Success', 'videogal update successfully');
         return redirect()->route('videogal.index');
-
     }
 
     /**
@@ -134,12 +135,9 @@ class VideoGalleryController extends Controller
      */
     public function destroy($id)
     {
-        $video = videoGallery::find($id);
-
-        @unlink(str_replace('/Storage','Storage',$video->video));
-       
+        $video = videoGallery::where('id','=',$id)->first();
         $video->delete();
-         Alert::success('Success', 'videogal created successfully');
+        Alert::success('Success', 'videogal delete successfully');
         return redirect()->route('videogal.index');
     }
 }
