@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Account;
 use App\Models\Achievement;
+use App\Models\AdvisoryCommittee;
 use App\Models\card;
 use App\Models\developInte;
 use App\Models\documents;
@@ -44,6 +45,12 @@ class PublicController extends Controller
             ->orderBy('Priority')
             ->limit(3)
             ->get();
+
+        $advisoryCommittees = AdvisoryCommittee::select('id','img','title','designation','Priority')
+        ->where('status', 1)
+        ->orderBy('Priority')
+        ->limit(8)
+        ->get();
 
         $services = Service::select('id', 'title', 'icon', 'description')
             ->where('status', 1)
@@ -129,6 +136,7 @@ class PublicController extends Controller
             'sliders',
             'ourWorks',
             'achievements',
+            'advisoryCommittees',
             'projects',
             'services',
             'notice',

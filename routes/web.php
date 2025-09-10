@@ -68,6 +68,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::resource('slider', \App\Http\Controllers\SliderController::class);
     Route::resource('achievement', \App\Http\Controllers\AchievementController::class);
+    Route::resource('advisoryCommittee', \App\Http\Controllers\AdvisorycommitteeController::class);
     Route::resource('sponsorChild', \App\Http\Controllers\SponsorChildController::class);
     Route::resource('photogroup', \App\Http\Controllers\PhotoGroupController::class);
     Route::resource('notice', \App\Http\Controllers\NoticeController::class);

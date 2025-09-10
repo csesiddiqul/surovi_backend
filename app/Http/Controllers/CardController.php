@@ -146,7 +146,7 @@ if ($request->hasFile('file')){
         $card->status = $request->status;
         $card->save();
         Alert::success('Success', 'card update successfully');
-        return back()->with('message','Create Successfully');
+         return redirect()->route('card.index');
     }
 
     /**
