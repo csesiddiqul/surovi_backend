@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ImageHelper;
 use App\Models\card;
 use Illuminate\Http\Request;
 use phpDocumentor\Reflection\Utils;
@@ -25,7 +26,7 @@ class CardController extends Controller
                         ->orWhere('img','like',"%{$search}%");
                 });
         }
-        $cards = $query->orderBy('created_at', 'DESC')->paginate(1);
+        $cards = $query->orderBy('created_at', 'DESC')->paginate(10);
        return view('card.index',compact('cards'));
     }
 
@@ -58,12 +59,10 @@ class CardController extends Controller
             'status' => 'required|numeric|in:1,2'
         ]);
 
-        $imge = $request->file;
-        $storeFileN = $imge->getClientOriginalName();
-        $storeLocation = $_SERVER['DOCUMENT_ROOT']. '/Storage/card/';
-        $imge->move($storeLocation,$storeFileN);
 
-        $dbsl = '/Storage/card/'.$storeFileN;
+        $dbsl = ImageHelper::resizeAndSave($request->file('file'), '/Storage/card/', 270, 271);
+
+
         $card = new card();
 
         $card->name = $request->name;
@@ -126,7 +125,8 @@ class CardController extends Controller
 
         $dbsl = $card->img;
 
-if ($request->hasFile('file')){
+if
+($request->hasFile('file')){
     $imge = $request->file;
     $storeFileN = $imge->getClientOriginalName();
     $storeLocation = $_SERVER['DOCUMENT_ROOT']. '/Storage/card/';

@@ -27,9 +27,10 @@ Route::get('pages/{slug}', [PublicController::class, 'pages'])->name('pages');
 
 // Route::get('/', [PublicController::class, 'index'])->name('index');
 Route::get('/development', [PublicController::class, 'development'])->name('development');
+Route::get('/advisory-board', [PublicController::class, 'advisoryBoard'])->name('advisoryBoard');
 Route::get('/mission', [PublicController::class, 'mission'])->name('mission');
 Route::post('/send_email', [contactController::class, 'sendEmail'])->name('send.email');
-Route::get('/ongoing', [PublicController::class, 'ongoing'])->name('ongoing');
+Route::get('/ongoing', [PublicController::class, 'ongoingProject'])->name('ongoing');
 Route::get('/complate', [PublicController::class, 'complate'])->name('complate');
 Route::get('/subfolder', [PublicController::class, 'subfolder'])->name('subfolder');
 Route::get('/educations', [PublicController::class, 'educations'])->name('educations');
@@ -95,4 +96,5 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('/account', AccountController::class);
     Route::resource('/donations', DonationsController::class);
     Route::resource('donate_info', DonateinfoController::class);
+
 });

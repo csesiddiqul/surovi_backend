@@ -67,10 +67,10 @@ class PublicController extends Controller
             ->where('status', 1)
             ->first();
 
-        $card = Card::select('id', 'name', 'description', 'img', 'Priority', 'status', 'position', 'mobile', 'email')
+        $cards = Card::select('id', 'name', 'description', 'img','position', 'mobile', 'email')
             ->where('status', 1)
             ->orderBy('priority')
-            ->limit(2)
+            ->limit(7)
             ->get();
 
         $news = News::select('id', 'title', 'img', 'priority')
@@ -141,7 +141,7 @@ class PublicController extends Controller
             'services',
             'notice',
             'slogan',
-            'card',
+            'cards',
             'news',
             'event',
             'imlink',
@@ -394,14 +394,20 @@ class PublicController extends Controller
     }
 
 
-
-
-    public function ongoing()
+    public function ongoingProject(Request $request)
     {
 
+        $query = project::query();
+            if ($request->has('search') && !empty($request->search)) {
+                $search = $request->search;
+                $query->where(function ($q) use ($search) {
+                    $q->where('img', 'like', "%{$search}%")
+                        ->orWhere('title', 'like', "%{$search}%");
+                });
+        }
+        $projects = $query->where('status',1)->orderBy('created_at', 'DESC')->paginate(10);
 
-        $ongoing = project::where('projectType', 1)->get();
-        return view('publice_page.ongoing_project', compact('ongoing'));
+        return view('public.page.ongoingProject', compact('projects'));
     }
 
     public function complate()
@@ -457,14 +463,35 @@ class PublicController extends Controller
         return view('publice_page.notice', compact('results'));
     }
 
-    public function Committeelist()
+    public function Committeelist(Request $request)
     {
-        $results = card::all();
+        $query = card::query();
+            if ($request->has('search') && !empty($request->search)) {
+                $search = $request->search;
+                $query->where(function ($q) use ($search) {
+                    $q->where('img', 'like', "%{$search}%")
+                        ->orWhere('name', 'like', "%{$search}%");
+                });
+        }
+        $cards = $query->where('status',1)->orderBy('created_at', 'DESC')->paginate(10);
 
-        return view('publice_page.committee', compact('results'));
+        return view('public.page.committeeList', compact('cards'));
     }
 
-
+    public function advisoryBoard(Request $request)
+    {
+        $query = advisoryCommittee::query();
+            if ($request->has('search') && !empty($request->search)) {
+                $search = $request->search;
+                $query->where(function ($q) use ($search) {
+                    $q->where('img', 'like', "%{$search}%")
+                        ->orWhere('title', 'like', "%{$search}%")
+                        ->orWhere('designation', 'like', "%{$search}%");
+                });
+        }
+        $advisoryCommittees = $query->where('status',1)->orderBy('created_at', 'DESC')->paginate(10);
+        return view('public.page.advisoryBoard', compact('advisoryCommittees'));
+    }
 
 
 

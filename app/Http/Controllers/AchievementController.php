@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ImageHelper;
 use App\Models\Achievement;
+
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AchievementController extends Controller
 {
@@ -53,13 +56,9 @@ class AchievementController extends Controller
             'status' => 'required| numeric|in:1,2'
         ]);
 
-        $imge = $request->file('file');
-        $storeFileN = time() . '_' . uniqid() . '.' . $imge->getClientOriginalExtension();
 
-        $storeLocation = public_path('storage/achievement/');
-        $imge->move($storeLocation, $storeFileN);
 
-        $dbsl = '/storage/achievement/' . $storeFileN;
+         $dbsl = ImageHelper::resizeAndSave($request->file('file'), '/Storage/achievement/', 414, 286);
 
 
         $achievement = new achievement();
@@ -71,7 +70,7 @@ class AchievementController extends Controller
         $achievement->save();
 
         // return back()->with('message','Create Successfully');
-
+         Alert::success('success','achievement create successfully!');
         return redirect()->route('achievement.index');
     }
 
@@ -114,18 +113,14 @@ class AchievementController extends Controller
             'status' => 'required|numeric|in:1,2'
         ]);
 
-        $dbsl = $achievement->img;
-        if ($request->hasFile('file')) {
 
-            $imge = $request->file;
-            $storeFileN = time() . '_' . uniqid() . '.' . $imge->getClientOriginalExtension();
-            $storeLocation = $_SERVER['DOCUMENT_ROOT'] . '/storage/achievement/';
-            $imge->move($storeLocation, $storeFileN);
-
-            $dbsl = '/storage/achievement/' . $storeFileN;
-
-            @unlink(str_replace('/Storage', 'Storage', $achievement->img));
-        }
+         $dbsl = $achievement->img;
+            if ($request->hasFile('file')) {
+                if ($achievement->img && file_exists(public_path($achievement->img))) {
+                    @unlink(public_path($achievement->img));
+                }
+                $dbsl = ImageHelper::resizeAndSave($request->file('file'), '/Storage/achievement/', 414, 286);
+            }
 
 
         $achievement->title = $request->title;
@@ -135,8 +130,8 @@ class AchievementController extends Controller
         $achievement->status = $request->status;
 
         $achievement->save();
-
-        return redirect()->route('achievement.index')->with('message', 'Create Successfully');
+         Alert::success('success','achievement update successfully!');
+        return redirect()->route('achievement.index');
     }
 
     /**
@@ -149,7 +144,7 @@ class AchievementController extends Controller
     {
         @unlink(str_replace('/Storage', 'Storage', $achievement->Img));
         $achievement->delete();
-
+        Alert::success('success','achievement delete successfully!');
         return redirect()->route('achievement.index');
 
     }
