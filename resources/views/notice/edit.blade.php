@@ -32,7 +32,7 @@
 
                                 <div class="form-group">
                                     <label for="exampleInputDescription">Description</label>
-                                    <textarea class="form-control"   name="description" id="exampleInputDescription" cols="30" rows="10">{{$notice->description}}</textarea>
+                                    <textarea class="form-control" id="editor"   name="description" id="exampleInputDescription" cols="30" rows="10">{{$notice->description}}</textarea>
 
                                 </div>
 

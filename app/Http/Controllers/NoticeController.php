@@ -16,17 +16,17 @@ class NoticeController extends Controller
      */
     public function index(Request $request)
     {
-         $query = Notice::query();
-            if ($request->has('search') && !empty($request->search)) {
-                $search = $request->search;
-                $query->where(function ($q) use ($search) {
-                    $q->where('title', 'like', "%{$search}%")
-                        ->orWhere('description', 'like', "%{$search}%")
-                        ->orWhere('file','like',"%{$search}%");
-                });
+        $query = Notice::query();
+        if ($request->has('search') && !empty($request->search)) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                    ->orWhere('description', 'like', "%{$search}%")
+                    ->orWhere('file', 'like', "%{$search}%");
+            });
         }
         $results = $query->orderBy('created_at', 'DESC')->paginate(10);
-        return view('notice.index',compact('results'));
+        return view('notice.index', compact('results'));
     }
 
     /**
@@ -48,40 +48,38 @@ class NoticeController extends Controller
     public function store(Request $request)
     {
 
-       $this->validate($request,[
-           'title' => 'required',
-           'file' => 'nullable|file',
-           'priority'=>'required',
-           'status' => 'required | numeric|in:1,2'
-       ]);
+        $this->validate($request, [
+            'title' => 'required',
+            'file' => 'nullable|file',
+            'priority' => 'required',
+            'status' => 'required | numeric|in:1,2'
+        ]);
 
-        if ($request->file){
+        if ($request->file) {
 
             $imge = $request->file;
             $storeFileN = $imge->getClientOriginalName();
-            $storeLocation = $_SERVER['DOCUMENT_ROOT']. '/Storage/noticeData/';
-            $imge->move($storeLocation,$storeFileN);
+            $storeLocation = $_SERVER['DOCUMENT_ROOT'] . '/Storage/noticeData/';
+            $imge->move($storeLocation, $storeFileN);
 
-            $dbsl = '/Storage/noticeData/'.$storeFileN;
-        }else{
+            $dbsl = '/Storage/noticeData/' . $storeFileN;
+        } else {
             $dbsl = '';
         }
 
 
 
-       $notice = new Notice();
-       $notice->title = $request->title;
-       $notice->description = $request->description;
-       $notice->file = $dbsl;
-       $notice->priority = $request->priority;
-       $notice->status = $request->status;
-       $notice->save();
+        $notice = new Notice();
+        $notice->title = $request->title;
+        $notice->description = $request->description;
+        $notice->file = $dbsl;
+        $notice->priority = $request->priority;
+        $notice->status = $request->status;
+        $notice->save();
 
-       //return back();
-       Alert::success('Success', 'Notice created successfully');
+        //return back();
+        Alert::success('Success', 'Notice created successfully');
         return redirect()->route('notice.index');
-
-
     }
 
     /**
@@ -93,7 +91,7 @@ class NoticeController extends Controller
     public function show(Notice $notice)
     {
         Alert::success('Success', 'Notice created successfully');
-        return view('notice.show',compact('notice'));
+        return view('notice.show', compact('notice'));
     }
 
     /**
@@ -104,7 +102,7 @@ class NoticeController extends Controller
      */
     public function edit(Notice $notice)
     {
-        return view('notice.edit',compact('notice'));
+        return view('notice.edit', compact('notice'));
     }
 
     /**
@@ -116,25 +114,25 @@ class NoticeController extends Controller
      */
     public function update(Request $request, Notice $notice)
     {
-        $this->validate($request,[
+        $this->validate($request, [
             'title' => 'required',
             'file' => 'nullable|file',
-            'priority'=>'required',
+            'priority' => 'required',
             'status' => 'required | numeric|in:1,2'
         ]);
 
         $dbsl = $notice->file;
 
-        if ($request->hasFile('file')){
+        if ($request->hasFile('file')) {
 
             $imge = $request->file;
             $storeFileN = $imge->getClientOriginalName();
-            $storeLocation = $_SERVER['DOCUMENT_ROOT']. '/Storage/noticeData/';
-            $imge->move($storeLocation,$storeFileN);
+            $storeLocation = $_SERVER['DOCUMENT_ROOT'] . '/Storage/noticeData/';
+            $imge->move($storeLocation, $storeFileN);
 
-            $dbsl = '/Storage/noticeData/'.$storeFileN;
+            $dbsl = '/Storage/noticeData/' . $storeFileN;
 
-            @unlink(str_replace('/Storage','Storage',$notice->file));
+            @unlink(str_replace('/Storage', 'Storage', $notice->file));
         }
 
 
@@ -165,8 +163,8 @@ class NoticeController extends Controller
         $getlist = Notice::count();
 
 
-        if($notice->file){
-            @unlink(str_replace('/Storage','Storage',$notice->file));
+        if ($notice->file) {
+            @unlink(str_replace('/Storage', 'Storage', $notice->file));
 
             $notice->delete();
             Alert::success('Success', 'Notice delete successfully');
