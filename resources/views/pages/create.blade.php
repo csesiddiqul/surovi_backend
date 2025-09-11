@@ -68,7 +68,7 @@
 
                                 <div class="form-group">
                                     <label for="exampleInputDescription">Description</label>
-                                    <textarea class="form-control" name="description" id="editor22" cols="30" rows="10"></textarea>
+                                    <textarea class="form-control" name="description" id="editor" cols="30" rows="10"></textarea>
 
 
                                 </div>
@@ -131,11 +131,6 @@
 
             </div><!-- /.container-fluid -->
 
-            <div id="editor22">
-            </div>
-            <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
-            <script>
-                CKEDITOR.replace( 'editor22' );
-            </script>
+
     </section>
 @endsection
