@@ -470,125 +470,23 @@
         </div>
         <div class="row g-4">
 
+            @foreach($cards as $card)
+
             <!-- Member 1 -->
             <div class="col-12 col-sm-6 col-md-3">
                 <div class="executive-committe-card border-0 shadow overflow-hidden text-center p-3">
                     <div class="executive-committe-img ">
-                        <img src="{{ asset('client/img/executive2.png') }}" class="img-fluid" alt="...">
+                        <img src="{{$card->img }}" class="img-fluid" alt="...">
                     </div>
                     <div class="executive-name mb-1">
-                        <b>Eng. Kaji Ali Ashraf</b>
+                        <b>{{ $card->name }}</b>
                     </div>
                     <div class="executive-title text-muted">
-                        <small>Executive Member (Dve)</small>
+                        <small>{{ $card->position }}</small>
                     </div>
                 </div>
             </div>
-
-            <!-- Member 2 -->
-            <div class="col-12 col-sm-6 col-md-3">
-                <div class="executive-committe-card border-0 shadow overflow-hidden text-center p-3">
-                    <div class="executive-committe-img ">
-                        <img src="{{ asset('client/img/executive3.png') }}" class="img-fluid" alt="...">
-                    </div>
-                    <div class="executive-name mb-1">
-                        <b>Eng. Mohd Habibur Rahman</b>
-                    </div>
-                    <div class="executive-title text-muted">
-                        <small>Treasurer</small>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Member 3 -->
-            <div class="col-12 col-sm-6 col-md-3">
-                <div class="executive-committe-card border-0 shadow overflow-hidden text-center p-3">
-                    <div class="executive-committe-img ">
-                        <img src="{{ asset('client/img/executive2.png') }}" class="img-fluid" alt="...">
-                    </div>
-                    <div class="executive-name mb-1">
-                        <b>Dr. Md. Zahidul Islam</b>
-                    </div>
-                    <div class="executive-title text-muted">
-                        <small>Senior Vice President</small>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Member 4 -->
-            <div class="col-12 col-sm-6 col-md-3">
-                <div class="executive-committe-card border-0 shadow overflow-hidden text-center p-3">
-                    <div class="executive-committe-img ">
-                        <img src="{{ asset('client/img/executive2.png') }}" class="img-fluid" alt="...">
-                    </div>
-                    <div class="executive-name mb-1">
-                        <b>Eng. Kaji Ali Ashraf</b>
-                    </div>
-                    <div class="executive-title text-muted">
-                        <small>Executive Member (Dve)</small>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Member 5 -->
-            <div class="col-12 col-sm-6 col-md-3">
-                <div class="executive-committe-card border-0 shadow overflow-hidden text-center p-3">
-                    <div class="executive-committe-img ">
-                     <img src="{{ asset('client/img/executive3.png') }}" class="img-fluid" alt="...">
-                    </div>
-                    <div class="executive-name mb-1">
-                        <b>Eng. Mohd Habibur Rahman</b>
-                    </div>
-                    <div class="executive-title text-muted">
-                        <small>Treasurer</small>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Member 6 -->
-            <div class="col-12 col-sm-6 col-md-3">
-                <div class="executive-committe-card border-0 shadow overflow-hidden text-center p-3">
-                    <div class="executive-committe-img ">
-                   <img src="{{ asset('client/img/executive2.png') }}" class="img-fluid" alt="...">
-                    </div>
-                    <div class="executive-name mb-1">
-                        <b>Dr. Md. Zahidul Islam</b>
-                    </div>
-                    <div class="executive-title text-muted">
-                        <small>Senior Vice President</small>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Member 7 -->
-            <div class="col-12 col-sm-6 col-md-3">
-                <div class="executive-committe-card border-0 shadow overflow-hidden text-center p-3">
-                    <div class="executive-committe-img ">
-               <img src="{{ asset('client/img/executive3.png') }}" class="img-fluid" alt="...">
-                    </div>
-                    <div class="executive-name mb-1">
-                        <b>Md. Khosed Ali Sarker</b>
-                    </div>
-                    <div class="executive-title text-muted">
-                        <small>Vice President</small>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Member 8 -->
-            <div class="col-12 col-sm-6 col-md-3">
-                <div class="executive-committe-card border-0 shadow overflow-hidden text-center p-3">
-                    <div class="executive-committe-img ">
-                      <img src="{{ asset('client/img/executive2.png') }}" class="img-fluid" alt="...">
-                    </div>
-                    <div class="executive-name mb-1">
-                        <b>Dr. Md. Zahidul Islam</b>
-                    </div>
-                    <div class="executive-title text-muted">
-                        <small>Senior Vice President</small>
-                    </div>
-                </div>
-            </div>
+             @endforeach
 
         </div>
     </div>
@@ -616,7 +514,7 @@
                 </div>
             </div>
             @endforeach
-           
+
 
         </div>
     </div>

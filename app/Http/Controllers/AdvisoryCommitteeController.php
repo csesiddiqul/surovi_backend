@@ -108,14 +108,15 @@ class AdvisoryCommitteeController extends Controller
             'priority' => 'required',
             'status'   => 'required|numeric|in:1,2'
         ]);
-        $dbsl = $advisoryCommittee->img;
 
-        if ($request->hasFile('img')) {
-            if ($advisoryCommittee->img && file_exists(public_path($advisoryCommittee->img))) {
-                @unlink(public_path($advisoryCommittee->img));
+            $dbsl = $advisoryCommittee->img;
+            if ($request->hasFile('img')) {
+                if ($advisoryCommittee->img && file_exists(public_path($advisoryCommittee->img))) {
+                    @unlink(public_path($advisoryCommittee->img));
+                }
+                $dbsl = ImageHelper::resizeAndSave($request->file('img'), '/Storage/advisoryCommittee/', 1296, 505);
             }
-            $dbsl = ImageHelper::resizeAndSave($request->file('img'), '/Storage/advisoryCommittee/', 1296, 505);
-        }
+            
         $advisoryCommittee->img      = $dbsl;
         $advisoryCommittee->title    = $request->title;
         $advisoryCommittee->designation    = $request->designation;

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\backend;
 
+use App\Helpers\ImageHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
 use Illuminate\Http\RedirectResponse;
@@ -27,7 +28,7 @@ class AccountController extends Controller
                         ->orWhere('description','like',"%{$search}%");
                 });
         }
-        $accounts = $query->orderBy('created_at', 'DESC')->paginate(1);
+        $accounts = $query->orderBy('created_at', 'DESC')->paginate(10);
 
 
         return view('backend.page.account.index', compact('accounts'));
@@ -69,6 +70,8 @@ class AccountController extends Controller
 
             $file = $request->file('image');
             $filename = time() . "-account." . $file->getClientOriginalExtension();
+
+
 
             $account = new Account();
             $account->title = $request->title;

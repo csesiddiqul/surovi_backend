@@ -5,6 +5,7 @@
 @extends('layouts.public');
 
 @section('content');
+
 <section class="main-about" style="margin-top:3%">
     <div class="about-bg">
         <div class="container">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ImageHelper;
 use App\Models\SponsorChild;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -57,13 +58,8 @@ class SponsorChildController extends Controller
             'status' => 'required| numeric|in:1,2'
         ]);
 
-        $imge = $request->file('file');
-        $storeFileN = time() . '_' . uniqid() . '.' . $imge->getClientOriginalExtension();
 
-        $storeLocation = public_path('storage/sponsorChild/');
-        $imge->move($storeLocation, $storeFileN);
-
-        $dbsl = '/storage/sponsorChild/' . $storeFileN;
+        $dbsl = ImageHelper::resizeAndSave($request->file('file'), '/Storage/sponsorChild/', 414, 286);
 
 
         $sponsorChild = new sponsorChild();
@@ -122,18 +118,15 @@ class SponsorChildController extends Controller
             'status' => 'required|numeric|in:1,2'
         ]);
 
-        $dbsl = $sponsorChild->img;
-        if ($request->hasFile('file')) {
 
-            $imge = $request->file;
-            $storeFileN = time() . '_' . uniqid() . '.' . $imge->getClientOriginalExtension();
-            $storeLocation = $_SERVER['DOCUMENT_ROOT'] . '/storage/sponsorChild/';
-            $imge->move($storeLocation, $storeFileN);
 
-            $dbsl = '/storage/sponsorChild/' . $storeFileN;
-
-            @unlink(str_replace('/Storage', 'Storage', $sponsorChild->img));
-        }
+           $dbsl = $sponsorChild->img;
+            if ($request->hasFile('file')) {
+                if ($sponsorChild->img && file_exists(public_path($sponsorChild->img))) {
+                    @unlink(public_path($sponsorChild->img));
+                }
+                $dbsl = ImageHelper::resizeAndSave($request->file('img'), '/Storage/sponsorChild/', 414, 286);
+            }
 
 
         $sponsorChild->name = $request->name;
