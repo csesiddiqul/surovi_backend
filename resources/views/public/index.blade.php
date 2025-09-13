@@ -157,7 +157,7 @@
 
 
         <div class="text-center mt-4">
-            <a href="all-achievements" class="btn btn-outline-danger px-5 py-2 rounded-pill shadow-sm"
+            <a href="{{ route('ongoing') }}" class="btn btn-outline-danger px-5 py-2 rounded-pill shadow-sm"
                 style="transition: all 0.4s;">
                 <i class="bi bi-rocket-takeoff-fill me-2"></i> See All Project
             </a>
@@ -487,7 +487,13 @@
                 </div>
             </div>
              @endforeach
+        </div>
 
+          <div class="text-center mt-4">
+            <a href="{{ route('Committeelist') }}" class="btn btn-outline-danger px-5 py-2 rounded-pill shadow-sm"
+                style="transition: all 0.4s;">
+                <i class="bi bi-rocket-takeoff-fill me-2"></i> See All Project
+            </a>
         </div>
     </div>
 
@@ -514,9 +520,15 @@
                 </div>
             </div>
             @endforeach
-
-
         </div>
+
+        <div class="text-center mt-4">
+            <a href="{{ route('advisoryBoard') }}" class="btn btn-outline-danger px-5 py-2 rounded-pill shadow-sm"
+                style="transition: all 0.4s;">
+                <i class="bi bi-rocket-takeoff-fill me-2"></i> See All Project
+            </a>
+        </div>
+
     </div>
 
     <!-- story   Section -->

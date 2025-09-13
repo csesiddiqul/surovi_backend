@@ -111,6 +111,32 @@
                     </ul>
                 </li>
 
+
+                <li class="nav-item {{ request()->routeIs('succesStory.create')  || request()->routeIs('succesStory.index') || request()->routeIs('succesStory.edit') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->routeIs('succesStory.create') || request()->routeIs('succesStory.index') || request()->routeIs('succesStory.edit') ? 'active' : '' }}">
+                        <i class="nav-icon fa-solid fa-images"></i>
+                        <p>
+                             Succrss Story
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('succesStory.create')}}" class="nav-link {{ request()->routeIs('succesStory.create') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>upload</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('succesStory.index')}}" class="nav-link {{ request()->routeIs('succesStory.index') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>list</p>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+
                 <li class="nav-item {{ request()->routeIs('advisoryCommittee.create')  || request()->routeIs('advisoryCommittee.index') || request()->routeIs('advisoryCommittee.edit') ? 'menu-open' : '' }}">
                     <a href="#" class="nav-link {{ request()->routeIs('advisoryCommittee.create') || request()->routeIs('advisoryCommittee.index') || request()->routeIs('advisoryCommittee.edit') ? 'active' : '' }}">
                         <i class="nav-icon fa-solid fa-images"></i>
