@@ -28,6 +28,7 @@ Route::get('pages/{slug}', [PublicController::class, 'pages'])->name('pages');
 // Route::get('/', [PublicController::class, 'index'])->name('index');
 Route::get('/development', [PublicController::class, 'development'])->name('development');
 Route::get('/advisory-board', [PublicController::class, 'advisoryBoard'])->name('advisoryBoard');
+Route::get('/succes-story', [PublicController::class, 'succesStory'])->name('succesStory');
 Route::get('/mission', [PublicController::class, 'mission'])->name('mission');
 Route::post('/send_email', [contactController::class, 'sendEmail'])->name('send.email');
 Route::get('/ongoing', [PublicController::class, 'ongoingProject'])->name('ongoing');
@@ -70,6 +71,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('slider', \App\Http\Controllers\SliderController::class);
     Route::resource('achievement', \App\Http\Controllers\AchievementController::class);
     Route::resource('advisoryCommittee', \App\Http\Controllers\AdvisorycommitteeController::class);
+    Route::resource('succesStory', \App\Http\Controllers\SuccessStoryController::class);
     Route::resource('sponsorChild', \App\Http\Controllers\SponsorChildController::class);
     Route::resource('photogroup', \App\Http\Controllers\PhotoGroupController::class);
     Route::resource('notice', \App\Http\Controllers\NoticeController::class);
