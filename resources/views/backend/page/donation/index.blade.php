@@ -43,7 +43,7 @@
                         <div class="d-flex">
                        <a href="{{Route('donations.edit', $donation->id)}}" class="btn btn-warning mr-1"><i class="fas fa-edit"></i></a>
 
-                        <a href="{{ route('donations.destroy', $donation->id) }}"
+                        {{-- <a href="{{ route('donations.destroy', $donation->id) }}"
                         class="btn btn-danger btn-xs"
                         onclick="event.preventDefault(); if(confirm('Are you sure you want to delete this donation?')) { document.getElementById('deletedonation{{ $donation->id }}').submit(); }">
                             <i class="fa-solid fa-trash-can"></i> Delete
@@ -52,7 +52,7 @@
                         <form id="deletedonation{{ $donation->id }}" action="{{ route('donations.destroy', $donation->id) }}" method="POST" class="d-none">
                             @csrf
                             @method('DELETE')
-                        </form>
+                        </form> --}}
 
 
 

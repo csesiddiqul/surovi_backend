@@ -26,7 +26,7 @@ class DonationsController extends Controller
      */
     public function create() //: Response
     {
-        return view('backend.page.donation.create');
+        // return view('backend.page.donation.create');
     }
 
     /**

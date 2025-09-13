@@ -237,12 +237,12 @@
                             </a>
                         </li>
 
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a href="{{route('donations.create')}}" class="nav-link {{ request()->routeIs('donations.create') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Create</p>
                             </a>
-                        </li>
+                        </li> --}}
                         <li class="nav-item">
                             <a href="{{route('donations.index')}}" class="nav-link {{ request()->routeIs('donations.index') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
