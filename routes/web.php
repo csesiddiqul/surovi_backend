@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\backend\AccountController;
 use App\Http\Controllers\backend\DonateinfoController;
 use App\Http\Controllers\backend\DonationsController;
-
+use App\Http\Controllers\SslCommerzPaymentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -66,6 +66,20 @@ Route::post('public-donate/{id?}', [DonateinfoController::class, 'store'])->name
 Route::get('achievement-list', [PublicController::class, 'achievementList'])->name('achievement-list');
 Route::get('achievement-details/{id?}', [PublicController::class, 'achievementDetails'])->name('achievement-details');
 
+//sslcommerz
+
+Route::get('/example1', [SslCommerzPaymentController::class, 'exampleEasyCheckout']);
+Route::get('/example2', [SslCommerzPaymentController::class, 'exampleHostedCheckout']);
+
+Route::post('/pay', [SslCommerzPaymentController::class, 'index']);
+Route::post('/pay-via-ajax', [SslCommerzPaymentController::class, 'payViaAjax']);
+
+Route::post('/success', [SslCommerzPaymentController::class, 'success']);
+Route::post('/fail', [SslCommerzPaymentController::class, 'fail']);
+Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);
+
+Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
+
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::resource('slider', \App\Http\Controllers\SliderController::class);
@@ -98,5 +112,4 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('/account', AccountController::class);
     Route::resource('/donations', DonationsController::class);
     Route::resource('donate_info', DonateinfoController::class);
-
 });
