@@ -19,7 +19,7 @@
             <h2 class="fw-bold d-inline-block position-relative pb-2">On-Going Projects</h2>
         </div>
 
-           <form method="GET" action="{{ route('ongoing') }}" class="mb-3">
+        <form method="GET" action="{{ route('ongoing') }}" class="mb-3">
             <div class="input-group">
                 <input type="text" name="search" class="form-control"
                        placeholder="Search by title..."

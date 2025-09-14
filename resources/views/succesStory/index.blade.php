@@ -37,7 +37,7 @@
             <tbody>
                 @forelse($succesStorys as $key => $succesStory)
                 <tr>
-                    <td>{{ $succesStory->firstItem() + $key }}</td>
+                    <td>{{ $succesStorys->firstItem() + $key }}</td>
 
 
                     <td>
@@ -74,7 +74,7 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="6" class="text-center">No succesStorys found.</td>
+                    <td colspan="6" class="text-center">No succesStory found.</td>
                 </tr>
                 @endforelse
             </tbody>

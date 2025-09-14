@@ -67,10 +67,6 @@
             </div>
             @endforeach
 
-
-
-
-
             <!-- card2 Section -->
             <!-- our services  Section -->
 
@@ -159,7 +155,7 @@
         <div class="text-center mt-4">
             <a href="{{ route('ongoing') }}" class="btn btn-outline-danger px-5 py-2 rounded-pill shadow-sm"
                 style="transition: all 0.4s;">
-                <i class="bi bi-rocket-takeoff-fill me-2"></i> See All Project
+                <i class="bi bi-rocket-takeoff-fill me-2"></i> See All On-Going Projects
             </a>
         </div>
     </div>
@@ -266,17 +262,17 @@
             <h2 class="fw-bold d-inline-block position-relative pb-2">Events & News</h2>
         </div>
         <div class="row g-4">
-            <div class="col-md-4">
+            @foreach ($events as $event)
+
+             <div class="col-md-4">
                 <div class="card ">
-                    <img class="stories-img" src="{{ asset('client/img/bolg2.png') }}" class="card-img-top" alt="...">
+                    <img class="stories-img" src="{{ $event->img}}" class="card-img-top" alt="...">
                     <div class="stories-title">
-                        <b>সুরভি'র রামাদান প্রোগ্রাম-২০২৫</b>
+                        <b>{{ $event->title}}</b>
                     </div>
 
                     <div class="card-body">
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                            additional content. This content is a little bit longer with supporting text below
-                            supporting.</p>
+                        <p class="card-text">{{ $event->description}}</p>
                     </div>
                     <div class="stories-card-footer text-center">
                         <b class="">View Details</b>
@@ -284,43 +280,7 @@
                 </div>
             </div>
 
-            <div class="col-md-4">
-                <div class="card ">
-                    <img class="stories-img" src="{{ asset('client/img/blog3.png') }}" class="card-img-top" alt="...">
-                    <div class="stories-title">
-                        <b>২১শে ফেব্রুয়ারি ২০২৫</b>
-                    </div>
-
-                    <div class="card-body">
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                            additional content. This content is a little bit longer with supporting text below
-                            supporting.</p>
-                    </div>
-                    <div class="stories-card-footer text-center">
-                        <b class="">View Details</b>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card ">
-                    <img class="stories-img" src="{{ asset('client/img/blog5.png') }}" class="card-img-top" alt="...">
-                    <div class="stories-title">
-                        <b>ডা. জুবাইদা রহমান এর সুরভি পরিদর্শন</b>
-                    </div>
-
-                    <div class="card-body">
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                            additional content. This content is a little bit longer with supporting text below
-                            supporting.</p>
-                    </div>
-                    <div class="stories-card-footer text-center">
-                        <b class="">View Details</b>
-                    </div>
-                </div>
-            </div>
-
-
+            @endforeach
 
 
         </div>
@@ -492,7 +452,7 @@
           <div class="text-center mt-4">
             <a href="{{ route('Committeelist') }}" class="btn btn-outline-danger px-5 py-2 rounded-pill shadow-sm"
                 style="transition: all 0.4s;">
-                <i class="bi bi-rocket-takeoff-fill me-2"></i> See All Project
+                <i class="bi bi-rocket-takeoff-fill me-2"></i> See All Executive Committee
             </a>
         </div>
     </div>
@@ -525,7 +485,7 @@
         <div class="text-center mt-4">
             <a href="{{ route('advisoryBoard') }}" class="btn btn-outline-danger px-5 py-2 rounded-pill shadow-sm"
                 style="transition: all 0.4s;">
-                <i class="bi bi-rocket-takeoff-fill me-2"></i> See All Project
+                <i class="bi bi-rocket-takeoff-fill me-2"></i> See All Advisory Committee
             </a>
         </div>
 
@@ -539,64 +499,32 @@
         </div>
 
         <div class="row g-4">
-
+            @foreach($succesStorys as $succesStory)
             <!-- Story Item -->
             <div class="col-md-3 col-sm-6">
                 <div class="card story-card border-0 shadow h-100 text-center">
                     <div class="story-img overflow-hidden">
-                        <img src="{{ asset('client/img/blog5.png') }}" class="img-fluid" alt="Story Image">
+                        <img src="{{$succesStory->img }}" class="img-fluid" alt="Story Image">
+                    </div>
+                    <div class="executive-name mb-1">
+                        <b>{{$succesStory->title }}</b>
                     </div>
                     <div class="card-body">
 
-                        <p class="story-title text-muted mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Facilis, amet?</p>
+                        <p class="story-title text-muted mb-0">{{$succesStory->description }}</p>
                     </div>
                 </div>
+
+
             </div>
-
-            <!-- Story Item -->
-            <div class="col-md-3 col-sm-6">
-                <div class="card story-card border-0 shadow h-100 text-center">
-                    <div class="story-img overflow-hidden">
-                            <img src="{{ asset('client/img/blog3.png') }}" class="img-fluid" alt="Story Image">
-                    </div>
-                    <div class="card-body">
-
-                        <p class="story-title text-muted mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Facilis, amet?</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Story Item -->
-            <div class="col-md-3 col-sm-6">
-                <div class="card story-card border-0 shadow h-100 text-center">
-                    <div class="story-img overflow-hidden">
-                            <img src="{{ asset('client/img/blog5.png') }}" class="img-fluid" alt="Story Image">
-                    </div>
-                    <div class="card-body">
-
-                        <p class="story-title text-muted mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Facilis, amet?</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Story Item -->
-            <div class="col-md-3 col-sm-6">
-                <div class="card story-card border-0 shadow h-100 text-center">
-                    <div class="story-img overflow-hidden">
-                         <img src="{{ asset('client/img/bolg2.png') }}" class="img-fluid" alt="Story Image">
-                    </div>
-                    <div class="card-body">
-
-                        <p class="story-title text-muted mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Facilis, amet?</p>
-                    </div>
-                </div>
-            </div>
-
+            @endforeach
         </div>
+         <div class="text-center mt-4">
+                    <a href="{{ route('succesStory') }}" class="btn btn-outline-danger px-5 py-2 rounded-pill shadow-sm"
+                        style="transition: all 0.4s;">
+                        <i class="bi bi-rocket-takeoff-fill me-2"></i> See All Success Story
+                    </a>
+                </div>
     </div>
 
     </div>

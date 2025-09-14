@@ -23,9 +23,9 @@ class EventController extends Controller
             if ($request->has('search') && !empty($request->search)) {
                 $search = $request->search;
                 $query->where(function ($q) use ($search) {
-                    $q->where('title', 'like', "%{$search}%")
-                        ->orWhere('description', 'like', "%{$search}%")
-                        ->orWhere('img','like',"%{$search}%");
+                    $q->where('img', 'like', "%{$search}%")
+                        ->orWhere('title', 'like', "%{$search}%")
+                        ->orWhere('description','like',"%{$search}%");
                 });
         }
         $events = $query->orderBy('created_at', 'DESC')->paginate(10);
@@ -69,16 +69,16 @@ class EventController extends Controller
 
 
 
-        $evetn = new event();
+        $event = new event();
 
-        $evetn->title = $request->title;
-        $evetn->img = $dbsl;
-        $evetn->description = $request->description;
-        $evetn->event_type = $request->event_type;
-        $evetn->priority = $request->priority;
-        $evetn->status = $request->status;
+        $event->title = $request->title;
+        $event->img = $dbsl;
+        $event->description = $request->description;
+        $event->event_type = $request->event_type;
+        $event->priority = $request->priority;
+        $event->status = $request->status;
 
-        $evetn->save();
+        $event->save();
         Alert::success('Success', 'event created successfully');
         return redirect()->route('event.index');
     }
@@ -100,8 +100,9 @@ class EventController extends Controller
      * @param  \App\Models\event  $event
      * @return \Illuminate\Http\Response
      */
-    public function edit(event $event)
+    public function edit($id)
     {
+        $event = Event::where('id', '=', $id)->first();
         return view('event.edit', compact('event'));
     }
 
@@ -154,10 +155,10 @@ class EventController extends Controller
      * @param  \App\Models\event  $event
      * @return \Illuminate\Http\Response
      */
-    public function destroy($event)
+    public function destroy($id)
     {
-        $getev = Event::where('id', '=', $event)->firstOrFail();
-        $getev->delete();
+        $event = Event::where('id', '=', $id)->firstOrFail();
+        $event->delete();
         Alert::success('Success', 'event delete successfully');
         return redirect()->route('event.index');
     }

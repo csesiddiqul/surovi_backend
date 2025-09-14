@@ -24,10 +24,13 @@ use App\Models\Sdg;
 use App\Models\service;
 use App\Models\slider;
 use App\Models\slogan;
+use App\Models\SuccessStory;
 use App\Models\UpdateNews;
 use App\Models\videoGallery;
 use App\Models\websiteSetting;
+use Illuminate\Console\Scheduling\Event as SchedulingEvent;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Event as FacadesEvent;
 
 class PublicController extends Controller
 {
@@ -44,6 +47,12 @@ class PublicController extends Controller
             ->where('status', 1)
             ->orderBy('Priority')
             ->limit(3)
+            ->get();
+
+        $succesStorys = SuccessStory::select('id', 'img', 'title', 'description', 'Priority')
+            ->where('status', 1)
+            ->orderBy('Priority')
+            ->limit(4)
             ->get();
 
         $advisoryCommittees = AdvisoryCommittee::select('id','img','title','designation','Priority')
@@ -79,7 +88,7 @@ class PublicController extends Controller
             ->limit(6)
             ->get();
 
-        $event = Event::select('id', 'title', 'img', 'priority')
+        $events = Event::select('id', 'title', 'img', 'priority')
             ->where('status', 1)
             ->where('event_type', 1)
             ->orderBy('priority')
@@ -120,6 +129,7 @@ class PublicController extends Controller
             ->where('prantsId', '=', 71)
             ->select('id', 'name', 'slug')
             ->where('status', '=', 1)
+            ->where('menu_type', '=', 2)
             ->orderBy('priority')
             ->limit(value: 4)
             ->get()
@@ -134,6 +144,7 @@ class PublicController extends Controller
 
         return view("public.index", compact(
             'sliders',
+            'succesStorys',
             'ourWorks',
             'achievements',
             'advisoryCommittees',
@@ -143,7 +154,7 @@ class PublicController extends Controller
             'slogan',
             'cards',
             'news',
-            'event',
+            'events',
             'imlink',
             'photoin',
             'video',
@@ -171,6 +182,27 @@ class PublicController extends Controller
             ->paginate(8);
 
         return view('public.page.achievementList', compact('achievements'));
+    }
+
+    public function succesStory(Request $request)
+    {
+        $query = SuccessStory::select('id', 'img', 'title', 'description', 'Priority')
+            ->where('status', 1);
+
+        // Search handle
+        if ($request->has('search') && !empty($request->search)) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('img', 'LIKE', "%{$search}%")
+                    ->orWhere('title', 'LIKE', "%{$search}%")
+                    ->orWhere('description', 'LIKE', "%{$search}%");
+            });
+        }
+
+        $succesStorys = $query->orderBy('Priority')
+            ->paginate(8);
+
+        return view('public.page.succesStory', compact('succesStorys'));
     }
 
     public function achievementDetails($id)
@@ -241,11 +273,25 @@ class PublicController extends Controller
 
 
 
-    public function eventlist()
+    public function eventlist(Request $request)
     {
-        $results = event::all();
+         $query = event::select('id', 'img', 'title', 'Priority')
+            ->where('status', 1);
 
-        return view('publice_page.event', compact('results'));
+        // Search handle
+        if ($request->has('search') && !empty($request->search)) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('img', 'LIKE', "%{$search}%")
+                    ->orWhere('title', 'LIKE', "%{$search}%");
+
+            });
+        }
+
+        $events = $query->orderBy('Priority')
+            ->paginate(8);
+
+        return view('public.page.eventList', compact('events'));
     }
     public function impactStories()
     {
