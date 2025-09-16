@@ -3,7 +3,12 @@
     $logoData = \App\Models\websiteSetting::first();
 @endphp
 
-<aside class="main-sidebar sidebar-light-danger elevation-4">
+<aside class="main-sidebar sidebar-light-danger elevation-4" style="
+border-top: 0px solid #dc3545;
+border-right: 1px solid #dc3545;
+border-bottom: 1px solid #dc3545;
+border-left: 1px solid #dc3545;
+">
     <!-- Brand Logo -->
     <a href="{{route('home')}}" class="brand-link">
         <img src="{{$logoData->logo}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
@@ -163,31 +168,6 @@
                 </li>
 
 
-                 <li class="nav-item {{ request()->routeIs('sponsorChild.create')  || request()->routeIs('sponsorChild.index') || request()->routeIs('sponsorChild.edit') ? 'menu-open' : '' }}">
-                    <a href="#" class="nav-link {{ request()->routeIs('sponsorChild.create') || request()->routeIs('sponsorChild.index') || request()->routeIs('sponsorChild.edit') ? 'active' : '' }}">
-                        <i class="nav-icon fa-solid fa-images"></i>
-                        <p>
-                             SponsorChild
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{route('sponsorChild.create')}}" class="nav-link {{ request()->routeIs('sponsorChild.create') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>upload</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{route('sponsorChild.index')}}" class="nav-link {{ request()->routeIs('sponsorChild.index') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>list</p>
-                            </a>
-                        </li>
-
-                    </ul>
-                </li>
-
 
 
 
@@ -246,8 +226,35 @@
                 </li>
 
 
-                <li class="nav-item {{ request()->routeIs('donate_info.index') || request()->routeIs('donations.create')  || request()->routeIs('donations.index') || request()->routeIs('donations.edit') ? 'menu-open' : '' }}">
-                    <a href="#" class="nav-link {{ request()->routeIs('donate_info.index') || request()->routeIs('donations.index') || request()->routeIs('donations.create')  ? 'active' : '' }}">
+
+                 <li class="nav-item {{ request()->routeIs('sponsorChild.create')  || request()->routeIs('sponsorChild.index') || request()->routeIs('sponsorChild.edit') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->routeIs('sponsorChild.create') || request()->routeIs('sponsorChild.index') || request()->routeIs('sponsorChild.edit') ? 'active' : '' }}">
+                        <i class="nav-icon fa-solid fa-images"></i>
+                        <p>
+                             SponsorChild
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('sponsorChild.create')}}" class="nav-link {{ request()->routeIs('sponsorChild.create') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>upload</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('sponsorChild.index')}}" class="nav-link {{ request()->routeIs('sponsorChild.index') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>list</p>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+
+
+                <li class="nav-item {{ request()->routeIs('payments') || request()->routeIs('donations.create')  || request()->routeIs('donations.index') || request()->routeIs('donations.edit') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->routeIs('payments') || request()->routeIs('donations.index') || request()->routeIs('donations.create')  ? 'active' : '' }}">
                         <i class="nav-icon fa-solid fa-newspaper"></i>
                         <p>
                             Donations
@@ -257,9 +264,9 @@
 
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('donate_info.index') }}" class="nav-link {{ request()->routeIs('donate_info.index') ? 'active' : '' }}">
+                            <a href="{{ route('payments') }}" class="nav-link {{ request()->routeIs('payments') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Donate Info</p>
+                                <p>Payments</p>
                             </a>
                         </li>
 

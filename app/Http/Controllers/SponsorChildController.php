@@ -49,6 +49,7 @@ class SponsorChildController extends Controller
     public function store(Request $request)
     {
 
+
         $this->validate($request, [
             'name' => 'required',
             'phone_number' => 'required',
@@ -125,7 +126,7 @@ class SponsorChildController extends Controller
                 if ($sponsorChild->img && file_exists(public_path($sponsorChild->img))) {
                     @unlink(public_path($sponsorChild->img));
                 }
-                $dbsl = ImageHelper::resizeAndSave($request->file('img'), '/Storage/sponsorChild/', 414, 286);
+                $dbsl = ImageHelper::resizeAndSave($request->file('file'), '/Storage/sponsorChild/', 414, 286);
             }
 
 

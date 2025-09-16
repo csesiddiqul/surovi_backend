@@ -65,9 +65,14 @@ Route::get('impact-stories-detail/{event_id}', [PublicController::class, 'impact
 Route::get('sdg-target', [PublicController::class, 'sdgTarget'])->name('sdg-target');
 Route::get('newslist', [PublicController::class, 'newslist'])->name('newslist');
 Route::get('pubDocuments', action: [PublicController::class, 'pubDocuments'])->name('pubDocuments');
-Route::get('donate_now', [PublicController::class, 'donate_now'])->name('donate_now');
-Route::get('public-donate/{id}', [PublicController::class, 'donate'])->name('pub.donate');
-Route::post('public-donate/{id?}', [DonateinfoController::class, 'store'])->name('donate.custom');
+Route::get('donate-now', [PublicController::class, 'donate_now'])->name('donate_now');
+Route::get('public-donate/{id}/{type}', [PublicController::class, 'publicDonate'])->name('pub.donate');
+// api.php
+Route::get('sponsor-child/search', [PublicController::class, 'searchChild'])->name('sponsor.child.search');
+
+
+// Route::get('public-donate/{id}', [PublicController::class, 'donate'])->name('pub.donate');
+
 Route::get('achievement-list', [PublicController::class, 'achievementList'])->name('achievement-list');
 Route::get('achievement-details/{id?}', [PublicController::class, 'achievementDetails'])->name('achievement-details');
 
@@ -118,4 +123,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('/account', AccountController::class);
     Route::resource('/donations', DonationsController::class);
     Route::resource('donate_info', DonateinfoController::class);
+
+    Route::get('payments', [SslCommerzPaymentController::class, 'payment'])->name('payments');
 });

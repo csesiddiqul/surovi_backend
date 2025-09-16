@@ -25,6 +25,7 @@
                     <th>SI</th>
 
                      <th>Title</th>
+                     <th>type</th>
                       <th>Image</th>
                       <th>Status</th>
                        <th>Action</th>
@@ -35,6 +36,7 @@
                     <tr>
                       <td> {{$key+1}} </td>
                       <td>{{$donation->title}}</td>
+                      <td>{{$donation->type}}</td>
                       <td>
                             <img alt="image" src="{{asset('backend/img/donation')}}/{{ $donation->image }}" width="60" height="40">
                       </td>
