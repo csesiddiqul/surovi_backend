@@ -26,7 +26,7 @@ class DonationsController extends Controller
      */
     public function create() //: Response
     {
-        // return view('backend.page.donation.create');
+        return view('backend.page.donation.create');
     }
 
     /**
@@ -39,6 +39,7 @@ class DonationsController extends Controller
                 'title' => 'required',
                 'description' => 'required',
                 'status' => 'required',
+                'type' => 'required',
                 'image' => 'required',
             ],
             [
@@ -59,6 +60,7 @@ class DonationsController extends Controller
 
             $donations = new Donations();
             $donations->title = $request->title;
+            $donations->type = $request->type;
             $donations->description = $request->description;
             $donations->image = $filename;
             $donations->status = $request->status;
@@ -95,6 +97,7 @@ class DonationsController extends Controller
         $request->validate(
             [
                 'title' => 'required',
+                'type' => 'required',
                 'description' => 'required',
                 'status' => 'required',
             ],
@@ -122,6 +125,7 @@ class DonationsController extends Controller
             $donation->title = $request->title;
             $donation->description = $request->description;
             $donation->image = $filename;
+            $donation->type = $request->type;
             $donation->status = $request->status;
             $donation->priority = $request->priority;
             $donation->update();

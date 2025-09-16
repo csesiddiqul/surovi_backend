@@ -6,25 +6,41 @@
     <div class="section-body">
       <div class="row">
         <div class="col-12">
-          <div class="card card-primary">
-            <form class="form p-2" action="{{Route('donations.store')}}" method="post" enctype="multipart/form-data">
+          <div class="card card-danger">
+
+            <div class="card-header">
+                <h3 class="card-title">Create Donations</h3>
+                <a href="{{route('donations.index')}}" class="btn btn-sm btn-white float-right"> <i class="fa-solid fa-arrow-left"></i>  Back  </a>
+            </div>
+
+            <form class="form p-4" action="{{Route('donations.store')}}" method="post" enctype="multipart/form-data">
               @csrf
-              <div class="card card-danger">
-
-                        <div class="card-header">
-                            <h3 class="card-title">Create Donations</h3>
-                             <a href="{{route('donations.index')}}" class="btn btn-sm btn-white float-right"> <i class="fa-solid fa-arrow-left"></i>  Back  </a>
-                        </div>
-
                   <div class="form-group row mb-4">
-                  <label class="col-form-label col-12 col-md-2 col-lg-2">Title</label>
-                  <div class="col-sm-12 col-md-9">
+                    <label class="col-form-label col-12 col-md-2 col-lg-2">Title</label>
+                    <div class="col-sm-12 col-md-9">
                       <input type="text" name="title" id="title" class="form-control">
                       @error('title')
                           <div class="alert alert-danger">{{ $message }}</div>
                       @enderror
                     </div>
                   </div>
+
+
+                   <div class="form-group row mb-4">
+                  <label class="col-form-label col-12 col-md-2 col-lg-2">Type</label>
+                  <div class="col-sm-12 col-md-9">
+                      <select class="form-control selectric rounded" name="type" id="type" required>
+                      <option value="">Select</option>
+                       <option value="school-feeding-edu">School Feeding & Education Materials</option>
+                        <option value="zakat">Zakat</option>
+                        <option value="sponsor-child">Sponsor a Child</option>
+                      </select>
+                      @error('type')
+                          <div class="alert alert-danger">{{ $message }}</div>
+                      @enderror
+                  </div>
+                  </div>
+
 
                   <div class="form-group row mb-4">
                     <label class="col-form-label col-12 col-md-2 col-lg-2">Image</label>
@@ -75,7 +91,6 @@
                         <button type="submit"  class="btn btn-success">Create</button>
                     </div>
                   </div>
-              </div>
             </form>
           </div>
         </div>

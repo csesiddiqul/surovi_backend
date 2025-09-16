@@ -1,5 +1,10 @@
 
-<nav class="main-header navbar navbar-expand navbar-light">
+<nav class="main-header navbar navbar-expand navbar-light" style="
+border-top: 0px solid #dc3545;
+border-right: 0px solid #dc3545;
+border-bottom: 1px solid #dc3545;
+border-left: 0px solid #dc3545;
+">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
         <li class="nav-item">

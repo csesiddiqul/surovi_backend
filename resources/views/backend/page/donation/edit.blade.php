@@ -30,6 +30,29 @@
                     </div>
                   </div>
 
+
+                  <div class="form-group row mb-4">
+                    <label class="col-form-label col-12 col-md-2 col-lg-2">Type</label>
+                    <div class="col-sm-12 col-md-9">
+                        <select class="form-control selectric rounded" name="type" id="type" required>
+                            <option value="">Select</option>
+                            <option value="school-feeding-edu" @selected($donation->type == 'school-feeding-edu')>
+                                School Feeding & Education Materials
+                            </option>
+                            <option value="zakat" @selected($donation->type == 'zakat')>
+                                Zakat
+                            </option>
+                            <option value="sponsor-child" @selected($donation->type == 'sponsor-child')>
+                                Sponsor a Child
+                            </option>
+                        </select>
+                        @error('type')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+
+
                   <div class="form-group row mb-4">
                     <label class="col-form-label col-12 col-md-2 col-lg-2">Image</label>
                     <div class="col-sm-12 col-md-4">
