@@ -26,7 +26,6 @@
                     <th>Name</th>
                     <th>Phone Number</th>
                     <th>Img</th>
-                    <th>description</th>
                     <th>Priority</th>
                     <th>Status</th>
                     <th>Action</th>
@@ -40,7 +39,6 @@
                     <td>{{$sponsorChild->name}}</td>
                     <td>{{$sponsorChild->phone_number}}</td>
                     <td><img src="{{$sponsorChild->img}}" alt="" width="20%"></td>
-                    <td>{{$sponsorChild->description}}</td>
                     <td>{{$sponsorChild->Priority}}</td>
                     <td>{{($sponsorChild->status == 1 ? 'Active' : 'De-Active')}}</td>
                     <td>
@@ -72,7 +70,7 @@
             <div class="mt-3">
                 {{ $sponsorChilds->appends(request()->query())->links() }}
             </div>
-            
+
 
         </div>
         <!-- /.card-body -->

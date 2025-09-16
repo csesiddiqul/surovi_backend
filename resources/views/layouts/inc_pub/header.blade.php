@@ -67,7 +67,7 @@
                     </ul>
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="btn custom-donate-btn rounded-pill px-4 py-2 me-2" href="donate.html">Donate Now</a>
+                            <a class="btn custom-donate-btn rounded-pill px-4 py-2 me-2" href="{{ url('donate-now') }}">Donate Now</a>
                         </li>
 
                         <li class="nav-item">

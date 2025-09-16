@@ -7,11 +7,11 @@
                 <!-- /.col-md-6 -->
 
                 <div class="col-lg-6">
-                    <div class="card card-danger card-outline">
+                    <div class="card  card-outline">
                         <div class="card-header">
                             <h5 class="card-title m-0">Update News</h5>
 
-                            <a href="{{route('updateNews.create')}}" class="float-right btn btn-danger">Add New</a>
+                            <a href="{{route('updateNews.create')}}" class="float-right btn btn-outline-danger">Add New</a>
                         </div>
                         <div class="card-body">
 
@@ -52,11 +52,11 @@
 
 
                 <div class="col-lg-6">
-                    <div class="card card-danger card-outline">
+                    <div class="card  card-outline">
                         <div class="card-header">
                             <h5 class="card-title m-0">Events</h5>
 
-                            <a href="{{route('event.create')}}" class="float-right btn btn-danger">Add New</a>
+                            <a href="{{route('event.create')}}" class="float-right btn btn-outline-danger">Add New</a>
                         </div>
                         <div class="card-body">
 
@@ -111,11 +111,11 @@
                 <!-- /.col-md-6 -->
 
                 <div class="col-lg-6">
-                    <div class="card card-danger card-outline">
+                    <div class="card card-outline">
                         <div class="card-header">
                             <h5 class="card-title m-0">Notice</h5>
 
-                            <a href="{{route('notice.create')}}" class="float-right btn btn-danger">Add New</a>
+                            <a href="{{route('notice.create')}}" class="float-right btn btn-outline-danger">Add New</a>
                         </div>
                         <div class="card-body">
 
@@ -156,11 +156,11 @@
 
 
                 <div class="col-lg-6">
-                    <div class="card card-danger card-outline">
+                    <div class="card  card-outline">
                         <div class="card-header">
                             <h5 class="card-title m-0">News</h5>
 
-                            <a href="{{route('news.create')}}" class="float-right btn btn-danger">Add New</a>
+                            <a href="{{route('news.create')}}" class="float-right btn btn-outline-danger">Add New</a>
                         </div>
                         <div class="card-body">
 

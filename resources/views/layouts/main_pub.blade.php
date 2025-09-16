@@ -15,6 +15,9 @@
 </head>
 
 <body>
+
+    @include('sweetalert::alert')
+
     @include('layouts.inc_pub.header')
 
     @yield('content')

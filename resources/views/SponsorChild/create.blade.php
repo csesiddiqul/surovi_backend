@@ -77,16 +77,11 @@
 
 
 
-                                <div class="form-group">
-                                    <label for="exampleInputTitle">Description</label>
-                                    <input type="text" value="{{old('description')}}" name="description" class="form-control" id="exampleInputTitle" placeholder="Enter Description">
-                                    @error('description')
-                                        <span class="note-help-block text-danger">
-                                            <strong>{{$message}}</strong>
-                                        </span>
-                                    @enderror
-
+                                <div class="form-group" >
+                                    <label for="editor">Description</label>
+                                    <textarea class="editor form-control" name="description" id="editor" cols="30" rows="10"></textarea>
                                 </div>
+
 
                                 <div class="form-group">
                                     <label for="exampleInputTitle">Priority</label>
