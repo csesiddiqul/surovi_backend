@@ -71,6 +71,23 @@
 
                                 </div>
 
+                                 <div class="form-group">
+                                    <label for="exampleInputStatus">Type</label>
+                                    <select class="form-control form-select" name="type" id="exampleInputStatus">
+                                        <option value="">Chose</option>
+                                        <option value="annual-report">Annual Report</option>
+                                        <option value="project-report">Project Report</option>
+                                        <option value="news-letter">News Letter</option>
+                                        <option value="others">Others</option>
+                                    </select>
+
+                                    @error('status')
+                                    <span class="note-help-block text-danger">
+                                            <strong>{{$message}}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
 
 
                                 <div class="form-group">
@@ -92,7 +109,7 @@
                             <!-- /.card-body -->
 
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Updata</button>
+                                <button type="submit" class="btn btn-success">Updata</button>
                             </div>
                         </form>
                     </div>

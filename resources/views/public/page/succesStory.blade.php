@@ -15,11 +15,10 @@
 @section('content')
 
 <div class="container py-5">
-        <div class="achievements text-center my-4">
-
+        <div class="achievements text-center p-5">
             <h2 class="fw-bold d-inline-block position-relative pb-2">Success Story</h2>
         </div>
-             <form method="GET" action="{{ route('succesStory') }}" class="mb-3">
+        <form method="GET" action="{{ route('succesStory')}}" class="mb-4">
             <div class="input-group">
                 <input type="text" name="search" class="form-control"
                        placeholder="Search by title..."
@@ -32,7 +31,8 @@
             @foreach($succesStorys as $succesStory)
             <!-- Story Item -->
             <div class="col-md-3 col-sm-6">
-                <div class="card story-card border-0 shadow h-100 text-center">
+              <a class="text-decoration-none" href="{{ route('successDetails', $succesStory->id)}}">
+                  <div class="card story-card border-0 shadow h-100 text-center">
                     <div class="story-img overflow-hidden">
                         <img src="{{$succesStory->img }}" class="img-fluid" alt="Story Image">
                     </div>
@@ -44,6 +44,7 @@
                         <p class="story-title text-muted mb-0">{{$succesStory->description }}</p>
                     </div>
                 </div>
+              </a>
             </div>
             @endforeach
         </div>

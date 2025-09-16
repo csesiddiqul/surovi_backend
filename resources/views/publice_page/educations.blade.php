@@ -1,14 +1,14 @@
 @extends('layouts.public');
 
 @section('content');
-<section class="main-about">
+    <section class="main-about">
 			<div class="about-bg">
 				<div class="container">
 					<h1>Programs- <span class="about-color">Educations</span></h1>
 				</div>
 			</div>
 
-		</section>
+    </section>
 
 
 

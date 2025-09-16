@@ -25,6 +25,7 @@
                     <th>Title</th>
                     <th>Date</th>
                     <th>Priority</th>
+                    <th>Type</th>
                     <th>Status</th>
                     <th>Action</th>
                 </tr>
@@ -37,6 +38,7 @@
                     <td>{{$documentData->title}}</td>
                     <td>{{$documentData->date}}</td>
                     <td>{{$documentData->priority}}</td>
+                    <td>{{$documentData->type}}</td>
                     <td>{{($documentData->status == 1 ? 'Active' : 'De-Active')}}</td>
                     <td>
                         <a href="{{route('documents.edit',$documentData->id)}}" onclick="return confirm('Are you sure Edit data?')" class="btn btn-success btn-xs"><i class="fa-solid fa-pen-to-square"></i> Edit</a>

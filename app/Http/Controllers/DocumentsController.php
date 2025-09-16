@@ -15,7 +15,8 @@ class DocumentsController extends Controller
      */
     public function index(Request $request)
     {
-   
+
+
         $query = documents::query();
             if ($request->has('search') && !empty($request->search)) {
                 $search = $request->search;
@@ -25,7 +26,7 @@ class DocumentsController extends Controller
                         ->orWhere('file','like',"%{$search}%");
                 });
         }
-        $results = $query->orderBy('created_at', 'DESC')->paginate(10);
+         $results = $query->orderBy('created_at', 'DESC')->paginate(10);
 
         return view('documents.index',compact('results'));
     }
@@ -48,12 +49,14 @@ class DocumentsController extends Controller
      */
     public function store(Request $request)
     {
+
         $this->validate(
             $request,[
                 'title' => 'required',
                 'file' => 'required|file',
                 'date' => 'required',
                 'priority'=> 'required',
+                'type' => 'required',
                 'status' => 'required| numeric|in:1,2'
             ]
         );
@@ -72,6 +75,7 @@ class DocumentsController extends Controller
         $document->file = $dbsl;
         $document->date = $request->date;
         $document->priority = $request->priority;
+         $document->type = $request->type;
         $document->status = $request->status;
 
 
@@ -121,6 +125,7 @@ class DocumentsController extends Controller
                 'file' => 'nullable|file',
                 'date' => 'required',
                 'priority'=> 'required',
+                'type' => 'required',
                 'status' => 'required| numeric|in:1,2'
             ]
         );
@@ -144,6 +149,7 @@ class DocumentsController extends Controller
         $document->file = $dbsl;
         $document->date = $request->date;
         $document->priority = $request->priority;
+        $document->type = $request->type;
         $document->status = $request->status;
 
 

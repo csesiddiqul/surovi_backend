@@ -16,11 +16,12 @@
 
 
            <!-- event  Section -->
-    <div class="container">
+    <div class="container pb-4">
         <div class="achievements text-center my-4">
-            <h2 class="fw-bold d-inline-block position-relative pb-2">Events & News</h2>
+            <h2 class="fw-bold d-inline-block position-relative p-4">Events & News</h2>
         </div>
-           <form method="GET" action="{{ route('eventlist') }}" class="mb-3">
+
+        <form method="GET" action="{{ route('eventlist') }}" class="mb-5">
             <div class="input-group">
                 <input type="text" name="search" class="form-control"
                        placeholder="Search by title..."
@@ -28,27 +29,29 @@
                 <button type="submit" class="btn btn-success">Search</button>
             </div>
         </form>
-        <div class="row g-4">
+
+        <div class="row g-4 ">
             @foreach ($events as $event)
 
-             <div class="col-md-4">
-                <div class="card ">
-                    <img class="stories-img" src="{{ $event->img }}" class="card-img-top" alt="...">
-                    <div class="stories-title">
-                        <b>{{ $event->title }}</b>
-                    </div>
+                <div class="col-md-4">
+                    <div class="card ">
+                        <img class="stories-img" src="{{ $event->img }}" class="card-img-top" alt="...">
+                        <div class="stories-title">
+                            <b>{{ $event->title }}</b>
+                        </div>
 
-                    <div class="card-body">
-                        <p class="card-text">{{ $event->description }}</p>
-                    </div>
-                    <div class="stories-card-footer text-center">
-                        <b class="">View Details</b>
+                        <div class="card-body">
+                            <p class="card-text">{{ $event->description }}</p>
+                        </div>
+                        <a class="text-decoration-none" href="{{ route('eventlist',$event->id) }}">
+                            <div class="achievements-footer text-center">
+                                <b class="">View Details</b>
+                            </div>
+                        </a>
                     </div>
                 </div>
-            </div>
 
             @endforeach
-
         </div>
 
          <div class="text-center mt-4">
