@@ -138,7 +138,7 @@
                             <h5 class="card-title fw-bold">   <b> {{ $project->title}}</b></h5>
                             <p class="card-text">dd {{ rtrim(substr(str_replace('&nbsp;', ' ', strip_tags(string: $project->location_data)), 0, 70)) }}{{ strlen(strip_tags($achievement->location_data)) > 100 ? '...' : '' }}</p>
                         </div>
-                        <a class="text-decoration-none" href="#">
+                        <a class="text-decoration-none" href="{{ route('projectDetails',$project->id) }}">
                             <div class="achievements-footer text-center">
                                 <b class="">View Details</b>
                             </div>
@@ -274,9 +274,11 @@
                     <div class="card-body">
                         <p class="card-text">{{ $event->description}}</p>
                     </div>
-                    <div class="stories-card-footer text-center">
-                        <b class="">View Details</b>
-                    </div>
+                   <a class="text-decoration-none" href="{{ route('eventlist',$event->id) }}">
+                        <div class="achievements-footer text-center">
+                            <b class="">View Details</b>
+                        </div>
+                    </a>
                 </div>
             </div>
 
@@ -286,7 +288,7 @@
         </div>
 
          <div class="text-center mt-4">
-            <a href="all-achievements" class="btn btn-outline-danger px-5 py-2 rounded-pill shadow-sm"
+            <a href="{{ route('eventlist')}}" class="btn btn-outline-danger px-5 py-2 rounded-pill shadow-sm"
                 style="transition: all 0.4s;">
                 <i class="bi bi-newspaper me-2"></i> Events & News
             </a>
@@ -502,7 +504,8 @@
             @foreach($succesStorys as $succesStory)
             <!-- Story Item -->
             <div class="col-md-3 col-sm-6">
-                <div class="card story-card border-0 shadow h-100 text-center">
+           <a  class="text-decoration-none" href="{{ route('succesStory')}}">
+                 <div class="card story-card border-0 shadow h-100 text-center">
                     <div class="story-img overflow-hidden">
                         <img src="{{$succesStory->img }}" class="img-fluid" alt="Story Image">
                     </div>
@@ -514,6 +517,7 @@
                         <p class="story-title text-muted mb-0">{{$succesStory->description }}</p>
                     </div>
                 </div>
+           </a>
 
 
             </div>

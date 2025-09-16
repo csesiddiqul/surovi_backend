@@ -34,7 +34,7 @@
                 <th scope="row">{{$key+1}}</th>
 
                 <td>
-                       <a href="{{route('singaleProject',$porojectData->id)}}" target="_blank">
+                       <a href="{{route('complate',$porojectData->id)}}" target="_blank">
                             {{$porojectData->title}}
                         </a>
 

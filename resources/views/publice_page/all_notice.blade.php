@@ -22,16 +22,8 @@
                 Date: {{date('d F, Y',strtotime($notice->created_at))}}
             </p>
             <p class="textp mt-2 border-ot ">
-
-
-
-                      {{$notice->description}}
-
+                {{$notice->description}}
             </p>
-
-
-
-
 @php
     $file = new SplFileInfo($notice->file);
     $ext  = $file->getExtension();

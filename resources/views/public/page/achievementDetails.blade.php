@@ -59,7 +59,7 @@ Achievement Details
 @section('content')
 <div class="container">
     <div class="achievements  text-center mb-4">
-            <h2 class="fw-bold d-inline-block position-relative pb-2">Our Achievements </h2>
+            <h2 class="fw-bold d-inline-block position-relative pb-2">Our Achievements Details </h2>
     </div>
 
     <div class="card achievement-card p-3">

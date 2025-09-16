@@ -109,7 +109,7 @@ class PublicController extends Controller
             ->limit(3)
             ->get();
 
-        $video = VideoGallery::select('id', 'title', 'video', 'priority')
+        $video = VideoGallery::select('id', 'title', 'video', 'description', 'priority')
             ->where('status', 1)
             ->orderBy('priority')
             ->limit(3)
@@ -314,17 +314,12 @@ class PublicController extends Controller
             });
         }
 
-        $events = $query->orderBy('Priority')
-            ->paginate(8);
-
+        $events = $query->orderBy('Priority')->paginate(8);
         return view('public.page.eventList', compact('events'));
     }
     public function impactStories()
     {
-
-        //3 is impact story
         $results = event::where('event_type', '=', 3)->get();
-
         return view('publice_page.impactStories', compact('results'));
     }
 
@@ -332,96 +327,90 @@ class PublicController extends Controller
     public function sdgTarget()
     {
         $results = Sdg::orderBy('priority', 'asc')->get();
-
         return view('publice_page.sdg_target', compact('results'));
     }
 
-    public function singaleEvent($id)
+    public function eventDetails($id)
     {
         $event = event::find($id);
+        return view('public.page.eventDetails', compact('event'));
+    }
+    public function successDetails($id){
 
-        return view('publice_page.event_page', compact('event'));
+        $succesStory = SuccessStory::find($id);
+        return view('public.page.successDetails', compact('succesStory'));
     }
     public function impactStoriesDetail($id)
     {
         $event = event::find($id);
-
         return view('publice_page.impactStoriesDetail', compact('event'));
     }
 
 
-    public function singaleProject($id)
+    public function projectDetails($id)
     {
         $project = project::find($id);
-
-        return view('publice_page.project_page', compact('project'));
+        return view('public.page.projectDetails', compact('project'));
     }
 
+    public function complateDetails($id){
+        $complates = project::find($id);
+        return view('public.page.complateDetails', compact('complates'));
+    }
 
-
-    public function singalePhoto($id)
+    public function photoDetails($id)
     {
-        $result = photo_gallery::find($id);
-
-        return view('publice_page.photo_page', compact('result'));
+        $photoga = photo_gallery::find($id);
+        return view('public.page.photoDetails', compact('photoga'));
     }
 
 
     public function singalegroup($id)
     {
-
-
         $photoga = photo_gallery::where([['group_id', '=', $id], ['status', 1]])->get();
-
         return view('publice_page.singale_group', compact('photoga'));
     }
 
     public function singaleCard($id)
     {
         $result = card::find($id);
-
         return view('publice_page.card_page', compact('result'));
     }
 
-
-
-    public function singaleVideo($id)
+    public function videoDetails($id)
     {
-        $result = videoGallery::find($id);
-
-        return view('publice_page.video_page', compact('result'));
+        $videogas = videoGallery::find($id);
+        return view('public.page.videoDetails', compact('videogas'));
     }
 
     public function singaleNews($id)
     {
         $news = news::find($id);
-
         return view('publice_page.singaleNews', compact('news'));
     }
 
-    public function photo_gallery()
+    public function photo_gallery(Request $request)
     {
-
-
-
         $photo_groups = photo_group::all();
 
-        //        foreach ($photo_groups as $picid){
-        //             $myid =  $picid->id;
-        //            $photoga = photo_gallery::where([['group_id', '=', $myid],['status', 1]])->first();
-        //        }
+       $query = photo_gallery::select('id', 'img', 'title', 'description', 'Priority')
+            ->where('status', 1);
 
+        // Search handle
+        if ($request->has('search') && !empty($request->search)) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('img', 'LIKE', "%{$search}%")
+                    ->orWhere('title', 'LIKE', "%{$search}%")
+                    ->orWhere('description', 'LIKE', "%{$search}%");
+            });
+        }
 
-        $photoga = photo_gallery::all();
+        $photogas = $query->orderBy('Priority')
+            ->paginate(10);
 
-
-
-        return view('publice_page.photo_gallery', compact('photoga', 'photo_groups'));
+        return view('public.page.photoGallery', compact('photogas', 'photo_groups'));
     }
-
-
-
-
 
     public function development()
     {
@@ -446,29 +435,56 @@ class PublicController extends Controller
          **/
     }
 
-    public function video_gallery()
+    public function video_gallery(Request $request)
     {
+        $query = videoGallery::select('id', 'title', 'video', 'description', 'Priority')
+            ->where('status', 1);
 
+        // Search handle
+        if ($request->has('search') && !empty($request->search)) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'LIKE', "%{$search}%")
+                    ->orWhere('video', 'LIKE', "%{$search}%")
+                    ->orWhere('description', 'LIKE', "%{$search}%");
+            });
+        }
 
-
-        $videoga = videoGallery::where('status', 1)->get();
-
-        return view('publice_page.video_gallery', compact('videoga'));
+        $videogas = $query->orderBy('Priority')->paginate(10);
+        return view('public.page.videoList', compact('videogas'));
     }
 
 
     public function welcome()
     {
-
         $slogandata = slogan::first();
-
         return view('publice_page.welcome', compact('slogandata'));
     }
+    public function publication(Request $request, $slug = null)
+    {
+        $query = documents::select('id', 'title', 'date', 'file', 'type', 'Priority')
+            ->where('status', 1);
 
+        if ($slug) {
+            $query->where('type', $slug);
+        }
+
+        if (!empty($request->search)) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'LIKE', "%{$search}%")
+                ->orWhere('type', 'LIKE', "%{$search}%")
+                ->orWhere('date', 'LIKE', "%{$search}%");
+            });
+        }
+
+        $results = $query->orderBy('Priority')->paginate(10);
+
+        return view('public.page.publication', compact('results'));
+    }
 
     public function ongoingProject(Request $request)
     {
-
         $query = project::query();
         if ($request->has('search') && !empty($request->search)) {
             $search = $request->search;
@@ -477,16 +493,24 @@ class PublicController extends Controller
                     ->orWhere('title', 'like', "%{$search}%");
             });
         }
-        $projects = $query->where('status', 1)->orderBy('created_at', 'DESC')->paginate(10);
+        $projects = $query->where('status',1)->orderBy('created_at', 'DESC')->paginate(10);
 
         return view('public.page.ongoingProject', compact('projects'));
     }
 
-    public function complate()
+    public function complate(Request $request)
     {
 
-        $complate = project::where('projectType', 2)->get();
-        return view('publice_page.complate_project', compact('complate'));
+        $query = project::query();
+            if ($request->has('search') && !empty($request->search)) {
+                $search = $request->search;
+                $query->where(function ($q) use ($search) {
+                    $q->where('img', 'like', "%{$search}%")
+                        ->orWhere('title', 'like', "%{$search}%");
+                });
+        }
+        $complates = $query->where('status',1)->orderBy('created_at', 'DESC')->paginate(10);
+        return view('public.page.complateProject', compact('complates'));
     }
 
 
@@ -507,10 +531,26 @@ class PublicController extends Controller
     }
 
 
-    public function job_applicaton()
+    public function noticeAll(Request $request)
     {
-        $jobApp = jobApplication::where('status', 1)->get();
-        return view('publice_page.job_applicaton', compact('jobApp'));
+         $query = jobApplication::where('status', 1);
+
+        if ($request->has('search') && !empty($request->search)) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'LIKE', "%{$search}%")
+                    ->orWhere('Type', 'LIKE', "%{$search}%");
+
+            });
+        }
+         $jobApps = $query->orderBy('created_at')->paginate(8);
+        return view('public.page.noticeAll', compact('jobApps'));
+    }
+
+    public function noticeAllDetails(){
+
+        $jobApps = jobApplication::find();
+        return view('public.page.noticeAllDetails', compact('jobApps'));
     }
 
     public function pubDocuments()
