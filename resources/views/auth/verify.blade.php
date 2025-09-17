@@ -11,7 +11,7 @@
 
                 <div class="card-body log-body">
 
-                    <h2 class="mylog">Verify <span class="scol">Your Email Address</span>  </h2>
+                    <h2 class="mylog">Verify <span class="scol">Your Email Addres</span>  </h2>
 
                     @if (session('resent'))
                         <div class="alert alert-success" role="alert">
