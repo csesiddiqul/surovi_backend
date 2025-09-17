@@ -160,7 +160,7 @@
                         <div class="card-header">
                             <h5 class="card-title m-0">News</h5>
 
-                            <a href="{{route('news.create')}}" class="float-right btn btn-outline-danger">Add New</a>
+                            <a href="{{route('project.create')}}" class="float-right btn btn-outline-danger">Add New</a>
                         </div>
                         <div class="card-body">
 

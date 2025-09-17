@@ -59,7 +59,7 @@ Event Details
 @section('content')
 <div class="container">
     <div class="events  text-center mb-4">
-            <h2 class="fw-bold d-inline-block position-relative pb-2">Our Events Details </h2>
+            <h2 class="fw-bold d-inline-block position-relative pb-2">Our Events & News Details </h2>
     </div>
 
     <div class="card event-card p-3">

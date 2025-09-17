@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class photo_gallery extends Model
 {
     use HasFactory;
+    
 }

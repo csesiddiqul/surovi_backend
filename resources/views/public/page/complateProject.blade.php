@@ -19,7 +19,7 @@
             <h2 class="fw-bold d-inline-block position-relative pb-2">Complete Projects</h2>
         </div>
 
-        <form method="GET" action="{{ route('complate') }}" class="mb-4">
+        <form method="GET" action="{{ route('complete') }}" class="mb-4">
             <div class="input-group">
                 <input type="text" name="search" class="form-control"
                        placeholder="Search by title..."
@@ -37,7 +37,7 @@
                             <h5 class="card-title fw-bold">   <b> {{ $complate->title}}</b></h5>
                             <p class="card-text">dd {{ rtrim(substr(str_replace('&nbsp;', ' ', strip_tags(string: $complate->location_data)), 0, 70)) }}{{ strlen(strip_tags($complate->location_data)) > 100 ? '...' : '' }}</p>
                         </div>
-                         <a class="text-decoration-none" href="{{ route('complateDetails',$complate->id) }}">
+                         <a class="text-decoration-none" href="{{ route('completeDetails',$complate->id) }}">
                             <div class="achievements-footer text-center">
                                 <b class="">View Details</b>
                             </div>

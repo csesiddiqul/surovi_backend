@@ -169,61 +169,32 @@ border-left: 1px solid #dc3545;
 
 
 
-
-
-                 <li class="nav-item {{ request()->routeIs('sdg.create')  || request()->routeIs('sdg.index') || request()->routeIs('sdg.edit') ? 'menu-open' : '' }}">
-                    <a href="#" class="nav-link {{ request()->routeIs('sdg.create') || request()->routeIs('sdg.index') ? 'active' : '' }}">
-                        <i class="nav-icon fa-solid fa-newspaper"></i>
+                <li class="nav-item {{ request()->routeIs('card.create')  || request()->routeIs('card.index') || request()->routeIs('card.edit') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->routeIs('card.create') || request()->routeIs('card.index') ? 'active' : '' }}">
+                        <i class="nav-icon fa-solid fa-id-badge"></i>
                         <p>
-                            SDG
+                            Executive Committee
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
-
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{route('sdg.create')}}" class="nav-link {{ request()->routeIs('sdg.create') ? 'active' : '' }}">
+                            <a href="{{route('card.create')}}" class="nav-link {{ request()->routeIs('card.create') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Create</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('sdg.index')}}" class="nav-link {{ request()->routeIs('sdg.index') ? 'active' : '' }}">
+                            <a href="{{route('card.index')}}" class="nav-link {{ request()->routeIs('card.index') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>list</p>
                             </a>
                         </li>
 
                     </ul>
-
                 </li>
 
 
-
-                <li class="nav-item {{ request()->routeIs('account.create')  || request()->routeIs('account.index') || request()->routeIs('account.edit') ? 'menu-open' : '' }}">
-                    <a href="#" class="nav-link {{ request()->routeIs('account.create') || request()->routeIs('account.index') ? 'active' : '' }}">
-                        <i class="nav-icon fa-solid fa-newspaper"></i>
-                        <p>
-                            Account
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{route('account.create')}}" class="nav-link {{ request()->routeIs('account.create') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Create</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{route('account.index')}}" class="nav-link {{ request()->routeIs('account.index') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>list</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
 
 
 
@@ -353,30 +324,6 @@ border-left: 1px solid #dc3545;
                 </li>
 
 
-                <li class="nav-item {{ request()->routeIs('card.create')  || request()->routeIs('card.index') || request()->routeIs('card.edit') ? 'menu-open' : '' }}">
-                    <a href="#" class="nav-link {{ request()->routeIs('card.create') || request()->routeIs('card.index') ? 'active' : '' }}">
-                        <i class="nav-icon fa-solid fa-id-badge"></i>
-                        <p>
-                            Executive Committee
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{route('card.create')}}" class="nav-link {{ request()->routeIs('card.create') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Create</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{route('card.index')}}" class="nav-link {{ request()->routeIs('card.index') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>list</p>
-                            </a>
-                        </li>
-
-                    </ul>
-                </li>
 
                 <li class="nav-item {{request()->routeIs('importantLink.create') || request()->routeIs('importantLink.index') || request()->routeIs('importantLink.edit') ? 'menu-open' : '' }}">
                     <a href="#" class="nav-link {{ request()->routeIs('importantLink.create') || request()->routeIs('importantLink.index') ? 'active' : '' }}">
@@ -428,32 +375,6 @@ border-left: 1px solid #dc3545;
                     </ul>
                 </li>
 
-                {{-- <li class="nav-item {{request()->routeIs('news.create') || request()->routeIs('news.index') || request()->routeIs('news.edit') ? 'menu-open' : '' }}">
-                    <a href="#" class="nav-link {{ request()->routeIs('news.create') || request()->routeIs('news.index') ? 'active' : '' }}">
-                        <i class="nav-icon fa-solid fa-newspaper"></i>
-                        <p>
-                            News
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{route('news.create')}}" class="nav-link {{ request()->routeIs('news.create') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Create</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{route('news.index')}}" class="nav-link {{ request()->routeIs('news.index') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>list</p>
-                            </a>
-                        </li>
-
-                    </ul>
-
-                </li> --}}
 
 
                 <li class="nav-item {{request()->routeIs('photogroup.create')
@@ -582,11 +503,9 @@ border-left: 1px solid #dc3545;
 
 
 
-                  <li class="nav-item  {{request()->routeIs('JobApplication.create')
-                || request()->routeIs('JobApplication.index')
-                || request()->routeIs('JobApplication.edit')
-
-              || request()->routeIs('project.create')
+                  <li class="nav-item
+                   {{
+ request()->routeIs('project.create')
                 || request()->routeIs('project.index')
                 || request()->routeIs('project.edit')
 
@@ -599,10 +518,8 @@ border-left: 1px solid #dc3545;
 
 
                     <a href="#" class="nav-link
-                    {{ request()->routeIs('JobApplication.create')
-                    || request()->routeIs('JobApplication.index')
-
-                    || request()->routeIs('project.create')
+                    {{
+                    request()->routeIs('project.create')
                     || request()->routeIs('project.index')
 
                     || request()->routeIs('documents.create')
@@ -631,51 +548,17 @@ border-left: 1px solid #dc3545;
                     <!--    </li>-->
                     <!--</ul>-->
 
-                    <!--<ul class="nav nav-treeview">-->
-                    <!--    <li class="nav-item">-->
-                    <!--        <a href="{{route('missionVision.index')}}" class="nav-link">-->
+                  <ul class="nav nav-treeview">
+                      <li class="nav-item">
+                       <a href="{{route('missionVision.index')}}" class="nav-link">
 
-                    <!--            <i class="nav-icon fa-solid fa-note-sticky"></i>-->
-                    <!--            <p>-->
-                    <!--                Mission & Vision-->
-                    <!--            </p>-->
-                    <!--        </a>-->
-                    <!--    </li>-->
-                    <!--</ul>-->
-
-
-
-
-
-
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item  {{request()->routeIs('JobApplication.create') || request()->routeIs('JobApplication.index') || request()->routeIs('JobApplication.edit') ? 'menu-open' : '' }}">
-                            <a href="#" class="nav-link {{ request()->routeIs('JobApplication.create') || request()->routeIs('JobApplication.index') ? 'active' : '' }}">
-                                <i class="nav-icon fa-solid fa-file-pen"></i>
-                                <p>
-                                    Career
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{route('JobApplication.create')}}" class="nav-link {{ request()->routeIs('JobApplication.create') ? 'active' : '' }}">
-                                        <i class="far fa-ciJobApplicationrcle nav-icon"></i>
-                                        <p>upload</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{route('JobApplication.index')}}" class="nav-link {{ request()->routeIs('viJobApplicationeogal.index') ? 'active' : '' }}">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>list</p>
-                                    </a>
-                                </li>
-
-                            </ul>
-                        </li>
-
-                    </ul>
+                              <i class="nav-icon fa-solid fa-note-sticky"></i>
+                              <p>
+                                  Mission & Vision
+                              </p>
+                          </a>
+                      </li>
+                  </ul>
 
 
 
