@@ -37,7 +37,7 @@ use PhpParser\Node\Stmt\Return_;
 class PublicController extends Controller
 {
 
-    public function index2()
+    public function index()
     {
         $sliders = Slider::select('id', 'title', 'url', 'priority')
             ->where('status', 1)
@@ -84,11 +84,6 @@ class PublicController extends Controller
             ->limit(7)
             ->get();
 
-        $news = News::select('id', 'title', 'img', 'priority')
-            ->where('status', 1)
-            ->orderBy('priority')
-            ->limit(6)
-            ->get();
 
         $events = Event::select('id', 'title', 'img', 'priority')
             ->where('status', 1)
@@ -144,6 +139,11 @@ class PublicController extends Controller
             });;
 
 
+        $noticeBoard = Notice::where('status', 1)->orderBy('created_at', 'desc')->limit('2')->get();
+
+        $donations = Donations::where('status', 1)->orderBy('priority', 'ASC')->inRandomOrder()->limit(3)->get();
+
+
         return view("public.index", compact(
             'sliders',
             'succesStorys',
@@ -152,10 +152,10 @@ class PublicController extends Controller
             'advisoryCommittees',
             'projects',
             'services',
-            'notice',
+            'noticeBoard',
+            'donations',
             'slogan',
             'cards',
-            'news',
             'events',
             'imlink',
             'photoin',
@@ -163,6 +163,8 @@ class PublicController extends Controller
             'updateNews'
         ));
     }
+
+
 
 
 
@@ -225,27 +227,6 @@ class PublicController extends Controller
 
 
 
-    public function index()
-    {
-
-        $slider = slider::where('status', 1)->orderBy('priority', 'ASC')->get();
-        $services = service::where('status', 1)->limit(3)->get();
-        $notice = Notice::where('status', 1)->limit(10)->orderBy('priority', 'ASC')->get();
-        $slogan = Slogan::select('id', 'file', 'slogan', 'status')
-            ->where('status', 1)
-            ->first();
-        $card = card::where('status', 1)->limit(2)->orderBy('priority', 'ASC')->get();
-        $news = news::where('status', 1)->limit(6)->orderBy('priority', 'ASC')->get();
-        $event = event::where([['event_type', '=', 1], ['status', '=', 1]])->limit(6)->orderBy('priority', 'ASC')->get();
-        $imlink = importantLink::where('status', 1)->limit(15)->orderBy('priority', 'ASC')->get();
-        $photoin = photo_gallery::where('status', 1)->limit(3)->orderBy('priority', 'ASC')->get();
-        $video = videoGallery::where('status', 1)->limit(3)->orderBy('priority', 'ASC')->get();
-        $project = project::where('projectType', 1)->limit(6)->get();
-        $updateNews = UpdateNews::where('status', 1)->limit(3)->get();
-        return view('publice_page.index', compact('slider', 'services', 'notice', 'slogan', 'card', 'news', 'imlink', 'event', 'photoin', 'video', 'project', 'updateNews'));
-    }
-
-
     public function donate_now()
     {
         $donations = Donations::where('status', 1)->orderBy('priority', 'ASC')->get();
@@ -274,33 +255,7 @@ class PublicController extends Controller
     }
 
 
-    public function donate($donate_id = null)
-    {
-        $account = Account::where('status', 1)->orderBy('priority', 'ASC')->get();
-        $accountt = Account::where('status', 1)->orderBy('priority', 'ASC')->get();
-        // public.page.donate_now
-        return view('public.page.payment', compact('account', 'accountt', 'donate_id'));
-    }
-
-
-
-
-
-
-    public function all_notice($id)
-    {
-        $notice = Notice::find($id);
-        //  $all_notice = Notice::where('id', '!=', $notice->id)->where('status', 1)->get();
-
-        $all_notice = Notice::where([['id', '!=', $notice->id], ['status', 1]])->get();
-        return view('publice_page.all_notice', compact('notice', 'all_notice'));
-    }
-
-
-
-
-
-    public function eventlist(Request $request)
+    public function evenNews(Request $request)
     {
         $query = event::select('id', 'img', 'title', 'Priority')
             ->where('status', 1);
@@ -315,35 +270,23 @@ class PublicController extends Controller
         }
 
         $events = $query->orderBy('Priority')->paginate(8);
-        return view('public.page.eventList', compact('events'));
-    }
-    public function impactStories()
-    {
-        $results = event::where('event_type', '=', 3)->get();
-        return view('publice_page.impactStories', compact('results'));
+        return view('public.page.evenNews', compact('events'));
     }
 
 
-    public function sdgTarget()
-    {
-        $results = Sdg::orderBy('priority', 'asc')->get();
-        return view('publice_page.sdg_target', compact('results'));
-    }
-
-    public function eventDetails($id)
+    public function eventDetail($id)
     {
         $event = event::find($id);
         return view('public.page.eventDetails', compact('event'));
     }
-    public function successDetails($id){
+
+
+
+    public function successDetails($id)
+    {
 
         $succesStory = SuccessStory::find($id);
         return view('public.page.successDetails', compact('succesStory'));
-    }
-    public function impactStoriesDetail($id)
-    {
-        $event = event::find($id);
-        return view('publice_page.impactStoriesDetail', compact('event'));
     }
 
 
@@ -353,7 +296,8 @@ class PublicController extends Controller
         return view('public.page.projectDetails', compact('project'));
     }
 
-    public function complateDetails($id){
+    public function completeDetails($id)
+    {
         $complates = project::find($id);
         return view('public.page.complateDetails', compact('complates'));
     }
@@ -365,17 +309,8 @@ class PublicController extends Controller
     }
 
 
-    public function singalegroup($id)
-    {
-        $photoga = photo_gallery::where([['group_id', '=', $id], ['status', 1]])->get();
-        return view('publice_page.singale_group', compact('photoga'));
-    }
 
-    public function singaleCard($id)
-    {
-        $result = card::find($id);
-        return view('publice_page.card_page', compact('result'));
-    }
+
 
     public function videoDetails($id)
     {
@@ -383,17 +318,33 @@ class PublicController extends Controller
         return view('public.page.videoDetails', compact('videogas'));
     }
 
-    public function singaleNews($id)
+    public function photo_group(Request $request)
     {
-        $news = news::find($id);
-        return view('publice_page.singaleNews', compact('news'));
+
+        $query = photo_group::select('id', 'img', 'group_name',  'Priority')
+            ->where('status', 1);
+
+        // Search handle
+        if ($request->has('search') && !empty($request->search)) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('img', 'LIKE', "%{$search}%")
+                    ->orWhere('group_name', 'LIKE', "%{$search}%");
+            });
+        }
+
+        $photogas = $query->orderBy('Priority')
+            ->paginate(10);
+
+        return view('public.page.photoGroup', compact('photogas'));
     }
 
-    public function photo_gallery(Request $request)
+    public function photo_gallery(Request $request, $id)
     {
-        $photo_groups = photo_group::all();
 
-       $query = photo_gallery::select('id', 'img', 'title', 'description', 'Priority')
+        $albumName = photo_group::where('id', $id)->select('id', 'img', 'group_name')->first();
+
+        $query = photo_gallery::where('group_id', $id)->select('id', 'img', 'title', 'description', 'Priority')
             ->where('status', 1);
 
         // Search handle
@@ -409,19 +360,15 @@ class PublicController extends Controller
         $photogas = $query->orderBy('Priority')
             ->paginate(10);
 
-        return view('public.page.photoGallery', compact('photogas', 'photo_groups'));
+        return view('public.page.photoGallery', compact('photogas','albumName'));
     }
 
-    public function development()
-    {
-        $devlopment = developInte::where('status', 1)->get();
-        return view('publice_page.development_intervention', compact('devlopment'));
-    }
+
 
     public function mission()
     {
         $devlopment = mission::where('status', 1)->get();
-        return view('publice_page.mission_vision', compact('devlopment'));
+        return view('public.page.mission-vision', compact('devlopment'));
     }
 
 
@@ -473,8 +420,8 @@ class PublicController extends Controller
             $search = $request->search;
             $query->where(function ($q) use ($search) {
                 $q->where('title', 'LIKE', "%{$search}%")
-                ->orWhere('type', 'LIKE', "%{$search}%")
-                ->orWhere('date', 'LIKE', "%{$search}%");
+                    ->orWhere('type', 'LIKE', "%{$search}%")
+                    ->orWhere('date', 'LIKE', "%{$search}%");
             });
         }
 
@@ -493,87 +440,56 @@ class PublicController extends Controller
                     ->orWhere('title', 'like', "%{$search}%");
             });
         }
-        $projects = $query->where('status',1)->orderBy('created_at', 'DESC')->paginate(10);
+        $projects = $query->where('status', 1)->orderBy('created_at', 'DESC')->paginate(10);
 
         return view('public.page.ongoingProject', compact('projects'));
     }
 
-    public function complate(Request $request)
+    public function complete(Request $request)
     {
 
         $query = project::query();
-            if ($request->has('search') && !empty($request->search)) {
-                $search = $request->search;
-                $query->where(function ($q) use ($search) {
-                    $q->where('img', 'like', "%{$search}%")
-                        ->orWhere('title', 'like', "%{$search}%");
-                });
+        if ($request->has('search') && !empty($request->search)) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('img', 'like', "%{$search}%")
+                    ->orWhere('title', 'like', "%{$search}%");
+            });
         }
-        $complates = $query->where('status',1)->orderBy('created_at', 'DESC')->paginate(10);
+        $complates = $query->where('status', 1)->orderBy('created_at', 'DESC')->paginate(10);
         return view('public.page.complateProject', compact('complates'));
     }
 
 
-    public function subfolder()
-    {
-        return view('publice_page.subfolder-img');
-    }
 
 
-    public function educations()
-    {
-        return view('publice_page.educations');
-    }
 
-    public function earlyChildhood()
-    {
-        return view('publice_page.earlyChildhoodCareDevelopment');
-    }
 
 
     public function noticeAll(Request $request)
     {
-         $query = jobApplication::where('status', 1);
+        $query = Notice::where('status', 1);
 
         if ($request->has('search') && !empty($request->search)) {
             $search = $request->search;
             $query->where(function ($q) use ($search) {
                 $q->where('title', 'LIKE', "%{$search}%")
                     ->orWhere('Type', 'LIKE', "%{$search}%");
-
             });
         }
-         $jobApps = $query->orderBy('created_at')->paginate(8);
+        $jobApps = $query->orderBy('created_at', 'desc')->paginate(8);
         return view('public.page.noticeAll', compact('jobApps'));
     }
 
-    public function noticeAllDetails(){
-
-        $jobApps = jobApplication::find();
-        return view('public.page.noticeAllDetails', compact('jobApps'));
-    }
-
-    public function pubDocuments()
-    {
-        $results = documents::where('status', 1)->get();
-        return view('publice_page.documents', compact('results'));
-    }
 
 
 
     public function contact()
     {
         $results = websiteSetting::first();
-        return view('publice_page.contact', compact('results'));
+        return view('public.page.contact', compact('results'));
     }
 
-
-    public function noticelist()
-    {
-        $results = Notice::all();
-
-        return view('publice_page.notice', compact('results'));
-    }
 
     public function Committeelist(Request $request)
     {
@@ -607,12 +523,6 @@ class PublicController extends Controller
 
 
 
-    public function newslist()
-    {
-        $results = news::all();
-
-        return view('publice_page.newslist', compact('results'));
-    }
 
     public function pages($slug)
     {

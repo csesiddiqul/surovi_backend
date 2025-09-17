@@ -17,6 +17,10 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-4 text-md-end text-center text-md-start">
+                    <a href="{{ route('contact') }}" class="btn btn-danger rounded-pill px-4">
+                        <i class="fa-solid fa-envelope me-2"></i> Contact
+                    </a> &nbsp;
+
                     <strong>Hotline : <a style="color: inherit; text-decoration: none;" href="tel:{{$setting->phone}}">{{$setting->phone}}</a></strong>
                 </div>
 
@@ -27,7 +31,7 @@
     <div class="sticky-top">
         <nav class="navbar navbar-expand-lg" style="padding-top: 0px;">
             <div class="container bg-white py-2 px-2 shadow-sm rounded-14">
-                <a class="navbar-brand d-flex align-items-center" href="#">
+                <a class="navbar-brand d-flex align-items-center" href="{{ route('index') }}">
                     <img src="{{$setting->logo}}" alt="Logo" height="40"
                         class="d-inline-block align-top"><span style="color:red">&nbsp;&nbsp;{{$setting->logo_name}}</span>
                 </a>

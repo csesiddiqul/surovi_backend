@@ -22,7 +22,7 @@
     <!-- Search Form -->
     <div class="card shadow-sm mb-4">
         <div class="card-body">
-            <form method="GET" action="{{ route('noticeAll') }}">
+            <form method="GET" action="{{ route('noticeBoard') }}">
                 <div class="input-group">
                     <input type="text" name="search" class="form-control"
                            placeholder="🔍 Search by title..."
@@ -43,8 +43,9 @@
                     <tr>
                         <th scope="col" style="width: 5%;">SL</th>
                         <th scope="col" style="width: 25%;"> Title</th>
-                        <th scope="col" style="width: 25%;">Location</th>
-                        <th scope="col" style="width: 45%;">Type</th>
+                              <th scope="col" style="width: 25%;">Type</th>
+                        <th scope="col" style="width: 45%;">Description</th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -52,8 +53,10 @@
                         <tr>
                             <td class="text-center">{{ $key + 1 }}</td>
                             <td>{{ $jobData->title }}</td>
-                            <td>{{ $jobData->location ?? 'N/A' }}</td>
-                            <td>{{ $jobData->Type ?? 'N/A' }}</td>
+                            <td><a href="{{ $jobData->file }}">
+                                Download</a></td>
+                            <td>{!! $jobData->description !!}</td>
+
                         </tr>
                     @empty
                         <tr>

@@ -10,7 +10,7 @@
 @endpush
 
 @section('title')
-    Achievement Details
+    All Photo Gellary
 @endsection
 
 @section('content')
@@ -18,10 +18,10 @@
 <div class="container">
     <div class="achievements text-center mb-4">
         <h2 class="fw-bold d-inline-block position-relative p-4">
-            Our Photo Gellary
+           {{ $albumName->group_name }}
         </h2>
     </div>
-      <form method="GET" action="{{ route('photo_gallery') }}" class="mb-3">
+      <form method="GET" action="{{ route('photo_gallery',$albumName->id) }}" class="mb-3">
             <div class="input-group">
                 <input type="text" name="search" class="form-control"
                        placeholder="Search by title..."

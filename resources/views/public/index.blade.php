@@ -89,7 +89,7 @@
                             <img class="acivment-imgas" src="{{ asset('client/img/achivement3.png')}}" alt="">
                         </div>
                         <div class="achievements-card-title">
-                            <b> {{ $achievement->title}}</b>
+                            <b> {!! Str::limit($achievement->title, 15, '..') !!}</b>
                         </div>
                         <div class="card-body">
                             <p class="card-text text-center">
@@ -129,14 +129,13 @@
         </div>
         <div class="row g-4">
 
-
             @foreach ($projects as $project)
                 <div class="col-md-4">
                     <div class="card h-100">
                         <img src="{{ asset('client/img/img4.jpg') }}"  class="card-img-top" alt="">
                         <div class="card-body text-center">
-                            <h5 class="card-title fw-bold">   <b> {{ $project->title}}</b></h5>
-                            <p class="card-text">dd {{ rtrim(substr(str_replace('&nbsp;', ' ', strip_tags(string: $project->location_data)), 0, 70)) }}{{ strlen(strip_tags($achievement->location_data)) > 100 ? '...' : '' }}</p>
+                            <h5 class="card-title fw-bold">   <b> {!! Str::limit($project->title, 25, '..') !!}</b></h5>
+                            <p class="card-text"> {{ rtrim(substr(str_replace('&nbsp;', ' ', strip_tags(string: $project->location_data)), 0, 70)) }}{{ strlen(strip_tags($achievement->location_data)) > 100 ? '...' : '' }}</p>
                         </div>
                         <a class="text-decoration-none" href="{{ route('projectDetails',$project->id) }}">
                             <div class="achievements-footer text-center">
@@ -268,13 +267,11 @@
                 <div class="card ">
                     <img class="stories-img" src="{{ $event->img}}" class="card-img-top" alt="...">
                     <div class="stories-title">
-                        <b>{{ $event->title}}</b>
+                         <h5 class="card-title fw-bold text-dark">   <b> {!! Str::limit($event->title, 25, '..') !!}</b></h5>
                     </div>
 
-                    <div class="card-body">
-                        <p class="card-text">{{ $event->description}}</p>
-                    </div>
-                   <a class="text-decoration-none" href="{{ route('eventlist',$event->id) }}">
+
+                   <a class="text-decoration-none" href="{{ route('eventDetail',$event->id) }}">
                         <div class="achievements-footer text-center">
                             <b class="">View Details</b>
                         </div>
@@ -288,7 +285,7 @@
         </div>
 
          <div class="text-center mt-4">
-            <a href="{{ route('eventlist')}}" class="btn btn-outline-danger px-5 py-2 rounded-pill shadow-sm"
+            <a href="{{ route('evenNews')}}" class="btn btn-outline-danger px-5 py-2 rounded-pill shadow-sm"
                 style="transition: all 0.4s;">
                 <i class="bi bi-newspaper me-2"></i> Events & News
             </a>
@@ -315,37 +312,29 @@
                                     <th scope="col">#</th>
                                     <th scope="col">Title</th>
                                     <th scope="col">Date</th>
-                                    <th scope="col">Details</th>
+                                    <th scope="col">File</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
+                                @foreach ($noticeBoard as $key=>  $notice)
+
+                                     <tr>
+                                    <th scope="row">{{ $key+1 }}</th>
                                     <td>
-                                        <img src="{{ asset('client/img/blog3.png') }}" alt="Notice" class="img-thumbnail me-2"
-                                            style="width:80px; height:60px; object-fit:cover;">
-                                        <b>সহযোগিতা পারে থ্যালাসেমিয়া </b>
+
+                                        <b>{{Str::limit($notice->title, 14, '.') }} </b>
                                     </td>
-                                    <td>২৩ আগস্ট ২০২৫</td>
                                     <td>
-                                        <a href="#" class="btn btn-sm btn-outline-success">View Details</a>
+                                        {{ $notice->created_at->format('d M, Y') }}
+                                    </td>
+                                    <td>
+                                        <a target="_blank" href="{{ $notice->file }}" class="btn btn-sm btn-outline-success">Download</a>
                                     </td>
                                 </tr>
+                                @endforeach
 
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>
-                                        <img src="{{ asset('client/img/blog5.png') }}" alt="Notice" class="img-thumbnail me-2"
-                                            style="width:80px; height:60px; object-fit:cover;">
-                                        <b>সহযোগিতা পারে থ্যালাসেমিয়া </b>
-                                    </td>
-                                    <td>২৩ আগস্ট ২০২৫</td>
-                                    <td>
-                                        <a href="#" class="btn btn-sm btn-outline-success">View Details</a>
-                                    </td>
-                                </tr>
 
-                                <!-- আরও নোটিশ যোগ করতে পারবেন -->
+
                             </tbody>
                         </table>
                     </div>
@@ -362,63 +351,36 @@
             <h2 class="fw-bold d-inline-block position-relative pb-2">Donation</h2>
         </div>
         <div class="row g-4">
+             @foreach($donations as $donation)
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <a href="{{ route('pub.donate', ['id' => $donation->id, 'type' => $donation->type]) }}" class="text-decoration-none">
+                        <div class="card h-100 shadow-sm border-0 rounded">
+                            <img src="{{ asset('backend/img/donation/' . $donation->image) }}"
+                                class="card-img-top rounded-top"
+                                alt="Donation Image"
+                                style="height: 250px; object-fit: cover;">
 
-            <div class="col-md-4">
-                <div class="card ">
-                    <img src="{{ asset('client/img/donation_2.png') }}" class="card-img-top" alt="...">
-                    <div class="service-card-title">
-                        <b>Donate Jakat</b>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                            additional content. This content is a little bit longer with supporting text below
-                            supporting.</p>
-                    </div>
-                    <a class="text-decoration-none" href="#">
-                        <div class="achievements-footer text-center">
-                            <b class="">View Details</b>
+                            <div class="card-body d-flex flex-column">
+                                <h6 class="card-title text-primary mb-2 text-dark text-center">{!! Str::limit($donation->title, 30, '...')  !!}</h6>
+
+                                <a class="text-decoration-none" href="{{ route('pub.donate', ['id' => $donation->id, 'type' => $donation->type]) }}">
+                            <div class="achievements-footer text-center">
+                                <b class="">View Details</b>
+                            </div>
+                        </a>
+                            </div>
                         </div>
                     </a>
                 </div>
-            </div>
+            @endforeach
+        </div>
 
-            <div class="col-md-4">
-                <div class="card ">
-                    <img src="{{ asset('client/img/donation_6.png') }}" class="card-img-top" alt="...">
-                    <div class="service-card-title">
-                        <b>Sponsor A Child</b>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                            additional content. This content is a little bit longer with supporting text below
-                            supporting.</p>
-                    </div>
-                    <a class="text-decoration-none" href="#">
-                        <div class="achievements-footer text-center">
-                            <b class="">View Details</b>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card ">
-                    <img src="{{ asset('client/img/donation_4.png') }}" class="card-img-top" alt="...">
-                    <div class="service-card-title">
-                        <b>General Donate</b>
-                    </div>
-                    <div class="card-body">
 
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                            additional content. This content is a little bit longer with supporting text below
-                            supporting.</p>
-                    </div>
-                    <a class="text-decoration-none" href="#">
-                        <div class="achievements-footer text-center">
-                            <b class="">Donate Now</b>
-                        </div>
-                    </a>
-                </div>
-            </div>
+         <div class="text-center mt-4">
+            <a href="{{ url('donate-now')}}" class="btn btn-outline-danger px-5 py-2 rounded-pill shadow-sm"
+                style="transition: all 0.4s;">
+      <i class="bi bi-cash-coin me-2"></i> Donate
+            </a>
         </div>
     </div>
     <!-- donation  Section -->
@@ -504,7 +466,7 @@
             @foreach($succesStorys as $succesStory)
             <!-- Story Item -->
             <div class="col-md-3 col-sm-6">
-           <a  class="text-decoration-none" href="{{ route('succesStory')}}">
+           <a  class="text-decoration-none" href="{{ url('success-details',$succesStory->id) }}">
                  <div class="card story-card border-0 shadow h-100 text-center">
                     <div class="story-img overflow-hidden">
                         <img src="{{$succesStory->img }}" class="img-fluid" alt="Story Image">

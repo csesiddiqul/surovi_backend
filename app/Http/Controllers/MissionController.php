@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\mission;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class MissionController extends Controller
 {
@@ -14,8 +15,8 @@ class MissionController extends Controller
      */
     public function index()
     {
-        $pageData = mission::all();
-        return view('missionVision.index',compact('pageData'));
+        $develop = mission::find(1);
+        return view('missionVision.edit', compact('develop'));
     }
 
     /**
@@ -59,8 +60,7 @@ class MissionController extends Controller
     public function edit($id)
     {
         $develop = mission::find($id);
-
-        return view('missionVision.edit',compact('develop'));
+        return view('missionVision.edit', compact('develop'));
     }
 
     /**
@@ -70,11 +70,11 @@ class MissionController extends Controller
      * @param  \App\Models\mission  $mission
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
         $developPage = mission::find($id);
 
-        $this->validate($request,[
+        $this->validate($request, [
 
             'title' => 'nullable',
             'description' => 'nullable',
@@ -91,23 +91,23 @@ class MissionController extends Controller
             'description4' => 'nullable',
 
 
-            'priority'=> 'required',
+            'priority' => 'required',
             'status' => 'required|numeric|in:1,2'
 
         ]);
 
         $dbsl = $developPage->img;
 
-        if ($request->hasFile('file')){
+        if ($request->hasFile('file')) {
 
             $imge = $request->file;
             $storeFileN = $imge->getClientOriginalName();
-            $storeLocation = $_SERVER['DOCUMENT_ROOT']. '/Storage/missionPage/';
-            $imge->move($storeLocation,$storeFileN);
+            $storeLocation = $_SERVER['DOCUMENT_ROOT'] . '/Storage/missionPage/';
+            $imge->move($storeLocation, $storeFileN);
 
-            $dbsl = '/Storage/missionPage/'.$storeFileN;
+            $dbsl = '/Storage/missionPage/' . $storeFileN;
 
-            @unlink(str_replace('/Storage','Storage',$developPage->img));
+            @unlink(str_replace('/Storage', 'Storage', $developPage->img));
         }
 
 
@@ -134,10 +134,8 @@ class MissionController extends Controller
 
         $developPage->save();
 
-        return back()->with('message','Create Successfully');
-
-
-
+        Alert::success('Success', 'Update Successfully');
+        return back();
     }
 
     /**
