@@ -1,51 +1,170 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center ad-from">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __(' ') }}</div>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #ff5a5a, #ff3b3b);
+      overflow: hidden;
+    }
 
+    /* floating circles for background effect */
+    .circle {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      animation: float 10s linear infinite;
+    }
+    .circle:nth-child(1) { width: 200px; height: 200px; top: -50px; left: -50px; animation-delay: 0s; }
+    .circle:nth-child(2) { width: 300px; height: 300px; bottom: -100px; right: -100px; animation-delay: 2s; }
+    .circle:nth-child(3) { width: 150px; height: 150px; top: 100px; right: 50px; animation-delay: 4s; }
 
-                <div class="card-body log-body">
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0px); }
+    }
 
-                    <h2 class="mylog">Reset <span class="scol">Password</span>  </h2>
+    .login-card {
+      position: relative;
+      background: #fff;
+      border-radius: 25px;
+      padding: 50px 35px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+      z-index: 1;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .login-card:hover{
+        transform: translateY(-5px);
+        box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+    }
 
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+    .login-card h3 {
+      text-align: center;
+      font-weight: 700;
+      margin-bottom: 30px;
+      color: #c71f1f;
+    }
 
-                    <form method="POST" action="{{ route('password.email') }}">
-                        @csrf
+    .form-control {
+      border-radius: 15px;
+      padding: 14px;
+      transition: 0.3s;
+    }
 
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('') }}</label>
+    .form-control:focus {
+      box-shadow: 0 0 10px rgba(199,31,31,0.5);
+      border-color: #c71f1f;
+    }
 
-                            <div class="col-md-12">
-                                <input id="email" type="email" class="form-control fild-cont @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Enter your Email" autofocus>
+    .btn-login {
+      border-radius: 15px;
+      padding: 14px;
+      background: #c71f1f;
+      border: none;
+      color: #fff;
+      font-weight: 600;
+      transition: 0.3s;
+    }
 
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+    .btn-login:hover {
+      background: #a21b1b;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(199,31,31,0.4);
+    }
 
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary mybtn">
-                                    {{ __('Send Password Reset Link') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
+    .extra-links {
+      margin-top: 15px;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    .extra-links a {
+      color: #c71f1f;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .extra-links a:hover {
+      text-decoration: underline;
+    }
+    .btn-custom {
+        background: linear-gradient(135deg, #ff416c, #ff4b2b);
+        color: #fff;
+        font-weight: 600;
+        font-size: 16px;
+        border: none;
+        border-radius: 12px;
+        padding: 12px 20px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 10px rgba(255, 65, 108, 0.4);
+    }
+
+    .btn-custom:hover {
+        background: linear-gradient(135deg, #ff4b2b, #ff416c);
+        box-shadow: 0 6px 14px rgba(255, 65, 108, 0.6);
+        transform: translateY(-2px);
+    }
+
+    .btn-custom:active {
+        transform: scale(0.97);
+        box-shadow: 0 2px 6px rgba(255, 65, 108, 0.5);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- floating background circles -->
+  <div class="circle"></div>
+  <div class="circle"></div>
+  <div class="circle"></div>
+
+  <div class="login-card">
+        <div class="text-center mb-4">
+            <img src="{{ asset('client/img/logo/suroviLogo.jpg') }}"
+                width="80" height="80"
+                alt="Surovi Logo"
+                class="rounded-circle shadow-lg mb-2">
+        <h4> Reset Password</h4>
         </div>
-    </div>
-</div>
-@endsection
+
+        <!-- Error show -->
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul class="mb-0">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+
+        <form method="POST" action="{{ route('password.email') }}">
+        @csrf
+            <div class="mb-3 text-start">
+                <label for="email" class="form-label fw-semibold">Email address</label>
+                <input type="email" name="email" class="form-control" id="email" placeholder="Reset email" required>
+
+            </div>
+            <button type="submit" class="btn btn-custom w-100">Send Password Reset Link</button>
+
+            <div class="mt-4 text-center">
+                <a href="/login" class="text-decoration-none fw-semibold ">⬅ Back to Login</a>
+            </div>
+        </form>
+
+  </div>
+
+</body>
+</html>
